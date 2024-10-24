@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "title": "Real-Time Availability",
+    "description": "Check the availability of meeting rooms in real time, ensuring you never miss out on your ideal space."
+  },
+  {
+    "id": 2,
+    "title": "Instant Booking Confirmation",
+    "description": "Receive instant confirmation of your bookings, giving you peace of mind and a hassle-free experience."
+  },
+  {
+    "id": 3,
+    "title": "Flexible Scheduling",
+    "description": "Easily schedule your meetings with our flexible options, catering to all your needs."
+  },
+  {
+    "id": 4,
+    "title": "24/7 Support",
+    "description": "Our support team is available 24/7 to assist you with any questions or issues."
+  }
+]

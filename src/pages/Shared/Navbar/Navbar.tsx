@@ -1,5 +1,14 @@
 import { Link, NavLink } from "react-router-dom";
 import "./Navbar.css";
+// import {
+//   DropdownMenu,
+//   DropdownMenuContent,
+//   DropdownMenuItem,
+//   DropdownMenuLabel,
+//   DropdownMenuSeparator,
+//   DropdownMenuTrigger,
+// } from "@/components/ui/dropdown-menu";
+// import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Navbar = () => {
   const navLinks = (
@@ -60,7 +69,28 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <li className="btn">Login</li>
+          {/* <DropdownMenu>
+            <DropdownMenuTrigger>
+              <Avatar className="">
+                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>Profile</DropdownMenuItem>
+              <DropdownMenuItem>Billing</DropdownMenuItem>
+              <DropdownMenuItem>Team</DropdownMenuItem>
+              <DropdownMenuItem>Subscription</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu> */}
+          <Link
+            to={"/login"}
+            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition duration-300"
+          >
+            Login
+          </Link>
         </div>
       </div>
     </div>
