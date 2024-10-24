@@ -4,6 +4,7 @@ import { adminPaths } from "./admin.routes";
 import App from "../App";
 import Login from "@/pages/Login/Login";
 import Register from "@/pages/Register/Register";
+import NotFound from "@/pages/Shared/NotFound/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);
 

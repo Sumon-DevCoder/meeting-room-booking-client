@@ -1,0 +1,11 @@
+li {
+  border: 2px solid indigo;
+  padding: 5px;
+  border-radius: 10%;
+}
+
+li:hover {
+  background-color: indigo;
+  color: white;
+  transition: background-color 0.5s ease;
+}
