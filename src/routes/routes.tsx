@@ -7,6 +7,7 @@ import Register from "@/pages/Register/Register";
 import NotFound from "@/pages/Shared/NotFound/NotFound";
 import AboutUs from "@/pages/About/About";
 import Home from "@/pages/Home/Home";
+import ContactUs from "@/pages/ContactUs/ContactUs";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "/about-us",
         element: <AboutUs />,
+      },
+      {
+        path: "/contact-us",
+        element: <ContactUs />,
       },
     ],
   },
