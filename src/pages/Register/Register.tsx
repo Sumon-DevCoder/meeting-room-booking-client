@@ -1,16 +1,14 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { authApi } from "@/redux/features/auth/authApi";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 
 const Register = () => {
   const navigate = useNavigate();
-  const [signup] = authApi.useSignupMutation();
+  const [signup, { data, error }] = authApi.useSignupMutation();
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = async (data: Record<string, any>) => {
+  const onSubmit = async (data: FieldValues) => {
     const toastId = toast.loading("logging in");
     try {
       const userInfo = {
