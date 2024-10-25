@@ -1,5 +1,5 @@
 import RoomCard from "@/components/RoomCard/RoomCard";
-import { useGetRoomsQuery } from "@/redux/api/baseApi";
+import { useGetRoomsQuery } from "@/redux/features/room/roomApi";
 import { TRoom } from "@/types/room.types";
 
 const FeaturedRooms = () => {
