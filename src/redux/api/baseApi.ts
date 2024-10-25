@@ -3,15 +3,15 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const baseApi = createApi({
   reducerPath: "baseApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5001/api" }),
   endpoints: (builder) => ({
-    getBooking: builder.query({
+    getRooms: builder.query({
       query: () => ({
         method: "GET",
-        url: "/booking",
+        url: "/rooms",
       }),
     }),
   }),
 });
 
-export const { useGetBookingQuery } = baseApi;
+export const { useGetRoomsQuery } = baseApi;

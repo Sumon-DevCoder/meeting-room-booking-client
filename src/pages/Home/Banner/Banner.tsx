@@ -1,8 +1,9 @@
+import PrimaryButton from "@/components/PrimaryButton/PrimaryButton";
 import meetingRoomImg from "../../../assets/modern_workspace_banner.jpg";
 
 const Banner = () => {
   return (
-    <section
+    <div
       className="relative h-96 bg-cover bg-center"
       style={{ backgroundImage: `url(${meetingRoomImg})` }}
     >
@@ -14,14 +15,9 @@ const Banner = () => {
         <p className="text-lg md:text-xl mb-6">
           Efficient, hassle-free room booking for all your meeting needs.
         </p>
-        <a
-          href="/meeting-rooms"
-          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition duration-300"
-        >
-          Book Now
-        </a>
+        <PrimaryButton path="/meeting-rooms" name="Book Now" />
       </div>
-    </section>
+    </div>
   );
 };
 

@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import "./Navbar.css";
+import PrimaryButton from "@/components/PrimaryButton/PrimaryButton";
 // import {
 //   DropdownMenu,
 //   DropdownMenuContent,
@@ -57,7 +58,7 @@ const Navbar = () => {
             </ul>
           </div>
           <Link
-            to={"/"}
+            to={`/`}
             className="btn btn-ghost text-xl bg-gradient-to-r from-indigo-500"
           >
             Meeting Room Booking
@@ -85,12 +86,8 @@ const Navbar = () => {
               <DropdownMenuItem>Subscription</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu> */}
-          <Link
-            to={"/login"}
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition duration-300"
-          >
-            Login
-          </Link>
+
+          <PrimaryButton path={"/login"} name="Login" />
         </div>
       </div>
     </div>
