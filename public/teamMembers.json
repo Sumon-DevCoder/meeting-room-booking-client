@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1",
+    "name": "Sumon Rahman",
+    "designation": "Operations Manager",
+    "bio": "Mustafizur oversees all platform operations, ensuring that RoomEase delivers a seamless and efficient booking experience. With a keen eye on user satisfaction, he coordinates between various teams to enhance platform performance and usability.",
+    "image": "https://i.ibb.co/FnLCcgC/Sumon.jpg"
+  },
+  {
+    "id": "2",
+    "name": "Sarah Williams",
+    "designation": "Customer Experience Specialist",
+    "bio": "Sarah is dedicated to ensuring that every interaction with RoomEase is smooth and enjoyable. She focuses on user feedback and continuously refines the platform to make booking rooms a pleasant experience.",
+    "image": "https://i.ibb.co/MC0WVHQ/360-F-302884605-actpip-Od-POQHDTn-Ftp4zg4-Rtl-Wzh-OASp.jpg"
+  },
+  {
+    "id": "3",
+    "name": "John Doe",
+    "designation": "Platform Security Specialist",
+    "bio": "John is responsible for the security of the RoomEase platform, safeguarding user data and booking information. He ensures that all processes meet strict security standards, providing users with peace of mind.",
+    "image": "https://i.ibb.co/njHtV67/360-F-243123463-z-Tooub557x-EWABDLk0j-Jkl-Dy-LSGl2jrr.jpg"
+  },
+  {
+    "id": "4",
+    "name": "Emily Chen",
+    "designation": "Content and Communications Manager",
+    "bio": "Emily oversees RoomEase’s communications, crafting clear and helpful content for users. She ensures that all information about our booking processes is easily accessible, enhancing the user experience and trust in our platform.",
+    "image": "https://i.ibb.co/FhZctbm/resize.webp"
+  }
+]

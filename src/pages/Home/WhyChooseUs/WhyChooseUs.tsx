@@ -1,11 +1,11 @@
 const WhyChooseUs = () => {
   return (
     <div>
-      <div>
+      <div className="max-w-screen-xl m-auto">
         <div className="bg-slate-600">
           <section
             id="features"
-            className="relative block px-6 py-10 md:py-10 md:px-10 border-t border-b border-neutral-900 bg-neutral-900/30"
+            className="relative  block px-6 py-10 md:py-10 md:px-10 border-t border-b border-neutral-900 bg-neutral-900/30"
           >
             <div className="relative mx-auto max-w-5xl text-center">
               <span className="text-gray-400 my-3 font-oswald  flex items-center justify-center font-medium uppercase tracking-wider">

@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "role": "Project Manager",
+    "testimonial": "RoomEase has transformed our meeting scheduling process. It's easy to use and saves us a lot of time!",
+    "image": "https://i.ibb.co.com/FnLCcgC/Sumon.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Jane Smith",
+    "role": "Team Lead",
+    "testimonial": "The user-friendly interface of RoomEase makes it effortless to book rooms for our team meetings.",
+    "image": "https://i.ibb.co.com/FnLCcgC/Sumon.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Michael Brown",
+    "role": "UX Designer",
+    "testimonial": "I love how easy it is to find and book meeting rooms that fit our needs perfectly!",
+    "image": "https://i.ibb.co.com/FnLCcgC/Sumon.jpg"
+  }
+]

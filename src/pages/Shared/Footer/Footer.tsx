@@ -141,12 +141,12 @@ const Footer = () => {
                 your needs, ensuring that every gathering is productive and
                 hassle-free.
               </p>
-              <a
-                href="/about"
+              <Link
+                to={"/about-us"}
                 className="text-indigo-600 hover:text-indigo-300 font-medium mt-4 inline-block"
               >
                 Learn More
-              </a>
+              </Link>
             </div>
           </div>
           <div className="border-t border-white/[20%] mt-8 pt-4">

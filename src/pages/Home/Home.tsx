@@ -15,7 +15,6 @@ const Home = () => {
       <WhyChooseUs />
       <WorkSection />
       <Testimonial />
-      <Footer />
     </div>
   );
 };
