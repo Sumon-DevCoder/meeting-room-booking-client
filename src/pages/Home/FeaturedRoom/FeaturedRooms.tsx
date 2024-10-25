@@ -15,7 +15,7 @@ const FeaturedRooms = () => {
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 my-10">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 my-10 px-20">
         {rooms?.result?.map((room: TRoom) => (
           <RoomCard key={room?._id} room={room} />
         ))}
