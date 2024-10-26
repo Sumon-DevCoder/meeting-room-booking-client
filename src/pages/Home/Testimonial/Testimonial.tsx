@@ -40,7 +40,7 @@ const Testimonial = () => {
     <Carousel className="hidden">
       {testimonials?.map((testimonial) => {
         return (
-          <div>
+          <div key={testimonial?.id}>
             <img className="w-20 h-96" src={testimonial?.image} />
             <p className="legend">Legend 2</p>
           </div>

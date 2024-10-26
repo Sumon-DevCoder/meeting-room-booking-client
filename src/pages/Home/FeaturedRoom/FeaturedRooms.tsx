@@ -11,8 +11,6 @@ const FeaturedRooms = () => {
 
   const { data: rooms } = data;
 
-  console.log(rooms?.result);
-
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 my-10 px-20">

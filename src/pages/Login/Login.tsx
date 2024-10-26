@@ -2,18 +2,25 @@
 import { authApi } from "@/redux/features/auth/authApi";
 import { setUser, TUser } from "@/redux/features/auth/authSlice";
 import { verifyToken } from "@/utils/verifyToken";
+import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { HiEye, HiEyeOff } from "react-icons/hi";
+import { Link } from "react-router-dom";
+import { TError } from "@/types";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [login, { data, error }] = authApi.useLoginMutation();
-  const { register, handleSubmit } = useForm();
-
-  // console.log();
+  const [login] = authApi.useLoginMutation();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit = async (data: FieldValues) => {
     // logging in
@@ -25,68 +32,144 @@ const Login = () => {
         password: data.password,
       };
 
+      console.log("userInfo", userInfo);
+
+      // Call the login mutation
       const res = await login(userInfo).unwrap();
-      const user = verifyToken(res?.data?.accessToken) as TUser; // set user in store
 
-      dispatch(setUser({ user: user, token: res?.data?.accessToken })); // set token in store
+      console.log(res);
 
-      // logged in
-      toast.success("Logged In", { id: toastId, duration: 2000 });
+      console.log(res.token);
 
-      navigate(`/${user?.role}/dashboard`);
+      if (res) {
+        const user = verifyToken(res?.token) as TUser; // set user in store
+        dispatch(setUser({ user: user, token: res?.data?.accessToken })); // set token in store
+
+        // success
+        toast.success("Login Successful", { id: toastId, duration: 3000 });
+        navigate(`/${user?.role}/dashboard`);
+      }
     } catch (err) {
-      const errorMsg = error?.data?.message || "Something went wrong";
-      toast.error(errorMsg, { id: toastId, duration: 2000 });
+      console.log("err", err);
+
+      const serverMsgErr =
+        (err as TError)?.data?.message || "Something went wrong";
+
+      if (serverMsgErr) {
+        return toast.error(serverMsgErr, {
+          id: toastId,
+          duration: 3000,
+        });
+      } else if (err) {
+        return toast.error("Something went wrong", {
+          id: toastId,
+          duration: 2000,
+        });
+      }
     }
   };
 
   return (
-    <div className="hero bg-base-200 min-h-screen">
-      <div className="hero-content flex-col lg:flex-row-reverse">
-        <div className="text-center lg:text-left">
-          <h1 className="text-5xl font-bold">Login now!</h1>
-          <p className="py-6">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
-          </p>
-        </div>
-        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-          <form onSubmit={handleSubmit(onSubmit)} className="card-body">
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                type="email"
-                placeholder="email"
-                className="input input-bordered"
-                {...register("email")}
-                required
-              />
-            </div>
+    <div className="mx-auto">
+      <div className="flex justify-center px-6 py-12">
+        <div className="w-full xl:w-3/4 lg:w-11/12 flex justify-center">
+          <div className="w-full lg:w-7/12 shadow-xl bg-gray-100 dark:bg-gray-700 p-5 rounded-lg lg:rounded-l-none">
+            <h3 className="py-4 text-2xl text-center text-gray-800 dark:text-white">
+              Login to Your Account
+            </h3>
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="px-8 pt-6 pb-8 mb-4 bg-gray-100 dark:bg-gray-800 rounded"
+            >
+              <div className="mb-4">
+                <label
+                  className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
+                  htmlFor="email"
+                >
+                  Email
+                </label>
+                <input
+                  className="w-full px-3 py-2 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                  id="email"
+                  type="email"
+                  placeholder="Enter Email"
+                  {...register("email", {
+                    required: "Email is required",
+                    pattern: {
+                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                      message: "Invalid email format",
+                    },
+                  })}
+                />
+                {errors.email && (
+                  <p className="text-red-500 text-sm ml-2 mt-1">
+                    {errors.email.message as string}
+                  </p>
+                )}
+              </div>
 
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
-              <input
-                type="password"
-                placeholder="password"
-                className="input input-bordered"
-                {...register("password")}
-                required
-              />
-              <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
-                  Forgot password?
-                </a>
-              </label>
-            </div>
-            <div className="form-control mt-6">
-              <button className="btn btn-primary">Login</button>
-            </div>
-          </form>
+              <div className="mb-4">
+                <label
+                  className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
+                  htmlFor="password"
+                >
+                  Password
+                </label>
+                <div className="relative">
+                  <input
+                    className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Enter Password"
+                    {...register("password", {
+                      required: "Password is required",
+                      minLength: {
+                        value: 6,
+                        message: "Password must be at least 6 characters long",
+                      },
+                    })}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)} // Toggle the state
+                    className="absolute top-2 right-0 flex items-center px-3 text-gray-500 focus:outline-none"
+                  >
+                    {showPassword ? (
+                      <HiEyeOff className="text-xl" />
+                    ) : (
+                      <HiEye className="text-xl" />
+                    )}
+                  </button>
+                </div>
+                {errors.password && (
+                  <p className="text-red-500 text-sm ml-2 mt-1">
+                    {errors.password.message as string}
+                  </p>
+                )}
+              </div>
+
+              <div className="mb-6 text-center">
+                <button
+                  className="w-full px-4 py-2 font-semibold text-white bg-blue-500 hover:bg-blue-700 rounded-full focus:outline-none focus:shadow-outline"
+                  type="submit"
+                >
+                  Login
+                </button>
+              </div>
+
+              <div className="text-center">
+                <p className="inline-block text-md text-black dark:text-blue-500 align-baseline">
+                  Don't have an account?{" "}
+                  <Link
+                    className="font-semibold text-indigo-500 underline"
+                    to={"/register"} // Link to your registration page
+                  >
+                    Register
+                  </Link>
+                </p>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>

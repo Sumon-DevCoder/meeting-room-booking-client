@@ -1,16 +1,35 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link, NavLink } from "react-router-dom";
 import PrimaryButton from "@/components/PrimaryButton/PrimaryButton";
-// import {
-//   DropdownMenu,
-//   DropdownMenuContent,
-//   DropdownMenuItem,
-//   DropdownMenuLabel,
-//   DropdownMenuSeparator,
-//   DropdownMenuTrigger,
-// } from "@/components/ui/dropdown-menu";
-// import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { currentUser, logout } from "@/redux/features/auth/authSlice";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { toast } from "sonner";
 
 const Navbar = () => {
+  const user = useAppSelector(currentUser);
+  const dispatch = useAppDispatch();
+
+  console.log(user);
+
+  const handleLogout = async () => {
+    try {
+      await dispatch(logout());
+      toast.success("Logout Successful");
+    } catch (err: any) {
+      toast.error("Logout Failed. Please try again.");
+    }
+  };
+
   const navLinks = (
     <>
       <NavLink to="/">
@@ -73,24 +92,26 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          {/* <DropdownMenu>
-            <DropdownMenuTrigger>
-              <Avatar className="">
-                <AvatarImage src="https://github.com/shadcn.png" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Profile</DropdownMenuItem>
-              <DropdownMenuItem>Billing</DropdownMenuItem>
-              <DropdownMenuItem>Team</DropdownMenuItem>
-              <DropdownMenuItem>Subscription</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu> */}
-
-          <PrimaryButton path={"/login"} name="Login" />
+          {user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Avatar>
+                  <AvatarImage src="https://github.com/shadcn.png" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>MyBookings</DropdownMenuItem>
+                <DropdownMenuItem>
+                  <button onClick={handleLogout}>Logout</button>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <PrimaryButton path={"/login"} name="Login" />
+          )}
         </div>
       </div>
     </div>
