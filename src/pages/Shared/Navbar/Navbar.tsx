@@ -1,5 +1,4 @@
 import { Link, NavLink } from "react-router-dom";
-import "./Navbar.css";
 import PrimaryButton from "@/components/PrimaryButton/PrimaryButton";
 // import {
 //   DropdownMenu,
@@ -15,16 +14,20 @@ const Navbar = () => {
   const navLinks = (
     <>
       <NavLink to="/">
-        <li>Home</li>
+        <li className="border-2 border-indigo-500 p-2 rounded-lg">Home</li>
       </NavLink>
       <NavLink to="/meeting-rooms">
-        <li>Meeting Rooms</li>
+        <li className="border-2 border-indigo-500 p-2 rounded-lg">
+          Meeting Rooms
+        </li>
       </NavLink>
       <NavLink to="/about-us">
-        <li>About Us</li>
+        <li className="border-2 border-indigo-500 p-2 rounded-lg">About Us</li>
       </NavLink>
       <NavLink to="/contact-us">
-        <li>Contact Us</li>
+        <li className="border-2 border-indigo-500 p-2 rounded-lg">
+          Contact Us
+        </li>
       </NavLink>
     </>
   );

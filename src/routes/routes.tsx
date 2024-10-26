@@ -8,6 +8,7 @@ import NotFound from "@/pages/Shared/NotFound/NotFound";
 import AboutUs from "@/pages/About/About";
 import Home from "@/pages/Home/Home";
 import ContactUs from "@/pages/ContactUs/ContactUs";
+import MeetingRoom from "@/pages/MeetingRoom/MeetingRoom";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "/contact-us",
         element: <ContactUs />,
+      },
+      {
+        path: "/meeting-rooms",
+        element: <MeetingRoom />,
       },
     ],
   },
