@@ -1,34 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link, NavLink } from "react-router-dom";
-import PrimaryButton from "@/components/PrimaryButton/PrimaryButton";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { currentUser, logout } from "@/redux/features/auth/authSlice";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { toast } from "sonner";
+import DropdownProfile from "@/components/DropdownProfile/DropdownProfile";
+import CheckUserInfo from "@/components/CheckUserRole/CheckUserInfo";
 
 const Navbar = () => {
-  const user = useAppSelector(currentUser);
-  const dispatch = useAppDispatch();
-
-  console.log(user);
-
-  const handleLogout = async () => {
-    try {
-      await dispatch(logout());
-      toast.success("Logout Successful");
-    } catch (err: any) {
-      toast.error("Logout Failed. Please try again.");
-    }
-  };
+  const { isAdmin, isVerifiedUser } = CheckUserInfo();
 
   const navLinks = (
     <>
@@ -48,12 +25,27 @@ const Navbar = () => {
           Contact Us
         </li>
       </NavLink>
+      {/* navigate(`/${user?.role}/dashboard`); */}
+      {isAdmin && (
+        <NavLink to={`/admin/dashboard`}>
+          <li className="border-2 border-indigo-500 p-2 rounded-lg">
+            Dashboard
+          </li>
+        </NavLink>
+      )}
+      {isVerifiedUser && (
+        <NavLink to={`/user/dashboard`}>
+          <li className="border-2 border-indigo-500 p-2 rounded-lg">
+            Dashboard
+          </li>
+        </NavLink>
+      )}
     </>
   );
 
   return (
     <div>
-      <div className="navbar bg-white shadow-lg px-5">
+      <div className="navbar bg-white shadow-lg px-5 sticky top-0 z-50">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -92,26 +84,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          {user ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger>
-                <Avatar>
-                  <AvatarImage src="https://github.com/shadcn.png" />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>MyBookings</DropdownMenuItem>
-                <DropdownMenuItem>
-                  <button onClick={handleLogout}>Logout</button>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          ) : (
-            <PrimaryButton path={"/login"} name="Login" />
-          )}
+          <DropdownProfile />
         </div>
       </div>
     </div>

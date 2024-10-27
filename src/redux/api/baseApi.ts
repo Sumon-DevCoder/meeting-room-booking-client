@@ -1,12 +1,3 @@
-// // Need to use the React-specific entry point to import createApi
-// import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
-// export const baseApi = createApi({
-//   reducerPath: "baseApi",
-//   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5001/api, header" }),
-//   endpoints: () => ({}),
-// });
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   BaseQueryApi,
@@ -101,5 +92,6 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: baseQueryWithRefreshToken,
+  tagTypes: ["rooms"],
   endpoints: () => ({}),
 });

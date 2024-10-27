@@ -7,9 +7,11 @@ const App = () => {
   const hideLayout = ["/login", "/register"];
 
   return (
-    <div className="font-poppins">
+    <div className="font-poppins flex flex-col min-h-screen">
       {!hideLayout.includes(location?.pathname) && <Navbar />}
-      <Outlet />
+      <main className="flex-grow">
+        <Outlet />
+      </main>
       {!hideLayout.includes(location?.pathname) && <Footer />}
     </div>
   );

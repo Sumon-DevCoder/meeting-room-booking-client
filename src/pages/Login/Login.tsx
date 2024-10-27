@@ -43,11 +43,14 @@ const Login = () => {
 
       if (res) {
         const user = verifyToken(res?.token) as TUser; // set user in store
-        dispatch(setUser({ user: user, token: res?.data?.accessToken })); // set token in store
+        const BearerToken = `Bearer ${res?.token}`;
+
+        dispatch(setUser({ user: user, token: BearerToken })); // set token in store
 
         // success
         toast.success("Login Successful", { id: toastId, duration: 3000 });
-        navigate(`/${user?.role}/dashboard`);
+        // navigate(`/${user?.role}`);
+        navigate("/");
       }
     } catch (err) {
       console.log("err", err);
