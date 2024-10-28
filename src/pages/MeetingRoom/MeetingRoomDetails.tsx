@@ -1,71 +1,109 @@
-// import { useParams, useNavigate } from "react-router-dom";
-// import { useGetSingleRoomQuery } from "@/redux/features/room/roomApi";
-// import Loading from "@/components/Loading/Loading";
-// import { toast } from "sonner";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import Loading from "@/components/Loading/Loading";
+import { useGetSingleRoomQuery } from "@/redux/features/room/roomApi";
+import { useParams } from "react-router-dom";
 
-// const MeetingRoomDetails = () => {
-//   const { id } = useParams();
-//   const navigate = useNavigate();
-
-//   const { data: room, isLoading, isError } = useGetSingleRoomQuery(id);
-
-//   if (isLoading) {
-//     return <Loading />;
-//   }
-
-//   if (isError) {
-//     return toast.error(isError);
-//   }
-
-//   const handleBookNow = () => {
-//     navigate(`/booking/${id}`);
-//   };
-
-//   return (
-//     <section className="container mx-auto py-8">
-//       <h1 className="text-3xl font-bold text-center mb-6">{room.name}</h1>
-//       <div className="flex flex-col md:flex-row">
-//         <div className="md:w-1/2">
-//           <div className="carousel">
-//             {room.images.map((image, index) => (
-//               <img
-//                 key={index}
-//                 src={image}
-//                 alt={room.name}
-//                 className="w-full h-64 object-cover mb-4 rounded-lg"
-//               />
-//             ))}
-//           </div>
-//         </div>
-//         <div className="md:w-1/2 md:pl-8">
-//           <h2 className="text-xl font-semibold">Room No: {room.roomNo}</h2>
-//           <h2 className="text-xl font-semibold">Floor No: {room.floorNo}</h2>
-//           <h2 className="text-xl font-semibold">Capacity: {room.capacity}</h2>
-//           <h2 className="text-xl font-semibold">
-//             Price Per Slot: ${room.pricePerSlot}
-//           </h2>
-//           <h2 className="text-xl font-semibold">Amenities:</h2>
-//           <ul className="list-disc pl-5 mb-4">
-//             {room.amenities.map((amenity, index) => (
-//               <li key={index}>{amenity}</li>
-//             ))}
-//           </ul>
-//           <button
-//             onClick={handleBookNow}
-//             className="mt-4 p-2 bg-blue-500 text-white rounded-md transition duration-200 ease-in-out hover:bg-blue-600"
-//           >
-//             Book Now
-//           </button>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default MeetingRoomDetails;
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination } from "swiper/modules";
 
 const MeetingRoomDetails = () => {
-  return <div></div>;
+  const { id } = useParams();
+  const { data, isLoading } = useGetSingleRoomQuery(id);
+  const room = data?.data;
+
+  // isLoaing
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  // if room not found
+  if (!room) {
+    return (
+      <p className="text-center mt-10 text-red-400 text-xl font-semibold">
+        Room details not found
+      </p>
+    );
+  }
+
+  // dectruting room
+  const { name, capacity, pricePerSlot, img, roomNo, floorNo, amenities } =
+    room;
+
+  const handleBookingClick = () => {
+    // Logic for handling booking goes here
+  };
+
+  return (
+    <div className="bg-white  max-w-screen-lg m-auto shadow-lg rounded-lg overflow-hidden font-roboto hover:shadow-2xl transform">
+      <div className="p-4 ">
+        {/* Swiper Image Slider Section */}
+        <Swiper
+          modules={[Pagination]}
+          pagination={{ clickable: true }}
+          className="h-72 w-full"
+        >
+          {img.map((imageSrc: any) => (
+            <SwiperSlide key={imageSrc?._id}>
+              <img
+                src={imageSrc}
+                alt="room img"
+                className="object-cover h-72 w-full rounded-md"
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+
+      {/* Details Section */}
+      <div className="p-6 flex justify-between">
+        {/* Left Section */}
+        <div className="space-y-2">
+          <h3 className="text-2xl font-semibold text-indigo-700 mb-2">
+            {name}
+          </h3>
+          <div className="text-gray-500 space-y-1">
+            <p>
+              Room No.: <span className="font-medium">{roomNo}</span>
+            </p>
+            <p>
+              Floor No.: <span className="font-medium">{floorNo}</span>
+            </p>
+            <p>
+              Capacity: <span className="font-medium">{capacity}</span>
+            </p>
+          </div>
+        </div>
+
+        {/* Right Section */}
+        <div className="text-right">
+          <p className="text-gray-900 font-bold text-lg mb-2 text-start">
+            ${pricePerSlot} per slot
+          </p>
+          <div>
+            <p className="text-gray-700 text-start font-bold text-lg">
+              Amenities:
+            </p>
+            <ul className="text-start list-disc pl-5 text-gray-600">
+              {amenities.map((amenity: any) => (
+                <li key={amenity?._id}>{amenity}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex justify-center mb-4 px-4">
+        <button
+          onClick={handleBookingClick}
+          className="mt-5 w-full py-3 px-6 bg-indigo-600 text-white font-semibold rounded-md transition duration-300 hover:bg-indigo-700 hover:shadow-md"
+        >
+          Book Now
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default MeetingRoomDetails;

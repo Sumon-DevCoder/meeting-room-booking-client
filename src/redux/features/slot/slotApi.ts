@@ -24,10 +24,13 @@ export const slotApi = baseApi.injectEndpoints({
       invalidatesTags: ["slots"],
     }),
     deleteSlotById: builder.mutation({
-      query: (slotId) => ({
-        method: "DELETE",
-        url: `/slots/${slotId}`,
-      }),
+      query: (slotId) => {
+        console.log("hitting api", slotApi);
+        return {
+          method: "DELETE",
+          url: `/slots/${slotId}`,
+        };
+      },
       invalidatesTags: ["slots"],
     }),
     updateslotById: builder.mutation({

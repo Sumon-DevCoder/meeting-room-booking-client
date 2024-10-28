@@ -10,10 +10,13 @@ export const roomApi = baseApi.injectEndpoints({
       providesTags: ["rooms"],
     }),
     getSingleRoom: builder.query({
-      query: (roomId) => ({
-        method: "GET",
-        url: `/rooms/${roomId}`,
-      }),
+      query: (roomId) => {
+        console.log("api hitting", roomId);
+        return {
+          method: "GET",
+          url: `/rooms/${roomId}`,
+        };
+      },
     }),
     createRoom: builder.mutation({
       query: (roomData) => ({

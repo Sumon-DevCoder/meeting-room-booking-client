@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 import { format, parseISO } from "date-fns";
 
 const SlotListTable = () => {
-  const { data, isLoading } = useGetSlotsQuery({}); // Adjust the query if necessary
+  const { data, isLoading } = useGetSlotsQuery({});
   const [deleteSlotById] = useDeleteSlotByIdMutation();
 
   if (isLoading) {
@@ -38,6 +38,8 @@ const SlotListTable = () => {
         const toastId = toast.loading("Deleting the slot...");
 
         try {
+          console.log("cc", slotId);
+
           const res = await deleteSlotById(slotId).unwrap();
 
           if (res && res.message) {

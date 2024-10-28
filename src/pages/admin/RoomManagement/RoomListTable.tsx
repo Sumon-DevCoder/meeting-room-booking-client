@@ -36,6 +36,7 @@ const RoomListTable = () => {
         const toastId = toast.loading("Deleting the room...");
 
         try {
+          console.log("roomId", roomId);
           const res = await deleteRoom(roomId).unwrap();
 
           if (res && res.message) {
