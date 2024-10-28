@@ -105,12 +105,13 @@ const CreateRoom = () => {
     }
   };
 
-  // Validate images function
-  const validateImages = (files: any) => {
-    if (files.length < 3) {
-      return toast.error("At least 3 images are required", { duration: 3000 });
-    }
-    return true;
+  const validateFiles = (files: any): Promise<string | true> => {
+    return new Promise((resolve) => {
+      if (files.length < 3) {
+        resolve("At least 3 images are required");
+      }
+      resolve(true);
+    });
   };
 
   return (
@@ -251,7 +252,7 @@ const CreateRoom = () => {
               type="file"
               {...register("img", {
                 required: "At least 3 images are required",
-                validate: validateImages,
+                validate: validateFiles,
               })}
               id="room-images"
               multiple

@@ -28,6 +28,12 @@ const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
       break;
   }
 
+  const createSlotsWithoutLabel = sidebarItems?.filter(
+    (item) => item.key === "Create Slots"
+  );
+
+  console.log(createSlotsWithoutLabel);
+
   return (
     <Sider
       trigger={null}

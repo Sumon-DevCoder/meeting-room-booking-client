@@ -4,7 +4,7 @@ import CreateAdmin from "@/pages/admin/CreateAdmin";
 import CreateRoom from "@/pages/admin/RoomManagement/CreateRoom";
 import RoomListTable from "@/pages/admin/RoomManagement/RoomListTable";
 import UpdateRoom from "@/pages/admin/RoomManagement/UpdateRoom";
-import CreateSlots from "@/pages/admin/SlotsMangement/CreateSlots";
+import SelectRoomSlots from "@/pages/admin/SlotsMangement/SelectRoomSlots";
 import SlotsListTable from "@/pages/admin/SlotsMangement/SlotsListTable";
 
 export const adminPaths = [
@@ -21,10 +21,6 @@ export const adminPaths = [
         path: "create-admin",
         element: <CreateAdmin />,
       },
-      {
-        path: "rooms/:id",
-        element: <UpdateRoom />,
-      },
     ],
   },
   {
@@ -34,6 +30,11 @@ export const adminPaths = [
         name: "Create Room",
         path: "create-room",
         element: <CreateRoom />,
+      },
+      {
+        name: "Update Room",
+        path: "rooms/:id",
+        element: <UpdateRoom />,
       },
       {
         name: "Rooms List",
@@ -48,7 +49,7 @@ export const adminPaths = [
       {
         name: "Create Slots",
         path: "create-Slots",
-        element: <CreateSlots />,
+        element: <SelectRoomSlots />,
       },
       {
         name: "Slots List",

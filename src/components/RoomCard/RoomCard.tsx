@@ -1,15 +1,30 @@
 import { TRoom } from "@/types/room.types";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import CheckUserInfo from "../CheckUserRole/CheckUserInfo";
-import { toast } from "sonner";
+import Swal from "sweetalert2";
 
 const RoomCard = ({ room }: { room: TRoom }) => {
   const { name, capacity, pricePerSlot, img, _id } = room;
   const { user } = CheckUserInfo();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleDetailsClick = () => {
     if (!user) {
-      toast.error("Please log in to see room details.");
+      Swal.fire({
+        title: "Login Required",
+        text: "You need to be logged in to view the room details. Would you like to log in now?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Login",
+        cancelButtonText: "Not Now",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login", { state: { from: location.pathname } });
+        }
+      });
     }
   };
 

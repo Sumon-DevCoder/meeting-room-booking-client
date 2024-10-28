@@ -5,7 +5,7 @@ import { verifyToken } from "@/utils/verifyToken";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { Link } from "react-router-dom";
@@ -14,6 +14,7 @@ import { TError } from "@/types";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const [login] = authApi.useLoginMutation();
   const {
     register,
@@ -41,6 +42,11 @@ const Login = () => {
 
       console.log(res.token);
 
+      // redirect path
+      const from = location.state?.from?.pathname || "/";
+
+      console.log("from", location);
+
       if (res) {
         const user = verifyToken(res?.token) as TUser; // set user in store
         const BearerToken = `Bearer ${res?.token}`;
@@ -50,7 +56,7 @@ const Login = () => {
         // success
         toast.success("Login Successful", { id: toastId, duration: 3000 });
         // navigate(`/${user?.role}`);
-        navigate("/");
+        navigate(from, { replace: true });
       }
     } catch (err) {
       console.log("err", err);

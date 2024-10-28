@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Loading from "@/components/Loading/Loading";
 import {
   useDeleteRoomByIdMutation,
@@ -7,6 +8,7 @@ import { TError } from "@/types";
 import { TRoom } from "@/types/room.types";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import Swal from "sweetalert2";
 
 const RoomListTable = () => {
   const { data, isLoading } = useGetRoomsQuery({});
@@ -19,30 +21,43 @@ const RoomListTable = () => {
 
   const rooms = data?.data?.result || [];
 
-  const handleRoomDelete = async (roomId: string) => {
-    const toastId = toast.loading("Deleting...");
-    try {
-      const res = await deleteRoom(roomId).unwrap();
+  const handleRoomDelete = async (roomId: string, roomName: string) => {
+    Swal.fire({
+      title: "Confirm Deletion",
+      text: `Are you sure you want to delete the room "${roomName}"?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Delete",
+      cancelButtonText: "Cancel",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const toastId = toast.loading("Deleting the room...");
 
-      if (res) {
-        toast.success(res.message, { id: toastId, duration: 3000 });
-      }
-    } catch (err) {
-      const serverMsgErr =
-        (err as TError)?.data?.message || "Something went wrong";
+        try {
+          const res = await deleteRoom(roomId).unwrap();
 
-      if (serverMsgErr) {
-        return toast.error(serverMsgErr, {
-          id: toastId,
-          duration: 3000,
-        });
-      } else if (err) {
-        return toast.error("Something went wrong", {
-          id: toastId,
-          duration: 2000,
-        });
+          if (res && res.message) {
+            toast.success(res.message, { id: toastId, duration: 3000 });
+          } else {
+            toast.error("Unexpected response received.", {
+              id: toastId,
+              duration: 3000,
+            });
+          }
+        } catch (err) {
+          const serverMsgErr =
+            (err as TError)?.data?.message ||
+            "An error occurred while deleting the room. Please try again.";
+
+          toast.error(serverMsgErr, {
+            id: toastId,
+            duration: 3000,
+          });
+        }
       }
-    }
+    });
   };
 
   return (
@@ -106,7 +121,9 @@ const RoomListTable = () => {
                 </button>
               </Link>
               <button
-                onClick={() => handleRoomDelete(room._id as string)}
+                onClick={() =>
+                  handleRoomDelete(room._id as string, room.name as string)
+                }
                 className="btn btn-sm ml-2 px-3 py-2 text-white bg-gradient-to-r from-red-500 to-red-700 rounded-md hover:bg-gradient-to-l hover:from-red-700 hover:to-red-500"
               >
                 Delete

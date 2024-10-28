@@ -4,12 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
-.active {
+/* .active {
   background-color: rgb(108, 35, 160);
   color: white;
   transition: background-color 0.5s ease;
   border-radius: 10%;
-}
+} */
 
 @layer base {
   :root {

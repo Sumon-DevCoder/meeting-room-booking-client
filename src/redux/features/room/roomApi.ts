@@ -31,12 +31,12 @@ export const roomApi = baseApi.injectEndpoints({
       invalidatesTags: ["rooms"],
     }),
     updateRoomById: builder.mutation({
-      query: ({ roomId, roomData }) => {
-        console.log("room api hitting", roomId, roomData);
+      query: ({ id, roomInfo }) => {
+        console.log("room api hitting", { id, roomInfo });
         return {
           method: "PUT",
-          url: `/rooms/${roomId}`,
-          body: roomData,
+          url: `/rooms/${id}`,
+          body: roomInfo,
         };
       },
       invalidatesTags: ["rooms"],

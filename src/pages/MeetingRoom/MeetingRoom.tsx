@@ -17,7 +17,7 @@ const MeetingRooms = () => {
     return <Loading />;
   }
 
-  const rooms = data?.data?.result;
+  const rooms = data?.data?.result || [];
 
   // Filter, search, and sort logic
   const filteredRooms = () => {
@@ -59,6 +59,8 @@ const MeetingRooms = () => {
 
     return result;
   };
+
+  console.log("filteredRooms", filteredRooms().length);
 
   // Reset filters
   const handleResetFilters = () => {
@@ -125,11 +127,20 @@ const MeetingRooms = () => {
       </div>
 
       {/* Room Listings */}
-      <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {filteredRooms().map((room: TRoom) => (
-          <RoomCard key={room?._id} room={room} />
-        ))}
-      </div>
+
+      {!filteredRooms()?.length ? (
+        <div className="flex justify-center items-center h-full">
+          <p className="text-center text-gray-600 font-semibold text-lg">
+            No rooms available at the moment. Please check back later.
+          </p>
+        </div>
+      ) : (
+        <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {filteredRooms()?.map((room: TRoom) => (
+            <RoomCard key={room?._id} room={room} />
+          ))}
+        </div>
+      )}
     </section>
   );
 };

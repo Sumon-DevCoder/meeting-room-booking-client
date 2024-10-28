@@ -9,35 +9,68 @@ const Navbar = () => {
 
   const navLinks = (
     <>
-      <NavLink to="/">
-        <li className="border-2 border-indigo-500 p-2 rounded-lg">Home</li>
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          `border-2 border-indigo-500 p-2 rounded-lg ${
+            isActive ? "bg-indigo-500 text-white" : "text-indigo-500"
+          }`
+        }
+      >
+        <li>Home</li>
       </NavLink>
-      <NavLink to="/meeting-rooms">
-        <li className="border-2 border-indigo-500 p-2 rounded-lg">
-          Meeting Rooms
-        </li>
+      <NavLink
+        to="/meeting-rooms"
+        className={({ isActive }) =>
+          `border-2 border-indigo-500 p-2 rounded-lg ${
+            isActive ? "bg-indigo-500 text-white" : "text-indigo-500"
+          }`
+        }
+      >
+        <li>Meeting Rooms</li>
       </NavLink>
-      <NavLink to="/about-us">
-        <li className="border-2 border-indigo-500 p-2 rounded-lg">About Us</li>
+      <NavLink
+        to="/about-us"
+        className={({ isActive }) =>
+          `border-2 border-indigo-500 p-2 rounded-lg ${
+            isActive ? "bg-indigo-500 text-white" : "text-indigo-500"
+          }`
+        }
+      >
+        <li>About Us</li>
       </NavLink>
-      <NavLink to="/contact-us">
-        <li className="border-2 border-indigo-500 p-2 rounded-lg">
-          Contact Us
-        </li>
+      <NavLink
+        to="/contact-us"
+        className={({ isActive }) =>
+          `border-2 border-indigo-500 p-2 rounded-lg ${
+            isActive ? "bg-indigo-500 text-white" : "text-indigo-500"
+          }`
+        }
+      >
+        <li>Contact Us</li>
       </NavLink>
-      {/* navigate(`/${user?.role}/dashboard`); */}
       {isAdmin && (
-        <NavLink to={`/admin/dashboard`}>
-          <li className="border-2 border-indigo-500 p-2 rounded-lg">
-            Dashboard
-          </li>
+        <NavLink
+          to="/admin/dashboard"
+          className={({ isActive }) =>
+            `border-2 border-indigo-500 p-2 rounded-lg ${
+              isActive ? "bg-indigo-500 text-white" : "text-indigo-500"
+            }`
+          }
+        >
+          <li>Dashboard</li>
         </NavLink>
       )}
       {isVerifiedUser && (
-        <NavLink to={`/user/dashboard`}>
-          <li className="border-2 border-indigo-500 p-2 rounded-lg">
-            Dashboard
-          </li>
+        <NavLink
+          to="/user/dashboard"
+          className={({ isActive }) =>
+            `border-2 border-indigo-500 p-2 rounded-lg ${
+              isActive ? "bg-indigo-500 text-white" : "text-indigo-500"
+            }`
+          }
+        >
+          <li>Dashboard</li>
         </NavLink>
       )}
     </>
