@@ -33,6 +33,8 @@ const CreateSlots = ({ selectedRoomId }: { selectedRoomId: string }) => {
   const onSubmit = async (data: FieldValues) => {
     const toastId = toast.loading("Creating Slot...");
 
+    console.log(room?.name);
+
     try {
       const slotInfo = {
         roomId: room?._id,

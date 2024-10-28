@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
+import BookingRoom from "../BookingRoom/BookingRoom";
 
 const MeetingRoomDetails = () => {
   const { id } = useParams();
@@ -28,12 +29,8 @@ const MeetingRoomDetails = () => {
   }
 
   // dectruting room
-  const { name, capacity, pricePerSlot, img, roomNo, floorNo, amenities } =
+  const { name, capacity, pricePerSlot, img, roomNo, floorNo, amenities, _id } =
     room;
-
-  const handleBookingClick = () => {
-    // Logic for handling booking goes here
-  };
 
   return (
     <div className="bg-white  max-w-screen-lg m-auto shadow-lg rounded-lg overflow-hidden font-roboto hover:shadow-2xl transform">
@@ -45,7 +42,7 @@ const MeetingRoomDetails = () => {
           className="h-72 w-full"
         >
           {img.map((imageSrc: any) => (
-            <SwiperSlide key={imageSrc?._id}>
+            <SwiperSlide key={room?._id}>
               <img
                 src={imageSrc}
                 alt="room img"
@@ -87,7 +84,7 @@ const MeetingRoomDetails = () => {
             </p>
             <ul className="text-start list-disc pl-5 text-gray-600">
               {amenities.map((amenity: any) => (
-                <li key={amenity?._id}>{amenity}</li>
+                <li key={room?._id}>{amenity}</li>
               ))}
             </ul>
           </div>
@@ -96,11 +93,25 @@ const MeetingRoomDetails = () => {
 
       <div className="flex justify-center mb-4 px-4">
         <button
-          onClick={handleBookingClick}
           className="mt-5 w-full py-3 px-6 bg-indigo-600 text-white font-semibold rounded-md transition duration-300 hover:bg-indigo-700 hover:shadow-md"
+          onClick={() => document.getElementById("my_modal_1").showModal()}
         >
           Book Now
         </button>
+        <dialog id="my_modal_1" className="modal">
+          <div className="modal-box">
+            <div className="py-4">
+              <BookingRoom roomId={_id} />
+            </div>
+            <div className="modal-action">
+              <form method="dialog">
+                <div className="flex justify-center items-center ">
+                  <button className="btn">Close</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </dialog>
       </div>
     </div>
   );

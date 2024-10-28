@@ -15,13 +15,24 @@ const SlotListTable = () => {
   const { data, isLoading } = useGetSlotsQuery({});
   const [deleteSlotById] = useDeleteSlotByIdMutation();
 
+  console.log(data);
+
   if (isLoading) {
     return <Loading />;
   }
 
   const slots = data?.data?.result || [];
 
-  console.log(slots);
+  // time format func
+  const formatTimeWithAMPM = (timeString: string) => {
+    const today = new Date();
+    const fullDateTimeString = `${
+      today.toISOString().split("T")[0]
+    }T${timeString}`; // Combine with today’s date
+    const date = new Date(fullDateTimeString);
+
+    return format(date, "hh:mm a");
+  };
 
   const handleSlotDelete = async (slotId: string, roomName: string) => {
     Swal.fire({
@@ -109,10 +120,15 @@ const SlotListTable = () => {
               </div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
-              <div className="text-sm text-gray-500">{slot.startTime}</div>
+              <div className="text-sm text-gray-500">
+                {formatTimeWithAMPM(slot?.startTime)}
+              </div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
-              <div className="text-sm text-gray-500">{slot.endTime}</div>
+              <div className="text-sm text-gray-500">
+                {" "}
+                {formatTimeWithAMPM(slot?.endTime)}
+              </div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
               <Link to={`/admin/slots/${slot._id}`}>

@@ -60,8 +60,6 @@ const MeetingRooms = () => {
     return result;
   };
 
-  console.log("filteredRooms", filteredRooms().length);
-
   // Reset filters
   const handleResetFilters = () => {
     setSearchTerm("");

@@ -4,8 +4,6 @@ import { useAppSelector } from "@/redux/hooks";
 const CheckUserInfo = () => {
   const user = useAppSelector(currentUser);
 
-  console.log(user);
-
   let isAdmin = false;
   let isVerifiedUser = false;
 

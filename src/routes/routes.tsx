@@ -13,6 +13,7 @@ import routesGenerator from "@/utils/routesGenerator";
 import { adminPaths } from "./admin.routes";
 import { userPaths } from "./user.routes";
 import ProtectedRoute from "@/components/layout/ProtectedRoute";
+import BookingRoom from "@/pages/BookingRoom/BookingRoom";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <MeetingRoomDetails />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/bookings/:id",
+        element: (
+          <ProtectedRoute>
+            <BookingRoom />
           </ProtectedRoute>
         ),
       },
