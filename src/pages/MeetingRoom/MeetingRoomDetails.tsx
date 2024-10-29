@@ -7,6 +7,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
+import {
+  JSXElementConstructor,
+  Key,
+  ReactElement,
+  ReactNode,
+  ReactPortal,
+} from "react";
 import BookingRoom from "../BookingRoom/BookingRoom";
 
 const MeetingRoomDetails = () => {
@@ -14,12 +21,12 @@ const MeetingRoomDetails = () => {
   const { data, isLoading } = useGetSingleRoomQuery(id);
   const room = data?.data;
 
-  // isLoaing
+  // isLoading
   if (isLoading) {
     return <Loading />;
   }
 
-  // if room not found
+  // If room not found
   if (!room) {
     return (
       <p className="text-center mt-10 text-red-400 text-xl font-semibold">
@@ -28,28 +35,42 @@ const MeetingRoomDetails = () => {
     );
   }
 
-  // dectruting room
-  const { name, capacity, pricePerSlot, img, roomNo, floorNo, amenities, _id } =
-    room;
+  // Destructuring room properties
+  const {
+    name,
+    capacity,
+    pricePerSlot,
+    img = [],
+    roomNo,
+    floorNo,
+    amenities = [],
+    _id,
+  } = room;
 
   return (
-    <div className="bg-white  max-w-screen-lg m-auto shadow-lg rounded-lg overflow-hidden font-roboto hover:shadow-2xl transform">
-      <div className="p-4 ">
+    <div className="bg-white max-w-screen-lg m-auto shadow-lg rounded-lg overflow-hidden font-roboto hover:shadow-2xl transform">
+      <div className="p-4">
         {/* Swiper Image Slider Section */}
         <Swiper
           modules={[Pagination]}
           pagination={{ clickable: true }}
           className="h-72 w-full"
         >
-          {img.map((imageSrc: any) => (
-            <SwiperSlide key={room?._id}>
-              <img
-                src={imageSrc}
-                alt="room img"
-                className="object-cover h-72 w-full rounded-md"
-              />
-            </SwiperSlide>
-          ))}
+          {img.length > 0 ? (
+            img.map(
+              (imageSrc: string | undefined, index: Key | null | undefined) => (
+                <SwiperSlide key={index}>
+                  <img
+                    src={imageSrc}
+                    alt="room img"
+                    className="object-cover h-72 w-full rounded-md"
+                  />
+                </SwiperSlide>
+              )
+            )
+          ) : (
+            <p>No images available</p>
+          )}
         </Swiper>
       </div>
 
@@ -83,15 +104,30 @@ const MeetingRoomDetails = () => {
               Amenities:
             </p>
             <ul className="text-start list-disc pl-5 text-gray-600">
-              {amenities.map((amenity: any) => (
-                <li key={room?._id}>{amenity}</li>
-              ))}
+              {amenities.length > 0 ? (
+                amenities.map(
+                  (
+                    amenity:
+                      | string
+                      | number
+                      | boolean
+                      | ReactElement<any, string | JSXElementConstructor<any>>
+                      | Iterable<ReactNode>
+                      | ReactPortal
+                      | null
+                      | undefined,
+                    index: Key | null | undefined
+                  ) => <li key={index}>{amenity}</li>
+                )
+              ) : (
+                <li>No amenities available</li>
+              )}
             </ul>
           </div>
         </div>
       </div>
 
-      <div className="flex justify-center mb-4 px-4">
+      {/* <div className="flex justify-center mb-4 px-4">
         <button
           className="mt-5 w-full py-3 px-6 bg-indigo-600 text-white font-semibold rounded-md transition duration-300 hover:bg-indigo-700 hover:shadow-md"
           onClick={() => document.getElementById("my_modal_1").showModal()}
@@ -101,7 +137,9 @@ const MeetingRoomDetails = () => {
         <dialog id="my_modal_1" className="modal">
           <div className="modal-box">
             <div className="py-4">
-              <BookingRoom roomId={_id} />
+              <div className="modal-action">
+                <BookingRoom roomId={_id} />
+              </div>
             </div>
             <div className="modal-action">
               <form method="dialog">
@@ -109,6 +147,26 @@ const MeetingRoomDetails = () => {
                   <button className="btn">Close</button>
                 </div>
               </form>
+            </div>
+          </div>
+        </dialog>
+      </div> */}
+
+      <div className="flex justify-center mb-4 px-4">
+        <button
+          className="mt-5 w-full py-3 px-6 bg-indigo-600 text-white font-semibold rounded-md transition duration-300 hover:bg-indigo-700 hover:shadow-md"
+          onClick={() =>
+            (
+              document.getElementById("my_modal_1") as HTMLDialogElement
+            ).showModal()
+          }
+        >
+          Book Now
+        </button>
+        <dialog id="my_modal_1" className="modal">
+          <div className="modal-box">
+            <div className="py-4">
+              <BookingRoom roomId={_id} />
             </div>
           </div>
         </dialog>

@@ -14,6 +14,7 @@ import { adminPaths } from "./admin.routes";
 import { userPaths } from "./user.routes";
 import ProtectedRoute from "@/components/layout/ProtectedRoute";
 import BookingRoom from "@/pages/BookingRoom/BookingRoom";
+import CheckOutPayment from "@/pages/CheckOutPayment/CheckOutPayment";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <BookingRoom />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/checkout-payment",
+        element: (
+          <ProtectedRoute>
+            <CheckOutPayment />
           </ProtectedRoute>
         ),
       },
