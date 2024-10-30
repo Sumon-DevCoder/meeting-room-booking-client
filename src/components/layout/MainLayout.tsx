@@ -18,7 +18,10 @@ const MainLayout = () => {
     <Layout className="min-h-screen ">
       <Sidebar collapsed={collapsed} />
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }}>
+        <Header
+          className="sticky top-0"
+          style={{ padding: 0, background: colorBgContainer }}
+        >
           <div className="flex justify-between items-center  ">
             <Button
               type="text"

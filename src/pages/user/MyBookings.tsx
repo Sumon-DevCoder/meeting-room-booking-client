@@ -4,18 +4,58 @@ import CheckUserInfo from "@/components/CheckUserRole/CheckUserInfo";
 import { useGetbookingByUserQuery } from "@/redux/features/booking/bookingApi";
 import { TBooking } from "@/types/booking.types";
 import { format } from "date-fns";
-import { Link } from "react-router-dom";
+import CureentUserData from "@/components/CureentUserData/CureentUserData";
+import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 
 const MyBookings = () => {
   const { user } = CheckUserInfo();
   const { data, isLoading } = useGetbookingByUserQuery(user?.email);
+  const bookings = data?.data || [];
+  const currentUserInfo = CureentUserData();
 
-  // Display loading spinner if data is loading
+  // loading
   if (isLoading) {
     return <Loading />;
   }
 
-  const bookings = data?.data || [];
+  const generateTransactionId = () => {
+    return uuidv4();
+  };
+
+  console.log(generateTransactionId());
+
+  // handle payment
+  const handlePayment = async (booking: TBooking) => {
+    console.log("tB", booking);
+    try {
+      const response = await axios.post("http://localhost:5001/api/payment", {
+        amount: booking.totalAmount,
+        currency: "BDT",
+        order_id: booking?._id,
+        tran_id: generateTransactionId(),
+        cus_name: currentUserInfo?.name,
+        cus_email: currentUserInfo?.email,
+        cus_phone: currentUserInfo?.phone,
+      });
+
+      console.log(response);
+
+      const redirectUrl = response?.data?.paymentUrl;
+      if (redirectUrl) {
+        window.location.replace(redirectUrl);
+      }
+
+      if (response.data && response.data.gateway_page) {
+        window.location.href = response.data.gateway_page; // Redirect to payment gateway
+
+        console.log("jjj", response);
+      }
+    } catch (error) {
+      console.error("Payment initiation failed:", error);
+      //   dispatch(setPaymentStatus("failed"));
+    }
+  };
 
   // Time format function
   const formatTimeWithAMPM = (timeString: string) => {
@@ -50,7 +90,7 @@ const MyBookings = () => {
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-          {bookings.map((booking: TBooking) => (
+          {bookings?.map((booking: TBooking) => (
             <tr key={booking._id}>
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="text-sm font-medium text-gray-900">
@@ -65,8 +105,8 @@ const MyBookings = () => {
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="text-sm text-gray-500">
                   {[
-                    formatTimeWithAMPM(booking.slots[0]?.startTime as string),
-                    formatTimeWithAMPM(booking.slots[0]?.endTime as string),
+                    formatTimeWithAMPM(booking.slots[0]?.startTime),
+                    formatTimeWithAMPM(booking.slots[0]?.endTime),
                   ].join(", ")}
                 </div>
               </td>
@@ -82,11 +122,12 @@ const MyBookings = () => {
                 </div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <Link to={"/checkout-payment"}>
-                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded">
-                    Pay
-                  </button>
-                </Link>
+                <button
+                  onClick={() => handlePayment(booking)}
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded"
+                >
+                  Pay
+                </button>
               </td>
             </tr>
           ))}

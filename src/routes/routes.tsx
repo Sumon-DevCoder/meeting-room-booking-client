@@ -14,7 +14,9 @@ import { adminPaths } from "./admin.routes";
 import { userPaths } from "./user.routes";
 import ProtectedRoute from "@/components/layout/ProtectedRoute";
 import BookingRoom from "@/pages/BookingRoom/BookingRoom";
-import CheckOutPayment from "@/pages/CheckOutPayment/CheckOutPayment";
+import SuccessPayment from "@/pages/Payment/SuccessPayment";
+import FailPayment from "@/pages/Payment/FailPayment";
+import CancelPayment from "@/pages/Payment/CancelPayment";
 
 const router = createBrowserRouter([
   {
@@ -62,10 +64,26 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/checkout-payment",
+        path: "/payment-success",
         element: (
           <ProtectedRoute>
-            <CheckOutPayment />
+            <SuccessPayment />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/payment-fail",
+        element: (
+          <ProtectedRoute>
+            <FailPayment />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/payment-cancel",
+        element: (
+          <ProtectedRoute>
+            <CancelPayment />
           </ProtectedRoute>
         ),
       },

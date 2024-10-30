@@ -21,7 +21,8 @@ const MeetingRooms = () => {
 
   // Filter, search, and sort logic
   const filteredRooms = () => {
-    let result = rooms;
+    // Make a shallow copy of rooms to prevent modifying the original array
+    let result = [...rooms];
 
     // Apply search
     if (searchTerm) {
@@ -125,7 +126,6 @@ const MeetingRooms = () => {
       </div>
 
       {/* Room Listings */}
-
       {!filteredRooms()?.length ? (
         <div className="flex justify-center items-center h-full">
           <p className="text-center text-gray-600 font-semibold text-lg">
@@ -133,7 +133,7 @@ const MeetingRooms = () => {
           </p>
         </div>
       ) : (
-        <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 px-10">
           {filteredRooms()?.map((room: TRoom) => (
             <RoomCard key={room?._id} room={room} />
           ))}

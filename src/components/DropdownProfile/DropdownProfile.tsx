@@ -15,10 +15,13 @@ import { useAppDispatch } from "@/redux/hooks";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import CheckUserInfo from "../CheckUserRole/CheckUserInfo";
 import { Link } from "react-router-dom";
+import CureentUserData from "../CureentUserData/CureentUserData";
 
 const DropdownProfile = () => {
   const { user, isAdmin } = CheckUserInfo();
   const dispatch = useAppDispatch();
+
+  const currentUserInfo = CureentUserData();
 
   const handleLogout = async () => {
     try {
@@ -40,7 +43,7 @@ const DropdownProfile = () => {
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuLabel>{currentUserInfo?.name}</DropdownMenuLabel>
             <DropdownMenuSeparator />
             {isAdmin ? (
               <>
@@ -52,7 +55,9 @@ const DropdownProfile = () => {
               </>
             ) : (
               <DropdownMenuItem>
-                <button>My Bookings</button>
+                <Link to={"/user/my-bookings"}>
+                  <button>My Bookings</button>
+                </Link>
               </DropdownMenuItem>
             )}
             <DropdownMenuSeparator />
