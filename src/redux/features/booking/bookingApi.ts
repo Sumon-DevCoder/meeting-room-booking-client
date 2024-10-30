@@ -2,6 +2,13 @@ import { baseApi } from "../../api/baseApi";
 
 export const bookingApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    getAllbooking: builder.query({
+      query: () => ({
+        method: "GET",
+        url: `/bookings`,
+      }),
+      providesTags: ["bookings"],
+    }),
     getbookingByUser: builder.query({
       query: (userId) => ({
         method: "GET",
@@ -34,12 +41,12 @@ export const bookingApi = baseApi.injectEndpoints({
       invalidatesTags: ["bookings"],
     }),
     updatebookingById: builder.mutation({
-      query: ({ id, bookingInfo }) => {
-        console.log("booking api hitting", { id, bookingInfo });
+      query: ({ id, status }) => {
+        console.log("booking api hitting", { id, status });
         return {
           method: "PUT",
           url: `/bookings/${id}`,
-          body: bookingInfo,
+          body: status,
         };
       },
       invalidatesTags: ["bookings"],
@@ -48,6 +55,7 @@ export const bookingApi = baseApi.injectEndpoints({
 });
 
 export const {
+  useGetAllbookingQuery,
   useGetbookingByUserQuery,
   useGetSinglebookingQuery,
   useCreatebookingMutation,

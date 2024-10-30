@@ -6,36 +6,38 @@ import { TBooking } from "@/types/booking.types";
 import { format } from "date-fns";
 import CureentUserData from "@/components/CureentUserData/CureentUserData";
 import axios from "axios";
+import { useGetPaymentByUserQuery } from "@/redux/features/payment/paymentApi";
 import { v4 as uuidv4 } from "uuid";
 
 const MyBookings = () => {
+  // import
   const { user } = CheckUserInfo();
   const { data, isLoading } = useGetbookingByUserQuery(user?.email);
+  const { data: paymentData, isLoading: isPaymentLoading } =
+    useGetPaymentByUserQuery(user?.email);
   const bookings = data?.data || [];
+  const paymentDatas = paymentData?.data || [];
   const currentUserInfo = CureentUserData();
 
   // loading
-  if (isLoading) {
+  if (isLoading || isPaymentLoading) {
     return <Loading />;
   }
 
-  const generateTransactionId = () => {
-    return uuidv4();
-  };
+  console.log(paymentData);
 
-  console.log(generateTransactionId());
+  const tran_id = uuidv4();
 
   // handle payment
   const handlePayment = async (booking: TBooking) => {
-    console.log("tB", booking);
     try {
       const response = await axios.post("http://localhost:5001/api/payment", {
         amount: booking.totalAmount,
         currency: "BDT",
         order_id: booking?._id,
-        tran_id: generateTransactionId(),
         cus_name: currentUserInfo?.name,
         cus_email: currentUserInfo?.email,
+        tran_id,
         cus_phone: currentUserInfo?.phone,
       });
 
@@ -65,6 +67,12 @@ const MyBookings = () => {
     }T${timeString}`;
     const date = new Date(fullDateTimeString);
     return format(date, "hh:mm a");
+  };
+
+  // Find payment status by booking ID
+  const getPaymentStatus = (bookingId: string) => {
+    const payment = paymentDatas?.find((p) => p.order_id === bookingId);
+    return payment ? payment.status : "pending"; // Default to "pending" if no status is found
   };
 
   return (
@@ -122,12 +130,16 @@ const MyBookings = () => {
                 </div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <button
-                  onClick={() => handlePayment(booking)}
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded"
-                >
-                  Pay
-                </button>
+                {getPaymentStatus(booking._id) === "pending" ? (
+                  <button
+                    onClick={() => handlePayment(booking)}
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded"
+                  >
+                    Pay
+                  </button>
+                ) : (
+                  <span className="text-green-600 font-bold">Paid</span>
+                )}
               </td>
             </tr>
           ))}
