@@ -4,10 +4,12 @@ import CheckUserInfo from "@/components/CheckUserRole/CheckUserInfo";
 import { useGetbookingByUserQuery } from "@/redux/features/booking/bookingApi";
 import { TBooking } from "@/types/booking.types";
 import { format } from "date-fns";
-import CureentUserData from "@/components/CureentUserData/CureentUserData";
 import axios from "axios";
 import { useGetPaymentByUserQuery } from "@/redux/features/payment/paymentApi";
 import { v4 as uuidv4 } from "uuid";
+import DataNotAvailable from "@/components/DataNotAvailable/DataNotAvailable";
+import useCurrentUserData from "@/hoooks/useCurrentData";
+import { TPayment } from "@/types/types.payment";
 
 const MyBookings = () => {
   // import
@@ -17,11 +19,21 @@ const MyBookings = () => {
     useGetPaymentByUserQuery(user?.email);
   const bookings = data?.data || [];
   const paymentDatas = paymentData?.data || [];
-  const currentUserInfo = CureentUserData();
+  const { currentUserInfo, isUserLoading } = useCurrentUserData();
 
   // loading
-  if (isLoading || isPaymentLoading) {
+  if (isLoading || isPaymentLoading || isUserLoading) {
     return <Loading />;
+  }
+
+  if (bookings?.length === 0) {
+    return (
+      <DataNotAvailable
+        path="/meeting-rooms"
+        buttonName="Book Now"
+        message="🚫 No bookings yet. 🌟 Find and book your perfect room!"
+      />
+    );
   }
 
   console.log(paymentData);
@@ -71,7 +83,9 @@ const MyBookings = () => {
 
   // Find payment status by booking ID
   const getPaymentStatus = (bookingId: string) => {
-    const payment = paymentDatas?.find((p) => p.order_id === bookingId);
+    const payment = paymentDatas?.find(
+      (p: TPayment) => p.order_id === bookingId
+    );
     return payment ? payment.status : "pending"; // Default to "pending" if no status is found
   };
 

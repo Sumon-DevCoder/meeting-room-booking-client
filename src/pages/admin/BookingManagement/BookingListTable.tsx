@@ -18,8 +18,6 @@ const BookingList = () => {
 
   const bookings = bookingData?.data?.result || [];
 
-  console.log(bookings);
-
   if (isBookingLoading) {
     return <Loading />;
   }

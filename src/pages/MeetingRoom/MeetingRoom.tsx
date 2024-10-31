@@ -3,49 +3,42 @@ import { useGetRoomsQuery } from "@/redux/features/room/roomApi";
 import Loading from "@/components/Loading/Loading";
 import { TRoom } from "@/types/room.types";
 import RoomCard from "@/components/RoomCard/RoomCard";
+import { motion } from "framer-motion"; // Import motion from framer-motion
 
 const MeetingRooms = () => {
-  // Import
   const { data, isLoading } = useGetRoomsQuery({});
   const [searchTerm, setSearchTerm] = useState("");
   const [capacityFilter, setCapacityFilter] = useState("");
   const [priceFilter, setPriceFilter] = useState("");
   const [sortOrder, setSortOrder] = useState("");
 
-  // Setup loading
   if (isLoading) {
     return <Loading />;
   }
 
   const rooms = data?.data?.result || [];
 
-  // Filter, search, and sort logic
   const filteredRooms = () => {
-    // Make a shallow copy of rooms to prevent modifying the original array
     let result = [...rooms];
 
-    // Apply search
     if (searchTerm) {
       result = result.filter((room: TRoom) =>
         room.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
-    // Apply capacity filter
     if (capacityFilter) {
       result = result.filter(
         (room: TRoom) => room.capacity >= parseInt(capacityFilter)
       );
     }
 
-    // Apply price filter
     if (priceFilter) {
       result = result.filter(
         (room: TRoom) => room.pricePerSlot <= parseInt(priceFilter)
       );
     }
 
-    // Apply sort order
     if (sortOrder === "asc") {
       result = result.sort(
         (a: { pricePerSlot: number }, b: { pricePerSlot: number }) =>
@@ -61,7 +54,6 @@ const MeetingRooms = () => {
     return result;
   };
 
-  // Reset filters
   const handleResetFilters = () => {
     setSearchTerm("");
     setCapacityFilter("");
@@ -73,7 +65,6 @@ const MeetingRooms = () => {
     <section className="container mx-auto py-8">
       <h1 className="text-3xl font-bold text-center mb-6">Meeting Rooms</h1>
 
-      {/* Search, Filter, and Sort Options */}
       <div className="flex flex-wrap gap-4 mb-6 justify-center">
         <input
           type="text"
@@ -125,7 +116,6 @@ const MeetingRooms = () => {
         </button>
       </div>
 
-      {/* Room Listings */}
       {!filteredRooms()?.length ? (
         <div className="flex justify-center items-center h-full">
           <p className="text-center text-gray-600 font-semibold text-lg">
@@ -135,7 +125,15 @@ const MeetingRooms = () => {
       ) : (
         <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 px-10">
           {filteredRooms()?.map((room: TRoom) => (
-            <RoomCard key={room?._id} room={room} />
+            <motion.div
+              key={room?._id}
+              initial={{ opacity: 0, y: 20 }} // Start with opacity 0 and slightly below
+              animate={{ opacity: 1, y: 0 }} // Animate to full opacity and original position
+              exit={{ opacity: 0, y: -20 }} // Animate out with fading
+              transition={{ duration: 0.3 }} // Set the duration of the transition
+            >
+              <RoomCard room={room} />
+            </motion.div>
           ))}
         </div>
       )}

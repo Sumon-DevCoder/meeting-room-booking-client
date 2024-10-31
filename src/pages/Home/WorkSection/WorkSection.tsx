@@ -29,42 +29,30 @@ const WorkSection = () => {
               />
             </div>
             <div className="relative grid grid-cols-1 text-center gap-y-12 md:grid-cols-3 gap-x-12">
-              <div>
-                <div className="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
-                  {/* Replace with an icon/illustration for this step */}
-                  <span className="text-xl font-semibold text-gray-700">1</span>
-                </div>
-                <h3 className="mt-6 text-xl text-white font-semibold leading-tight md:mt-10">
-                  Select a Room
-                </h3>
-                <p className="mt-4 text-base text-gray-400 md:text-lg">
-                  Choose the perfect room that fits your needs and capacity.
-                </p>
-              </div>
-              <div>
-                <div className="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
-                  {/* Replace with an icon/illustration for this step */}
-                  <span className="text-xl font-semibold text-gray-700">2</span>
-                </div>
-                <h3 className="mt-6 text-xl text-white font-semibold leading-tight md:mt-10">
-                  Choose Date & Time
-                </h3>
-                <p className="mt-4 text-base text-gray-400 md:text-lg">
-                  Select your desired date and time for the booking.
-                </p>
-              </div>
-              <div>
-                <div className="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
-                  {/* Replace with an icon/illustration for this step */}
-                  <span className="text-xl font-semibold text-gray-700">3</span>
-                </div>
-                <h3 className="mt-6 text-xl text-white font-semibold leading-tight md:mt-10">
-                  Confirm Booking
-                </h3>
-                <p className="mt-4 text-base text-gray-400 md:text-lg">
-                  Review your selection and confirm your booking to finalize.
-                </p>
-              </div>
+              {["Select a Room", "Choose Date & Time", "Confirm Booking"].map(
+                (step, index) => (
+                  <div
+                    key={index}
+                    className="hover:scale-105 transition-transform duration-300"
+                  >
+                    <div className="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow transition-colors duration-300 hover:bg-gray-200">
+                      <span className="text-xl font-semibold text-gray-700">
+                        {index + 1}
+                      </span>
+                    </div>
+                    <h3 className="mt-6 text-xl text-white font-semibold leading-tight md:mt-10">
+                      {step}
+                    </h3>
+                    <p className="mt-4 text-base text-gray-400 md:text-lg">
+                      {index === 0
+                        ? "Choose the perfect room that fits your needs and capacity."
+                        : index === 1
+                        ? "Select your desired date and time for the booking."
+                        : "Review your selection and confirm your booking to finalize."}
+                    </p>
+                  </div>
+                )
+              )}
             </div>
           </div>
         </div>

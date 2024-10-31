@@ -5,24 +5,37 @@ const WhyChooseUs = () => {
         <div className="bg-slate-600">
           <section
             id="features"
-            className="relative  block px-6 py-10 md:py-10 md:px-10 border-t border-b border-neutral-900 bg-neutral-900/30"
+            className="relative block px-6 py-10 md:py-10 md:px-10 border-t border-b border-neutral-900 bg-neutral-900/30"
           >
             <div className="relative mx-auto max-w-5xl text-center">
-              <span className="text-gray-400 my-3 font-oswald  flex items-center justify-center font-medium uppercase tracking-wider">
+              <span
+                className="text-gray-400 my-3 font-oswald flex items-center justify-center font-medium uppercase tracking-wider"
+                data-aos="fade-up"
+              >
                 Why Choose Us
               </span>
-              <h2 className="block w-full bg-gradient-to-b  from-white to-gray-400 bg-clip-text font-bold text-transparent text-3xl sm:text-4xl">
+              <h2
+                className="block w-full bg-gradient-to-b from-white to-gray-400 bg-clip-text font-bold text-transparent text-3xl sm:text-4xl"
+                data-aos="fade-up"
+              >
                 Seamless Meeting Room Booking Experience
               </h2>
-              <p className="mx-auto my-4 w-full max-w-xl bg-transparent text-center font-medium leading-relaxed tracking-wide text-gray-400">
+              <p
+                className="mx-auto my-4 w-full max-w-xl bg-transparent text-center font-medium leading-relaxed tracking-wide text-gray-400"
+                data-aos="fade-up"
+              >
                 Our platform is designed to provide an intuitive experience for
                 users booking meeting rooms, ensuring convenience and
                 efficiency.
               </p>
             </div>
 
-            <div className="relative mx-auto max-w-7xl z-10 grid grid-cols-1 gap-10 pt-14 sm:grid-cols-2 lg:grid-cols-3 ">
-              <div className="rounded-md border border-neutral-800 bg-neutral-900/50 p-8 text-center shadow">
+            <div className="relative mx-auto max-w-7xl z-10 grid grid-cols-1 gap-10 pt-14 sm:grid-cols-2 lg:grid-cols-3">
+              {/* User-Friendly Design Card */}
+              <div
+                className="rounded-md border border-neutral-800 bg-neutral-900/50 p-8 text-center shadow"
+                data-aos="fade-up"
+              >
                 <div
                   className="button-text mx-auto flex h-12 w-12 items-center justify-center rounded-md border"
                   style={{
@@ -57,7 +70,11 @@ const WhyChooseUs = () => {
                 </p>
               </div>
 
-              <div className="rounded-md border border-neutral-800 bg-neutral-900/50 p-8 text-center shadow">
+              {/* Secure Processes Card */}
+              <div
+                className="rounded-md border border-neutral-800 bg-neutral-900/50 p-8 text-center shadow"
+                data-aos="fade-up"
+              >
                 <div
                   className="button-text mx-auto flex h-12 w-12 items-center justify-center rounded-md border"
                   style={{
@@ -89,7 +106,11 @@ const WhyChooseUs = () => {
                 </p>
               </div>
 
-              <div className="rounded-md border border-neutral-800 bg-neutral-900/50 p-8 text-center shadow">
+              {/* Robust Management Tools Card */}
+              <div
+                className="rounded-md border border-neutral-800 bg-neutral-900/50 p-8 text-center shadow"
+                data-aos="fade-up"
+              >
                 <div
                   className="button-text mx-auto flex h-12 w-12 items-center justify-center rounded-md border"
                   style={{
@@ -136,10 +157,10 @@ const WhyChooseUs = () => {
               }}
             ></div>
             <div
-              className="absolute bottom-0 right-0 z-0 h-1/3 w-full"
+              className="absolute bottom-0 right-0 z-0 h-1/3 w-full border-b"
               style={{
                 backgroundImage:
-                  "linear-gradient(to left top, rgba(220, 38, 38, 0.2) 0%, transparent 50%, transparent 100%)",
+                  "linear-gradient(to left top, rgba(79, 70, 229, 0.2) 0%, transparent 50%, transparent 100%)",
                 borderColor: "rgba(92, 79, 240, 0.2)",
               }}
             ></div>

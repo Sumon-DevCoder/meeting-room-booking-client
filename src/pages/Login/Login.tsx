@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { TError } from "@/types";
+import { motion } from "framer-motion"; // Import Framer Motion
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,6 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit = async (data: FieldValues) => {
-    // logging in
     const toastId = toast.loading("Logging in");
 
     try {
@@ -33,19 +33,11 @@ const Login = () => {
         password: data.password,
       };
 
-      console.log("userInfo", userInfo);
-
       // Call the login mutation
       const res = await login(userInfo).unwrap();
 
-      console.log(res);
-
-      console.log(res.token);
-
       // redirect path
       const from = location.state?.from?.pathname || "/";
-
-      console.log("from", location);
 
       if (res) {
         const user = verifyToken(res?.token) as TUser; // set user in store
@@ -55,12 +47,9 @@ const Login = () => {
 
         // success
         toast.success("Login Successful", { id: toastId, duration: 3000 });
-        // navigate(`/${user?.role}`);
         navigate(from, { replace: true });
       }
     } catch (err) {
-      console.log("err", err);
-
       const serverMsgErr =
         (err as TError)?.data?.message || "Something went wrong";
 
@@ -82,7 +71,13 @@ const Login = () => {
     <div className="mx-auto">
       <div className="flex justify-center px-6 py-12">
         <div className="w-full xl:w-3/4 lg:w-11/12 flex justify-center">
-          <div className="w-full lg:w-7/12 shadow-xl bg-gray-100 dark:bg-gray-700 p-5 rounded-lg lg:rounded-l-none">
+          <motion.div
+            className="w-full lg:w-7/12 shadow-xl bg-gray-100 dark:bg-gray-700 p-5 rounded-lg lg:rounded-l-none"
+            initial={{ opacity: 0, y: -20 }} // Initial state
+            animate={{ opacity: 1, y: 0 }} // Animate to this state
+            exit={{ opacity: 0, y: 20 }} // Exit state
+            transition={{ duration: 0.5 }} // Duration of the animation
+          >
             <h3 className="py-4 text-2xl text-center text-gray-800 dark:text-white">
               Login to Your Account
             </h3>
@@ -178,7 +173,7 @@ const Login = () => {
                 </p>
               </div>
             </form>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

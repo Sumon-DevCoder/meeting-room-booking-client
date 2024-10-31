@@ -5,6 +5,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { HiEye, HiEyeOff } from "react-icons/hi";
+import { motion } from "framer-motion";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -71,9 +72,19 @@ const Register = () => {
   return (
     <div>
       <div className="mx-auto">
-        <div className="flex justify-center px-6 py-5">
+        <motion.div
+          className="flex justify-center px-6 py-5"
+          initial={{ opacity: 0, y: 20 }} // Start slightly below and transparent
+          animate={{ opacity: 1, y: 0 }} // Animate to original position and full opacity
+          transition={{ duration: 0.5 }} // Duration of the animation
+        >
           <div className="w-full xl:w-3/4 lg:w-11/12 flex justify-center">
-            <div className="w-full lg:w-7/12 shadow-xl bg-gray-100 dark:bg-gray-700 p-5 rounded-lg lg:rounded-l-none">
+            <motion.div
+              className="w-full lg:w-7/12 shadow-xl bg-gray-100 dark:bg-gray-700 p-5 rounded-lg lg:rounded-l-none"
+              initial={{ scale: 0.95 }} // Scale down slightly at start
+              animate={{ scale: 1 }} // Animate to full scale
+              transition={{ duration: 0.5 }}
+            >
               <h3 className="py-4 text-2xl text-center text-gray-800 dark:text-white">
                 Create an Account!
               </h3>
@@ -248,11 +259,11 @@ const Register = () => {
                 <hr className="mb-6 border-t" />
                 <div className="text-center">
                   {/* <a
-                    className="inline-block text-sm text-blue-500 dark:text-blue-500 align-baseline hover:text-blue-800"
-                    href="#"
-                  >
-                    Forgot Password?
-                  </a> */}
+                  className="inline-block text-sm text-blue-500 dark:text-blue-500 align-baseline hover:text-blue-800"
+                  href="#"
+                >
+                  Forgot Password?
+                </a> */}
                 </div>
                 <div className="text-center">
                   <p className="inline-block text-md text-black dark:text-blue-500 align-baseline ">
@@ -266,9 +277,9 @@ const Register = () => {
                   </p>
                 </div>
               </form>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

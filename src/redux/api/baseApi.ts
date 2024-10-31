@@ -11,6 +11,7 @@ import { RootState } from "../store";
 import { logout, setUser } from "../features/auth/authSlice";
 import { toast } from "sonner";
 import { TResponse } from "../../types/global";
+import { TUser } from "@/types/booking.types";
 
 // pass token for every request to server
 const baseQuery = fetchBaseQuery({
@@ -38,7 +39,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   BaseQueryApi,
   DefinitionType
 > = async (arg, api, extraOptions): Promise<any> => {
-  let result = (await baseQuery(arg, api, extraOptions)) as TResponse;
+  let result = (await baseQuery(arg, api, extraOptions)) as TResponse<TUser>;
 
   console.log("result fo custom base query", result);
 
@@ -76,7 +77,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
         })
       );
 
-      result = (await baseQuery(arg, api, extraOptions)) as TResponse;
+      result = (await baseQuery(arg, api, extraOptions)) as TResponse<TUser>;
 
       console.log("token generate success");
     } else {

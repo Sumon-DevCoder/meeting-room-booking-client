@@ -15,13 +15,18 @@ import { useAppDispatch } from "@/redux/hooks";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import CheckUserInfo from "../CheckUserRole/CheckUserInfo";
 import { Link } from "react-router-dom";
-import CureentUserData from "../CureentUserData/CureentUserData";
+import Loading from "../Loading/Loading";
+import useCurrentUserData from "@/hoooks/useCurrentData";
 
 const DropdownProfile = () => {
   const { user, isAdmin } = CheckUserInfo();
   const dispatch = useAppDispatch();
 
-  const currentUserInfo = CureentUserData();
+  const { currentUserInfo, isUserLoading } = useCurrentUserData();
+
+  if (isUserLoading) {
+    return <Loading />;
+  }
 
   const handleLogout = async () => {
     try {
