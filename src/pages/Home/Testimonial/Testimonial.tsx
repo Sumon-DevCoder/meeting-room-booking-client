@@ -1,5 +1,4 @@
 import { TTestimonial } from "@/types/testimonial.types";
-
 import { useEffect, useState } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
@@ -37,16 +36,38 @@ const Testimonial = () => {
   }
 
   return (
-    <Carousel className="hidden">
-      {testimonials?.map((testimonial) => {
-        return (
-          <div key={testimonial?.id}>
-            <img className="w-20 h-96" src={testimonial?.image} />
-            <p className="legend">Legend 2</p>
-          </div>
-        );
-      })}
-    </Carousel>
+    <div className="bg-slate-400 p-10 max-w-screen-xl m-auto rounded-lg">
+      <div className="flex justify-center">
+        <h2 className="text-2xl font-bold text-center mb-4 border-b-2 border-gray-300 pb-2 inline-block">
+          What Our Clients Say
+        </h2>
+      </div>
+      <div className="lg:px-64">
+        <Carousel>
+          {testimonials.map((testimonial) => {
+            return (
+              <div key={testimonial?.id} className="flex flex-col items-center">
+                <div className="avatar">
+                  <div className="w-24 rounded-full">
+                    <img
+                      src={testimonial?.image}
+                      alt={`${testimonial?.name}'s testimonial`}
+                    />
+                  </div>
+                </div>
+                <h3 className="text-lg font-semibold pt-2">
+                  {testimonial?.name}
+                </h3>
+                <p className="text-sm text-gray-500">{testimonial?.role}</p>
+                <p className="mt-2 text-center px-20">
+                  {testimonial?.testimonial}
+                </p>
+              </div>
+            );
+          })}
+        </Carousel>
+      </div>
+    </div>
   );
 };
 

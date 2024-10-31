@@ -4,7 +4,7 @@ import meetingRoomImg from "../../../assets/modern_workspace_banner.jpg";
 const Banner = () => {
   return (
     <div
-      className="relative h-96 bg-cover bg-center mt-[2px]"
+      className="relative md:h-[450px] bg-cover bg-center mt-[2px]"
       style={{ backgroundImage: `url(${meetingRoomImg})` }}
     >
       {/* Background overlay */}
@@ -12,14 +12,17 @@ const Banner = () => {
 
       {/* Animated content */}
       <div className="relative flex flex-col items-center justify-center h-full text-white text-center p-4">
-        <h1 data-aos="fade-up" className="text-4xl md:text-5xl font-bold mb-4">
+        <h1
+          data-aos="fade-up"
+          className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
+        >
           Book Your Ideal Meeting Room with Ease
         </h1>
 
         <p
           data-aos="fade-up"
           data-aos-delay="200"
-          className="text-lg md:text-xl mb-6"
+          className="text-md md:text-xl mb-6"
         >
           Efficient, hassle-free room booking for all your meeting needs.
         </p>

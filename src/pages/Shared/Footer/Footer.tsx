@@ -4,13 +4,13 @@ const Footer = () => {
   return (
     <div>
       <div className="mt-8 bg-gray-900 pt-9">
-        <div className="mx-auto w-full  px-4 xl:px-0">
-          <div className="flex flex-col justify-between sm:px-[18px] md:flex-row md:px-10">
+        <div className="mx-auto w-full  px-4 md:px-0 ">
+          <div className="flex flex-col gap-5 lg:gap-0 justify-between sm:px-[18px] md:flex-row lg:px-10">
             <div className="md:w-[316px]">
               <h1 className="text-white font-extrabold text-[24px]">
                 <Link
                   to={"/"}
-                  className="btn btn-ghost text-xl bg-gradient-to-r from-indigo-500"
+                  className="btn btn-ghost lg:text-xl bg-gradient-to-r from-indigo-500"
                 >
                   Meeting Room Booking
                 </Link>
@@ -20,7 +20,7 @@ const Footer = () => {
                 effortless meeting room bookings. Discover the perfect space and
                 enjoy a hassle-free scheduling experience
               </p>
-              <div className="mt-[18px] flex gap-6">
+              <div className="mt-[18px] flex gap-5">
                 <a
                   className="hover:scale-110"
                   target="_blank"
@@ -75,6 +75,7 @@ const Footer = () => {
               <h3 className="text-white font-medium text-[18px] mt-6 md:mt-0">
                 Contact Us
               </h3>
+              {/* one */}
               <div className="mt-[23px] flex items-center">
                 <div className="flex h-[38px] w-[38px] items-center justify-center rounded-full bg-white">
                   <svg
@@ -104,6 +105,33 @@ const Footer = () => {
                   <p className="text-white text-[12px]">Support Number</p>
                 </div>
               </div>
+              {/* two */}
+              <div className="mt-[23px] flex items-center">
+                <div className="flex h-[38px] w-[38px] items-center justify-center rounded-full bg-white">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12 2C10.34 2 8.68 2.63 7.5 3.77C6.31 4.91 5.5 6.5 5.5 8.5C5.5 10.9 8.5 14.5 12 18C15.5 14.5 18.5 10.9 18.5 8.5C18.5 6.5 17.69 4.91 16.5 3.77C15.32 2.63 13.66 2 12 2ZM12 20C11.55 20 11.1 19.95 10.66 19.85C10.76 19.95 10.87 20 11 20H13C13.13 20 13.24 19.95 13.34 19.85C12.9 19.95 12.45 20 12 20Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+                <div className="ml-[18px]">
+                  <a
+                    href="tel:+911800123444"
+                    className="text-white font-medium"
+                  >
+                    1234 Street Name, City
+                  </a>
+                  <p className="text-white text-[12px]">Address</p>
+                </div>
+              </div>
+
               <div className="mt-[23px] flex items-center">
                 <div className="flex h-[38px] w-[38px] items-center justify-center rounded-full bg-white">
                   <svg
@@ -149,8 +177,8 @@ const Footer = () => {
             </div>
           </div>
           <div className="border-t border-white/[20%] mt-8 pt-4">
-            <p className="text-center text-white text-[14px]">
-              © 2024 YOUR COMPANY NAME. All Rights Reserved.
+            <p className="text-center text-white text-[14px] pb-3">
+              © 2024 Meeting Booking Room. All Rights Reserved.
             </p>
           </div>
         </div>

@@ -18,10 +18,17 @@ import { Link } from "react-router-dom";
 import Loading from "../Loading/Loading";
 import useCurrentUserData from "@/hoooks/useCurrentData";
 
+// Import icons from react-icons
+import { FaUserCircle } from "react-icons/fa";
+import { MdDashboard, MdLogout } from "react-icons/md";
+import { BsCalendar2Check } from "react-icons/bs";
+
+// Import motion for animations
+import { motion } from "framer-motion";
+
 const DropdownProfile = () => {
   const { user, isAdmin } = CheckUserInfo();
   const dispatch = useAppDispatch();
-
   const { currentUserInfo, isUserLoading } = useCurrentUserData();
 
   if (isUserLoading) {
@@ -41,35 +48,46 @@ const DropdownProfile = () => {
     <div>
       {user ? (
         <DropdownMenu>
-          <DropdownMenuTrigger>
-            <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
+          <DropdownMenuTrigger asChild>
+            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+              <Avatar>
+                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+            </motion.div>
           </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuLabel>{currentUserInfo?.name}</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            {isAdmin ? (
-              <>
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <DropdownMenuContent>
+              <DropdownMenuLabel>
+                <FaUserCircle className="inline mr-2" /> {currentUserInfo?.name}
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              {isAdmin ? (
                 <DropdownMenuItem>
                   <Link to="/admin/dashboard">
-                    <button>Dashboard</button>
+                    <MdDashboard className="inline mr-2" /> Dashboard
                   </Link>
                 </DropdownMenuItem>
-              </>
-            ) : (
-              <DropdownMenuItem>
-                <Link to={"/user/my-bookings"}>
-                  <button>My Bookings</button>
-                </Link>
+              ) : (
+                <DropdownMenuItem>
+                  <Link to={"/user/my-bookings"}>
+                    <BsCalendar2Check className="inline mr-2" /> My Bookings
+                  </Link>
+                </DropdownMenuItem>
+              )}
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                className="cursor-pointer"
+                onClick={handleLogout}
+              >
+                <MdLogout className="inline mr-2" /> Logout
               </DropdownMenuItem>
-            )}
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <button onClick={handleLogout}>Logout</button>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
+            </DropdownMenuContent>
+          </motion.div>
         </DropdownMenu>
       ) : (
         <PrimaryButton path={"/login"} name="Login" />

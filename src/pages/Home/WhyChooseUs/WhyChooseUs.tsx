@@ -33,7 +33,7 @@ const WhyChooseUs = () => {
             <div className="relative mx-auto max-w-7xl z-10 grid grid-cols-1 gap-10 pt-14 sm:grid-cols-2 lg:grid-cols-3">
               {/* User-Friendly Design Card */}
               <div
-                className="rounded-md border border-neutral-800 bg-neutral-900/50 p-8 text-center shadow"
+                className="rounded-md border border-neutral-800 bg-neutral-900/50 p-8 text-center shadow transition duration-500 hover:scale-105 hover:shadow-2xl transform"
                 data-aos="fade-up"
               >
                 <div

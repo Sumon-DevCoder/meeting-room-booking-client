@@ -5,6 +5,7 @@ import { adminPaths } from "../../routes/admin.routes";
 import { useAppSelector } from "@/redux/hooks";
 import { currentUser } from "@/redux/features/auth/authSlice";
 import { userPaths } from "@/routes/user.routes";
+import { Link } from "react-router-dom";
 
 const userRole = {
   ADMIN: "admin",
@@ -39,9 +40,11 @@ const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
         console.log(collapsed, type);
       }}
     >
-      <div className="demo-logo-vertical border-2 border-indigo-400 rounded-md text-center text-slate-200 font-bold p-2">
-        MR Booking
-      </div>
+      <Link to="/">
+        <div className="demo-logo-vertical border-2 border-indigo-400 rounded-md text-center hover:bg-slate-600 text-slate-200 font-bold p-2">
+          MR Booking
+        </div>
+      </Link>
       <Menu
         className="sticky top-0"
         theme="dark"
