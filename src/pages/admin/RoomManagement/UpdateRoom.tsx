@@ -1,17 +1,20 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  useGetRoomsQuery,
-  useUpdateRoomByIdMutation,
-} from "@/redux/features/room/roomApi"; // Assuming you have a getRoomQuery for fetching room data
+
 import { TError } from "@/types";
 import { FieldValues, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
-import { useEffect } from "react";
+import {
+  useGetSingleRoomQuery,
+  useUpdateRoomByIdMutation,
+} from "@/redux/features/room/roomApi";
+import Loading from "@/components/Loading/Loading";
 
 const UpdateRoom = () => {
-  const { id } = useParams(); // Assuming the room ID is passed as a URL parameter
-  const { data, isLoading } = useGetRoomsQuery(id); // Fetch the room details
+  const { id } = useParams();
+  const { data: roomData, isLoading: RoomIsLoading } =
+    useGetSingleRoomQuery(id);
   const [updateRoomById] = useUpdateRoomByIdMutation();
   const navigate = useNavigate();
   const {
@@ -21,24 +24,15 @@ const UpdateRoom = () => {
     reset,
   } = useForm<FieldValues>();
 
-  // actual roomData
-  const roomData = data?.data?.result[0];
+  // loading
+  if (RoomIsLoading) {
+    return <Loading />;
+  }
 
-  useEffect(() => {
-    if (roomData) {
-      reset({
-        roomName: roomData.name,
-        roomNo: roomData.roomNo,
-        floorNo: roomData.floorNo,
-        capacity: roomData.capacity,
-        pricePerSlot: roomData.pricePerSlot,
-        amenities: roomData.amenities || [],
-        additionalAmenities: roomData.additionalAmenities || "",
-      });
-    }
-  }, [roomData, reset]);
+  //   // extract data
+  const room = roomData?.data;
 
-  console.log(roomData);
+  console.log(room);
 
   // Image upload function
   const uploadImageToImgBB = async (file: any) => {
@@ -143,10 +137,6 @@ const UpdateRoom = () => {
     });
   };
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className="mx-auto w-full bg-white shadow-md rounded-lg p-8">
       <h2 className="text-2xl font-semibold text-indigo-700 text-center mb-4">
@@ -165,6 +155,7 @@ const UpdateRoom = () => {
             type="text"
             {...register("roomName", { required: "Room Name is required" })}
             id="room-name"
+            defaultValue={room?.name}
             placeholder="Room Name"
             className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
           />
@@ -184,6 +175,7 @@ const UpdateRoom = () => {
             </label>
             <input
               type="text"
+              defaultValue={room?.roomNo}
               {...register("roomNo", {
                 required: "Room Number is required",
                 pattern: {
@@ -208,6 +200,7 @@ const UpdateRoom = () => {
             </label>
             <input
               type="text"
+              defaultValue={room?.floorNo}
               {...register("floorNo", {
                 required: "Floor Number is required",
                 pattern: {
@@ -232,6 +225,7 @@ const UpdateRoom = () => {
             </label>
             <input
               type="number"
+              defaultValue={room?.capacity}
               {...register("capacity", {
                 required: "Capacity is required",
                 min: { value: 1, message: "Capacity must be at least 1" },
@@ -258,6 +252,7 @@ const UpdateRoom = () => {
               Price per Slot
             </label>
             <input
+              defaultValue={room?.pricePerSlot}
               type="number"
               {...register("pricePerSlot", {
                 required: "Price per Slot is required",
@@ -281,6 +276,7 @@ const UpdateRoom = () => {
               Upload Room Images (3 images)
             </label>
             <input
+              //   defaultValue={room?.img}
               type="file"
               {...register("img", {
                 validate: validateFiles,
@@ -304,6 +300,7 @@ const UpdateRoom = () => {
           {amenitiesOptions.map((amenity) => (
             <div key={amenity} className="flex items-center mb-2">
               <input
+                defaultChecked={room?.amenities.includes(amenity)}
                 type="checkbox"
                 {...register("amenities")}
                 value={amenity}

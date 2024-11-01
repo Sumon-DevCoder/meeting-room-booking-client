@@ -158,7 +158,7 @@ const Footer = () => {
                 </div>
               </div>
             </div>
-            <div className="md:w-[316px]">
+            <div className="md:w-[340px]">
               <h3 className="text-white font-medium text-[18px] mt-6 md:mt-0">
                 About Us
               </h3>
@@ -168,12 +168,20 @@ const Footer = () => {
                 your needs, ensuring that every gathering is productive and
                 hassle-free.
               </p>
-              <Link
-                to={"/about-us"}
-                className="text-indigo-600 hover:text-indigo-300 font-medium mt-4 inline-block"
-              >
-                Learn More
-              </Link>
+              <div className="flex gap-4 md:flex-col lg:flex-row">
+                <Link
+                  to={"/about-us"}
+                  className="text-indigo-600 hover:text-indigo-300 md:border-none  border-b-2 border-gray-400 mt-4 inline-block"
+                >
+                  Privacy Policy
+                </Link>
+                <Link
+                  to={"/about-us"}
+                  className="text-indigo-600 hover:text-indigo-300 md:border-none border-b-2  border-gray-400 md:mt-0  mt-4 lg:mt-4 inline-block"
+                >
+                  Terms of Service.
+                </Link>
+              </div>
             </div>
           </div>
           <div className="border-t border-white/[20%] mt-8 pt-4">

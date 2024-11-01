@@ -9,37 +9,45 @@ export const userApi = baseApi.injectEndpoints({
       }),
       providesTags: ["users"],
     }),
-    // getUserById: builder.query({
-    //   query: (userId) => ({
-    //     method: "GET",
-    //     url: `/users/${userId}`,
-    //   }),
-    //   providesTags: (result, error, id) => [{ type: "users", id }],
-    // }),
-    // createUser: builder.mutation({
-    //   query: (userData) => ({
-    //     method: "POST",
-    //     url: `/users`, // Endpoint to create a new user
-    //     body: userData,
-    //   }),
-    //   invalidatesTags: ["users"],
-    // }),
-    // deleteUserById: builder.mutation({
-    //   query: (userId) => ({
-    //     method: "DELETE",
-    //     url: `/users/${userId}`, // Endpoint to delete a user by ID
-    //   }),
-    //   invalidatesTags: ["users"],
-    // }),
-    updateUserById: builder.mutation({
-      query: ({ id, userInfo }) => ({
-        method: "PUT",
-        url: `/users/${id}`, // Endpoint to update user information
-        body: userInfo,
+    getUserById: builder.query({
+      query: (userId) => ({
+        method: "GET",
+        url: `/users/${userId}`,
       }),
+      providesTags: ["users"],
+    }),
+    createUser: builder.mutation({
+      query: (userData) => ({
+        method: "POST",
+        url: `/users`,
+        body: userData,
+      }),
+      invalidatesTags: ["users"],
+    }),
+    deleteUserById: builder.mutation({
+      query: (userId) => ({
+        method: "DELETE",
+        url: `/users/${userId}`,
+      }),
+      invalidatesTags: ["users"],
+    }),
+    updateUserById: builder.mutation({
+      query: ({ id, role }) => {
+        console.log("api hitting", id, role);
+        return {
+          method: "PUT",
+          url: `/users/${id}`,
+          body: role,
+        };
+      },
       invalidatesTags: ["users"],
     }),
   }),
 });
 
-export const { useGetUsersQuery, useUpdateUserByIdMutation } = userApi;
+export const {
+  useGetUsersQuery,
+  useUpdateUserByIdMutation,
+  useCreateUserMutation,
+  useDeleteUserByIdMutation,
+} = userApi;

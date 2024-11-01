@@ -19,7 +19,7 @@ const MainLayout = () => {
       <Sidebar collapsed={collapsed} />
       <Layout>
         <Header
-          className="sticky top-0"
+          className="sticky top-0 z-10"
           style={{ padding: 0, background: colorBgContainer }}
         >
           <div className="flex justify-between items-center  ">

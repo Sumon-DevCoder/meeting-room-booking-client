@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Loading from "@/components/Loading/Loading";
 import {
@@ -10,28 +11,40 @@ import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import Swal from "sweetalert2";
 import { format, parseISO } from "date-fns";
+import DataNotAvailable from "@/components/DataNotAvailable/DataNotAvailable";
 
 const SlotListTable = () => {
   const { data, isLoading } = useGetSlotsQuery({});
   const [deleteSlotById] = useDeleteSlotByIdMutation();
 
-  console.log(data);
+  const slots = data?.data?.result || [];
 
   if (isLoading) {
     return <Loading />;
   }
 
-  const slots = data?.data?.result || [];
+  if (slots.length === 0) {
+    return (
+      <DataNotAvailable
+        message="No available slots exist"
+        path="/admin/create-Slots"
+        buttonName="Create Slots"
+      />
+    );
+  }
 
-  // time format func
+  // Time format function with AM/PM
   const formatTimeWithAMPM = (timeString: string) => {
-    const today = new Date();
-    const fullDateTimeString = `${
-      today.toISOString().split("T")[0]
-    }T${timeString}`; // Combine with today’s date
-    const date = new Date(fullDateTimeString);
-
-    return format(date, "hh:mm a");
+    try {
+      const today = new Date();
+      const fullDateTimeString = `${
+        today.toISOString().split("T")[0]
+      }T${timeString}`;
+      const date = new Date(fullDateTimeString);
+      return format(date, "hh:mm a");
+    } catch (error) {
+      return "Invalid time";
+    }
   };
 
   const handleSlotDelete = async (slotId: string, roomName: string) => {
@@ -49,10 +62,7 @@ const SlotListTable = () => {
         const toastId = toast.loading("Deleting the slot...");
 
         try {
-          console.log("cc", slotId);
-
           const res = await deleteSlotById(slotId).unwrap();
-
           if (res && res.message) {
             toast.success(res.message, { id: toastId, duration: 3000 });
           } else {
@@ -65,11 +75,7 @@ const SlotListTable = () => {
           const serverMsgErr =
             (err as TError)?.data?.message ||
             "An error occurred while deleting the slot. Please try again.";
-
-          toast.error(serverMsgErr, {
-            id: toastId,
-            duration: 3000,
-          });
+          toast.error(serverMsgErr, { id: toastId, duration: 3000 });
         }
       }
     });
@@ -102,33 +108,22 @@ const SlotListTable = () => {
       <tbody className="bg-white divide-y divide-gray-200">
         {slots.map((slot: TSlots) => (
           <tr key={slot._id}>
-            <td className="px-6 py-4 whitespace-nowrap">
-              <div className="text-sm font-medium text-gray-900">
-                {slot?.roomName}
-              </div>
+            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+              {slot.roomName}
             </td>
-            <td className="px-6 py-4 whitespace-nowrap">
-              <div className="text-sm text-gray-500">{slot.roomNo}</div>{" "}
-              {/* Make sure roomNo is available in your slot data */}
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              {slot.roomNo || "N/A"}
             </td>
-            <td className="px-6 py-4 whitespace-nowrap">
-              <div className="text-sm text-gray-500">
-                {" "}
-                {slot.date
-                  ? format(parseISO(slot.date), "MMMM dd, yyyy")
-                  : "No date available"}
-              </div>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              {slot.date
+                ? format(parseISO(slot.date), "MMMM dd, yyyy")
+                : "No date available"}
             </td>
-            <td className="px-6 py-4 whitespace-nowrap">
-              <div className="text-sm text-gray-500">
-                {formatTimeWithAMPM(slot?.startTime)}
-              </div>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              {slot.startTime ? formatTimeWithAMPM(slot.startTime) : "N/A"}
             </td>
-            <td className="px-6 py-4 whitespace-nowrap">
-              <div className="text-sm text-gray-500">
-                {" "}
-                {formatTimeWithAMPM(slot?.endTime)}
-              </div>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              {slot.endTime ? formatTimeWithAMPM(slot.endTime) : "N/A"}
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
               <Link to={`/admin/slots/${slot._id}`}>
@@ -137,13 +132,7 @@ const SlotListTable = () => {
                 </button>
               </Link>
               <button
-                onClick={
-                  () =>
-                    handleSlotDelete(
-                      slot._id as string,
-                      slot.roomName as string
-                    ) // Adjust according to your slot data
-                }
+                onClick={() => handleSlotDelete(slot._id, slot.roomName)}
                 className="btn btn-sm ml-2 px-3 py-2 text-white bg-gradient-to-r from-red-500 to-red-700 rounded-md hover:bg-gradient-to-l hover:from-red-700 hover:to-red-500"
               >
                 Delete

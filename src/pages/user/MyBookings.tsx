@@ -42,16 +42,23 @@ const MyBookings = () => {
 
   // handle payment
   const handlePayment = async (booking: TBooking) => {
+    const data = {
+      amount: booking.totalAmount,
+      currency: "BDT",
+      order_id: booking?._id,
+      cus_name: currentUserInfo?.name,
+      cus_email: currentUserInfo?.email,
+      tran_id,
+      cus_phone: currentUserInfo?.phone,
+    };
+
+    console.log("data", data);
+
     try {
-      const response = await axios.post("http://localhost:5001/api/payment", {
-        amount: booking.totalAmount,
-        currency: "BDT",
-        order_id: booking?._id,
-        cus_name: currentUserInfo?.name,
-        cus_email: currentUserInfo?.email,
-        tran_id,
-        cus_phone: currentUserInfo?.phone,
-      });
+      const response = await axios.post(
+        "http://localhost:5001/api/payment",
+        data
+      );
 
       console.log(response);
 

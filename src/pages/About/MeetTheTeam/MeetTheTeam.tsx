@@ -14,7 +14,7 @@ const MeetTheTeam = () => {
     <section className="bg-gray-300 py-12 my-10 rounded-lg ">
       <div className="container mx-auto text-center">
         <h2 className="text-4xl font-bold text-gray-800 mb-8">Meet the Team</h2>
-        <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-auto px-10">
+        <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 mx-auto px-10">
           {teamMembers.map((member: TTeamMember) => (
             <div
               key={member.id}

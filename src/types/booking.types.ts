@@ -20,6 +20,7 @@ export const USER_STATUS = {
 } as const;
 
 export type TUser = {
+  _id: string;
   name: string;
   email: string;
   password: string;

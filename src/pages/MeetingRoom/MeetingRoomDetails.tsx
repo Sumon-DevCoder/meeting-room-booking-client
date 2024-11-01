@@ -18,13 +18,15 @@ import BookingRoom from "../BookingRoom/BookingRoom";
 
 const MeetingRoomDetails = () => {
   const { id } = useParams();
-  const { data, isLoading } = useGetSingleRoomQuery(id);
+  const { data, isLoading } = useGetSingleRoomQuery(id); // get single room
   const room = data?.data;
 
   // isLoading
   if (isLoading) {
     return <Loading />;
   }
+
+  console.log(room);
 
   // If room not found
   if (!room) {
@@ -54,7 +56,7 @@ const MeetingRoomDetails = () => {
         <Swiper
           modules={[Pagination]}
           pagination={{ clickable: true }}
-          className="h-72 w-full"
+          className="h-48 md:h-[450px] w-full"
         >
           {img.length > 0 ? (
             img.map(
@@ -63,7 +65,7 @@ const MeetingRoomDetails = () => {
                   <img
                     src={imageSrc}
                     alt="room img"
-                    className="object-cover h-72 w-full rounded-md"
+                    className="object-cover h-[450px] w-full rounded-md"
                   />
                 </SwiperSlide>
               )

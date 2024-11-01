@@ -9,12 +9,22 @@ export const slotApi = baseApi.injectEndpoints({
       }),
       providesTags: ["slots"],
     }),
+    getSingleSlots: builder.query({
+      query: (id) => {
+        console.log("slot api hitting", id);
+        return {
+          method: "GET",
+          url: `/slots/${id}`,
+        };
+      },
+      providesTags: ["slots"],
+    }),
     getSlotByRoom: builder.query({
       query: (roomId) => {
         console.log("api hitting", roomId);
         return {
           method: "GET",
-          url: `/slots/${roomId}`,
+          url: `/slots/room/${roomId}`,
         };
       },
     }),
@@ -56,4 +66,5 @@ export const {
   useCreateSlotMutation,
   useDeleteSlotByIdMutation,
   useUpdateslotByIdMutation,
+  useGetSingleSlotsQuery,
 } = slotApi;

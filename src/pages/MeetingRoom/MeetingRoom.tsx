@@ -6,7 +6,7 @@ import RoomCard from "@/components/RoomCard/RoomCard";
 import { motion } from "framer-motion"; // Import motion from framer-motion
 
 const MeetingRooms = () => {
-  const { data, isLoading } = useGetRoomsQuery({});
+  const { data, isLoading } = useGetRoomsQuery({}); // get room data
   const [searchTerm, setSearchTerm] = useState("");
   const [capacityFilter, setCapacityFilter] = useState("");
   const [priceFilter, setPriceFilter] = useState("");

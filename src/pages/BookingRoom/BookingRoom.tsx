@@ -38,6 +38,8 @@ const BookingRoom = ({ roomId }: { roomId: string }) => {
     return <Loading />;
   }
 
+  console.log(roomId);
+
   const verifiedUser = user
     ? users?.find((u: { email: any }) => u.email === user.email)
     : null;

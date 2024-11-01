@@ -13,14 +13,16 @@ import { TError } from "@/types";
 const BookingList = () => {
   const { data: bookingData, isLoading: isBookingLoading } =
     useGetAllbookingQuery({});
-  const [updatebookingById] = useUpdatebookingByIdMutation();
-  const [deletebookingById] = useDeletebookingByIdMutation();
+  const [updateBookingById] = useUpdatebookingByIdMutation();
+  const [deleteBookingById] = useDeletebookingByIdMutation();
 
   const bookings = bookingData?.data?.result || [];
 
   if (isBookingLoading) {
     return <Loading />;
   }
+
+  console.log(bookings);
 
   // Date and time formatting
   const formatDateTime = (dateString: string, timeString: string) => {
@@ -34,20 +36,22 @@ const BookingList = () => {
   // Handle booking status update
   const handleStatusChange = async (booking: TBooking, status: string) => {
     try {
-      await updatebookingById({ id: booking._id, status }).unwrap();
-      alert(`Booking has been ${status}`);
+      await updateBookingById({ id: booking._id, status }).unwrap();
+      toast.success(`Booking status updated to ${status}`);
     } catch (error) {
       console.error("Failed to update booking status:", error);
+      const errorMsg =
+        (error as TError)?.data?.message ||
+        "Failed to update booking status. Please try again.";
+      toast.error(errorMsg);
     }
   };
 
   // Handle booking deletion
-  const handleDeleteboking = async (booking: TBooking) => {
+  const handleDeleteBooking = async (booking: TBooking) => {
     Swal.fire({
       title: "Confirm Deletion",
-      text: `Are you sure you want to delete the room "${
-        booking?.room?.name as string
-      }"?`,
+      text: `Are you sure you want to delete the booking for room "${booking?.room?.name}"?`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -56,28 +60,20 @@ const BookingList = () => {
       cancelButtonText: "Cancel",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const toastId = toast.loading("Deleting Booking...");
+        const toastId = toast.loading("Deleting booking...");
 
         try {
-          const res = await deletebookingById(booking?._id).unwrap();
-
-          if (res && res.message) {
-            toast.success(res.message, { id: toastId, duration: 3000 });
+          const response = await deleteBookingById(booking._id).unwrap();
+          if (response?.message) {
+            toast.success(response.message, { id: toastId });
           } else {
-            toast.error("Unexpected response received.", {
-              id: toastId,
-              duration: 3000,
-            });
+            toast.error("Unexpected response received.", { id: toastId });
           }
         } catch (err) {
-          const serverMsgErr =
+          const serverErrorMsg =
             (err as TError)?.data?.message ||
-            "An error occurred while deleting the room. Please try again.";
-
-          toast.error(serverMsgErr, {
-            id: toastId,
-            duration: 3000,
-          });
+            "An error occurred while deleting the booking. Please try again.";
+          toast.error(serverErrorMsg, { id: toastId });
         }
       }
     });
@@ -85,8 +81,8 @@ const BookingList = () => {
 
   return (
     <table className="min-w-full divide-y divide-gray-200 overflow-x-auto">
-      <thead className="bg-gray-50 ">
-        <tr className="">
+      <thead className="bg-gray-50">
+        <tr>
           <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
             Room Name
           </th>
@@ -141,7 +137,7 @@ const BookingList = () => {
                 </button>
               )}
               <button
-                onClick={() => handleDeleteboking(booking)}
+                onClick={() => handleDeleteBooking(booking)}
                 className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 ml-2 rounded"
               >
                 Delete

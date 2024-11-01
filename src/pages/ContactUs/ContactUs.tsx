@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 
 const ContactUs = () => {
   // Animation variants
@@ -10,6 +11,10 @@ const ContactUs = () => {
   const itemVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
+  };
+
+  const handleEmail = () => {
+    toast.success("Success");
   };
 
   return (
@@ -209,6 +214,7 @@ const ContactUs = () => {
                   <div className="text-center">
                     <button
                       type="submit"
+                      onClick={handleEmail}
                       className="w-full bg-blue-800 text-white px-6 py-3 font-xl rounded-md sm:mb-0"
                     >
                       Send Message

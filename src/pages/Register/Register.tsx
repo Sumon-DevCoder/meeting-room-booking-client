@@ -36,7 +36,7 @@ const Register = () => {
 
       // Check if the signup was successful
       if (response) {
-        toast.success("Registration Successful", {
+        toast.success("Registration Successful, Please Login", {
           id: toastId,
           duration: 4000,
         });
