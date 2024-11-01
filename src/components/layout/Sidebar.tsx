@@ -41,7 +41,7 @@ const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
       }}
     >
       <Link to="/">
-        <div className="demo-logo-vertical border-2 border-indigo-400 rounded-md text-center hover:bg-slate-600 text-slate-200 font-bold p-2">
+        <div className="demo-logo-vertical border-b-2  border-indigo-400 rounded-md text-center hover:bg-slate-600 text-slate-200 font-bold p-2">
           MR Booking
         </div>
       </Link>

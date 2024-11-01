@@ -3,14 +3,17 @@ import { useGetRoomsQuery } from "@/redux/features/room/roomApi";
 import Loading from "@/components/Loading/Loading";
 import { TRoom } from "@/types/room.types";
 import RoomCard from "@/components/RoomCard/RoomCard";
-import { motion } from "framer-motion"; // Import motion from framer-motion
+import { motion } from "framer-motion";
+import useDebounce from "@/hoooks/useDebounce";
 
 const MeetingRooms = () => {
-  const { data, isLoading } = useGetRoomsQuery({}); // get room data
+  const { data, isLoading } = useGetRoomsQuery({});
   const [searchTerm, setSearchTerm] = useState("");
   const [capacityFilter, setCapacityFilter] = useState("");
   const [priceFilter, setPriceFilter] = useState("");
   const [sortOrder, setSortOrder] = useState("");
+
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
   if (isLoading) {
     return <Loading />;
@@ -21,9 +24,10 @@ const MeetingRooms = () => {
   const filteredRooms = () => {
     let result = [...rooms];
 
-    if (searchTerm) {
+    // Filter by debounced search term instead of the immediate searchTerm
+    if (debouncedSearchTerm) {
       result = result.filter((room: TRoom) =>
-        room.name.toLowerCase().includes(searchTerm.toLowerCase())
+        room.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
       );
     }
 
@@ -127,10 +131,10 @@ const MeetingRooms = () => {
           {filteredRooms()?.map((room: TRoom) => (
             <motion.div
               key={room?._id}
-              initial={{ opacity: 0, y: 20 }} // Start with opacity 0 and slightly below
-              animate={{ opacity: 1, y: 0 }} // Animate to full opacity and original position
-              exit={{ opacity: 0, y: -20 }} // Animate out with fading
-              transition={{ duration: 0.3 }} // Set the duration of the transition
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
             >
               <RoomCard room={room} />
             </motion.div>

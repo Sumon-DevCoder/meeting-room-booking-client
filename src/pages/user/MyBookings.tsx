@@ -38,43 +38,80 @@ const MyBookings = () => {
 
   console.log(paymentData);
 
-  const tran_id = uuidv4();
+  // const tran_id = uuidv4();
 
-  // handle payment
+  // // handle payment
+  // const handlePayment = async (booking: TBooking) => {
+  //   const data = {
+  //     amount: booking.totalAmount,
+  //     currency: "BDT",
+  //     order_id: booking?._id,
+  //     cus_name: currentUserInfo?.name,
+  //     cus_email: currentUserInfo?.email,
+  //     tran_id,
+  //     cus_phone: currentUserInfo?.phone,
+  //   };
+
+  //   console.log("data", data);
+
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:5001/api/payment",
+  //       data
+  //     );
+
+  //     console.log(response);
+
+  //     const redirectUrl = response?.data?.paymentUrl;
+  //     if (redirectUrl) {
+  //       window.location.replace(redirectUrl);
+  //     }
+
+  //     if (response.data && response.data.gateway_page) {
+  //       window.location.href = response.data.gateway_page; // Redirect to payment gateway
+
+  //       console.log("jjj", response);
+  //     }
+  //   } catch (error) {
+  //     console.error("Payment initiation failed:", error);
+  //     //   dispatch(setPaymentStatus("failed"));
+  //   }
+  // };
+
   const handlePayment = async (booking: TBooking) => {
-    const data = {
-      amount: booking.totalAmount,
-      currency: "BDT",
-      order_id: booking?._id,
-      cus_name: currentUserInfo?.name,
-      cus_email: currentUserInfo?.email,
-      tran_id,
-      cus_phone: currentUserInfo?.phone,
-    };
-
-    console.log("data", data);
-
     try {
-      const response = await axios.post(
-        "http://localhost:5001/api/payment",
-        data
+      const response = await fetch(
+        "http://localhost:5001/api/payment/initiate",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ amount: 100, currency: "BDT" }),
+        }
       );
 
-      console.log(response);
-
-      const redirectUrl = response?.data?.paymentUrl;
-      if (redirectUrl) {
-        window.location.replace(redirectUrl);
+      // Check if the response is ok (status in the range 200-299)
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Error initiating payment:", errorData);
+        alert("Payment initiation failed. Please try again."); // User-friendly error message
+        return; // Exit the function if there's an error
       }
 
-      if (response.data && response.data.gateway_page) {
-        window.location.href = response.data.gateway_page; // Redirect to payment gateway
+      const data = await response.json();
+      console.log("data", data);
 
-        console.log("jjj", response);
+      // Check if the URL is present in the response
+      if (data.url) {
+        window.location.href = data.url; // Redirect to payment page
+      } else {
+        console.error("Payment URL not found in response.");
+        alert("Payment initiation failed. No URL returned.");
       }
     } catch (error) {
-      console.error("Payment initiation failed:", error);
-      //   dispatch(setPaymentStatus("failed"));
+      console.error("Unexpected error:", error);
+      alert("An unexpected error occurred. Please try again."); // User-friendly error message
     }
   };
 

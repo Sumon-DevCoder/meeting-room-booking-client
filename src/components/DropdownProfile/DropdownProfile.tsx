@@ -46,7 +46,7 @@ const DropdownProfile = () => {
           <DropdownMenuTrigger asChild>
             <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
               <Avatar>
-                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarImage src={currentUserInfo?.img} />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
             </motion.div>
@@ -58,7 +58,10 @@ const DropdownProfile = () => {
           >
             <DropdownMenuContent>
               <DropdownMenuLabel>
-                <FaUserCircle className="inline mr-2" /> {currentUserInfo?.name}
+                <Link to={"/user/profile"}>
+                  <FaUserCircle className="inline mr-2" />{" "}
+                  {currentUserInfo?.name}
+                </Link>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               {isAdmin ? (

@@ -4,18 +4,20 @@ import useCurrentUserData from "@/hoooks/useCurrentData";
 const UserProfile = () => {
   const { currentUserInfo, isUserLoading } = useCurrentUserData();
 
+  console.log(currentUserInfo);
+
   if (isUserLoading) {
     return <Loading />;
   }
 
   return (
-    <div className="flex justify-center items-center -pt-10 min-h-screen bg-gray-100">
+    <div className="flex justify-center items-center -pt-10 min-h-screen">
       <div className="bg-white rounded-lg shadow-lg overflow-hidden w-full max-w-3xl">
         {/* Header Section */}
         <div className="flex items-center p-6 bg-blue-600 text-white">
           <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-white mr-4">
             <img
-              src="https://via.placeholder.com/80"
+              src={currentUserInfo?.img}
               alt="User Profile"
               className="object-cover w-full h-full"
             />

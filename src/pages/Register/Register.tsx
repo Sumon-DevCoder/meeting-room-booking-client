@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { motion } from "framer-motion";
+import axios from "axios"; // Ensure axios is installed
 
 const Register = () => {
   const navigate = useNavigate();
@@ -16,9 +17,31 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const [showPassword, setShowPassword] = useState(false);
+  const [userImg, setUserImg] = useState<File | null>(null); // State for user image
 
   const onSubmit = async (data: FieldValues) => {
     const toastId = toast.loading("Processing...");
+
+    // Upload the image to ImgBB if it exists
+    let imageUrl = "";
+    if (userImg) {
+      const formData = new FormData();
+      formData.append("image", userImg);
+
+      try {
+        const response = await axios.post(
+          `https://api.imgbb.com/1/upload?key=${"9b72c2e7f55726fd9a28bfb8bfedc08b"}`, // Replace with your ImgBB API key
+          formData
+        );
+        imageUrl = response.data.data.url; // Get the image URL
+      } catch (uploadError) {
+        console.error("Image upload failed:", uploadError);
+        return toast.error("Image upload failed", {
+          id: toastId,
+          duration: 2000,
+        });
+      }
+    }
 
     // userInfo object
     const userInfo = {
@@ -28,6 +51,7 @@ const Register = () => {
       phone: data.phone,
       role: "user",
       address: data.address,
+      img: imageUrl, // Include image URL
     };
 
     try {
@@ -243,6 +267,27 @@ const Register = () => {
                     )}
                   </div>
                 </div>
+
+                {/* User Image Upload */}
+                <div className="mb-4">
+                  <label
+                    className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
+                    htmlFor="userImg"
+                  >
+                    Upload Image
+                  </label>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      if (e.target.files && e.target.files.length > 0) {
+                        setUserImg(e.target.files[0]); // Set the file to state
+                      }
+                    }}
+                    className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                  />
+                </div>
+
                 <div className="mb-6 text-center">
                   <button
                     className={`w-full px-4 py-2 font-semibold text-white ${
