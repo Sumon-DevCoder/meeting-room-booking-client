@@ -54,7 +54,12 @@ const MyBooking = () => {
   // create order
   const handleOrder = async () => {
     const paymentInfo = {
-      user: currentUserInfo,
+      user: {
+        name: currentUserInfo?.name,
+        email: currentUserInfo?.email,
+        phone: currentUserInfo?.phone,
+        address: currentUserInfo?.address,
+      },
       bookings: bookingItems,
     };
 

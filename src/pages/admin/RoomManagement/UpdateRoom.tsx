@@ -36,7 +36,9 @@ const UpdateRoom = () => {
 
   // Image upload function
   const uploadImageToImgBB = async (file: any) => {
-    const url = `https://api.imgbb.com/1/upload?key=${"9b72c2e7f55726fd9a28bfb8bfedc08b"}`;
+    const url = `https://api.imgbb.com/1/upload?key=${
+      import.meta.env.VITE_IMGBB_API_KEY
+    }`;
 
     const formData = new FormData();
     formData.append("image", file);

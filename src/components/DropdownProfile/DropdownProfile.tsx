@@ -8,7 +8,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { toast } from "sonner";
 import { logout } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
@@ -30,6 +29,8 @@ const DropdownProfile = () => {
   const dispatch = useAppDispatch();
   const { currentUserInfo } = useCurrentUserData();
 
+  console.log(currentUserInfo);
+
   const handleLogout = async () => {
     try {
       await dispatch(logout());
@@ -45,10 +46,11 @@ const DropdownProfile = () => {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-              <Avatar>
-                <AvatarImage src={currentUserInfo?.img} />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
+              <div className="avatar">
+                <div className="w-12 rounded-full">
+                  <img src={currentUserInfo?.img} />
+                </div>
+              </div>
             </motion.div>
           </DropdownMenuTrigger>
           <motion.div

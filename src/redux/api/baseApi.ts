@@ -15,7 +15,7 @@ import { TUser } from "@/types/booking.types";
 
 // pass token for every request to server
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:5000/api",
+  baseUrl: "https://meeting-room-booking-server-zeta.vercel.app/api",
   headers: {
     "Content-Type": "application/json",
   },
@@ -55,13 +55,16 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   if (result.error?.status === 401) {
     console.log("token is expired");
     // try to get new token req for new Token
-    const res = await fetch("http://localhost:5000/api/auth/refresh-token", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    });
+    const res = await fetch(
+      "https://meeting-room-booking-server-zeta.vercel.app/api/auth/refresh-token",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      }
+    );
 
     // get new token
     const data = await res.json();

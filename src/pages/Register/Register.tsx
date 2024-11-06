@@ -30,7 +30,9 @@ const Register = () => {
 
       try {
         const response = await axios.post(
-          `https://api.imgbb.com/1/upload?key=${"9b72c2e7f55726fd9a28bfb8bfedc08b"}`, // Replace with your ImgBB API key
+          `https://api.imgbb.com/1/upload?key=${
+            import.meta.env.VITE_IMGBB_API_KEY
+          }`, // Replace with your ImgBB API key
           formData
         );
         imageUrl = response.data.data.url; // Get the image URL

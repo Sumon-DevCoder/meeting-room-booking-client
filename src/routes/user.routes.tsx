@@ -1,3 +1,4 @@
+import OrderManagement from "@/pages/OrderHistory/OrderHistory";
 import MyBookings from "@/pages/user/MyBookings";
 import UserDashboard from "@/pages/user/UserDashboard";
 import UserProfile from "@/pages/user/UserProfile";
@@ -17,5 +18,10 @@ export const userPaths = [
     name: "My Bookings",
     path: "my-bookings",
     element: <MyBookings />,
+  },
+  {
+    name: "Order History",
+    path: "order-history",
+    element: <OrderManagement />,
   },
 ];
