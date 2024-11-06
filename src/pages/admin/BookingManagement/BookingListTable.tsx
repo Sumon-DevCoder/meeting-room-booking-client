@@ -1,7 +1,6 @@
 import {
   useDeletebookingByIdMutation,
   useGetAllbookingQuery,
-  useUpdatebookingByIdMutation,
 } from "@/redux/features/booking/bookingApi";
 import Loading from "@/components/Loading/Loading";
 import { TBooking } from "@/types/booking.types";
@@ -9,11 +8,14 @@ import { format } from "date-fns";
 import Swal from "sweetalert2";
 import { toast } from "sonner";
 import { TError } from "@/types";
+import axiosInstance from "@/config/axiosInstance";
 
 const BookingList = () => {
-  const { data: bookingData, isLoading: isBookingLoading } =
-    useGetAllbookingQuery({});
-  const [updateBookingById] = useUpdatebookingByIdMutation();
+  const {
+    data: bookingData,
+    isLoading: isBookingLoading,
+    refetch,
+  } = useGetAllbookingQuery({});
   const [deleteBookingById] = useDeletebookingByIdMutation();
 
   const bookings = bookingData?.data?.result || [];
@@ -36,8 +38,12 @@ const BookingList = () => {
   // Handle booking status update
   const handleStatusChange = async (booking: TBooking, status: string) => {
     try {
-      await updateBookingById({ id: booking._id, status }).unwrap();
-      toast.success(`Booking status updated to ${status}`);
+      const res = await axiosInstance.put(`/bookings/${booking?._id}`, {
+        isConfirmed: status,
+      });
+      console.log("res", res);
+      toast.success(`booking updated successful`);
+      refetch();
     } catch (error) {
       console.error("Failed to update booking status:", error);
       const errorMsg =

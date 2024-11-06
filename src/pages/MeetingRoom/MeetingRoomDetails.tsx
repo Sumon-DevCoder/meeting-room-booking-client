@@ -129,31 +129,6 @@ const MeetingRoomDetails = () => {
         </div>
       </div>
 
-      {/* <div className="flex justify-center mb-4 px-4">
-        <button
-          className="mt-5 w-full py-3 px-6 bg-indigo-600 text-white font-semibold rounded-md transition duration-300 hover:bg-indigo-700 hover:shadow-md"
-          onClick={() => document.getElementById("my_modal_1").showModal()}
-        >
-          Book Now
-        </button>
-        <dialog id="my_modal_1" className="modal">
-          <div className="modal-box">
-            <div className="py-4">
-              <div className="modal-action">
-                <BookingRoom roomId={_id} />
-              </div>
-            </div>
-            <div className="modal-action">
-              <form method="dialog">
-                <div className="flex justify-center items-center ">
-                  <button className="btn">Close</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </dialog>
-      </div> */}
-
       <div className="flex justify-center mb-4 px-4">
         <button
           className="mt-5 w-full py-3 px-6 bg-indigo-600 text-white font-semibold rounded-md transition duration-300 hover:bg-indigo-700 hover:shadow-md"

@@ -10,9 +10,9 @@ export const bookingApi = baseApi.injectEndpoints({
       providesTags: ["bookings"],
     }),
     getbookingByUser: builder.query({
-      query: (userId) => ({
+      query: (email) => ({
         method: "GET",
-        url: `/bookings/${userId}`,
+        url: `/bookings/${email}`,
       }),
       providesTags: ["bookings"],
     }),

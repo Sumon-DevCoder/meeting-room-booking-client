@@ -1,210 +1,250 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Loading from "@/components/Loading/Loading";
+"use client";
+
+import {
+  useGetbookingByUserQuery,
+  useDeletebookingByIdMutation,
+} from "@/redux/features/booking/bookingApi";
+import { useCreateorderMutation } from "@/redux/features/order/orderApi";
+import Swal from "sweetalert2";
+import { toast } from "sonner";
+import { useEffect } from "react";
 import CheckUserInfo from "@/components/CheckUserRole/CheckUserInfo";
-import { useGetbookingByUserQuery } from "@/redux/features/booking/bookingApi";
+import useCurrentUserData from "@/hoooks/useCurrentData";
+import Loading from "@/components/Loading/Loading";
+import { TError } from "@/types";
 import { TBooking } from "@/types/booking.types";
 import { format } from "date-fns";
-import axios from "axios";
-import { useGetPaymentByUserQuery } from "@/redux/features/payment/paymentApi";
-import { v4 as uuidv4 } from "uuid";
-import DataNotAvailable from "@/components/DataNotAvailable/DataNotAvailable";
-import useCurrentUserData from "@/hoooks/useCurrentData";
-import { TPayment } from "@/types/types.payment";
 
-const MyBookings = () => {
-  // import
+const MyBooking = () => {
   const { user } = CheckUserInfo();
-  const { data, isLoading } = useGetbookingByUserQuery(user?.email);
-  const { data: paymentData, isLoading: isPaymentLoading } =
-    useGetPaymentByUserQuery(user?.email);
-  const bookings = data?.data || [];
-  const paymentDatas = paymentData?.data || [];
+
+  // import current user info data
   const { currentUserInfo, isUserLoading } = useCurrentUserData();
 
-  // loading
-  if (isLoading || isPaymentLoading || isUserLoading) {
+  // import getBooking by user
+  const {
+    data: bookingData,
+    refetch,
+    isLoading,
+  } = useGetbookingByUserQuery(user?.email);
+
+  // import create order mutation
+  const [createOrder] = useCreateorderMutation();
+
+  // delete order mutation
+  const [deletebookingById] = useDeletebookingByIdMutation();
+  const bookingItems = bookingData?.data || [];
+
+  // setup refetch
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
+
+  // setup loading
+  if (isUserLoading || isLoading) {
     return <Loading />;
   }
 
-  if (bookings?.length === 0) {
-    return (
-      <DataNotAvailable
-        path="/meeting-rooms"
-        buttonName="Book Now"
-        message="🚫 No bookings yet. 🌟 Find and book your perfect room!"
-      />
-    );
-  }
+  // console.log for checking
+  console.log("bookingData", bookingData);
+  console.log("currentUserInfo", currentUserInfo);
 
-  console.log(paymentData);
+  // create order
+  const handleOrder = async () => {
+    const paymentInfo = {
+      user: currentUserInfo,
+      bookings: bookingItems,
+    };
 
-  // const tran_id = uuidv4();
-
-  // // handle payment
-  // const handlePayment = async (booking: TBooking) => {
-  //   const data = {
-  //     amount: booking.totalAmount,
-  //     currency: "BDT",
-  //     order_id: booking?._id,
-  //     cus_name: currentUserInfo?.name,
-  //     cus_email: currentUserInfo?.email,
-  //     tran_id,
-  //     cus_phone: currentUserInfo?.phone,
-  //   };
-
-  //   console.log("data", data);
-
-  //   try {
-  //     const response = await axios.post(
-  //       "http://localhost:5001/api/payment",
-  //       data
-  //     );
-
-  //     console.log(response);
-
-  //     const redirectUrl = response?.data?.paymentUrl;
-  //     if (redirectUrl) {
-  //       window.location.replace(redirectUrl);
-  //     }
-
-  //     if (response.data && response.data.gateway_page) {
-  //       window.location.href = response.data.gateway_page; // Redirect to payment gateway
-
-  //       console.log("jjj", response);
-  //     }
-  //   } catch (error) {
-  //     console.error("Payment initiation failed:", error);
-  //     //   dispatch(setPaymentStatus("failed"));
-  //   }
-  // };
-
-  const handlePayment = async (booking: TBooking) => {
     try {
-      const response = await fetch(
-        "http://localhost:5001/api/payment/initiate",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ amount: 100, currency: "BDT" }),
-        }
-      );
-
-      // Check if the response is ok (status in the range 200-299)
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error("Error initiating payment:", errorData);
-        alert("Payment initiation failed. Please try again."); // User-friendly error message
-        return; // Exit the function if there's an error
-      }
-
-      const data = await response.json();
-      console.log("data", data);
-
-      // Check if the URL is present in the response
-      if (data.url) {
-        window.location.href = data.url; // Redirect to payment page
+      const res = await createOrder(paymentInfo).unwrap();
+      if (res.success) {
+        console.log(res);
+        window.location.href = res.data.payment_url;
       } else {
-        console.error("Payment URL not found in response.");
-        alert("Payment initiation failed. No URL returned.");
+        console.error("Payment initiation failed:", res.message);
       }
     } catch (error) {
-      console.error("Unexpected error:", error);
-      alert("An unexpected error occurred. Please try again."); // User-friendly error message
+      console.log(error);
     }
   };
 
-  // Time format function
-  const formatTimeWithAMPM = (timeString: string) => {
-    const today = new Date();
-    const fullDateTimeString = `${
-      today.toISOString().split("T")[0]
-    }T${timeString}`;
-    const date = new Date(fullDateTimeString);
-    return format(date, "hh:mm a");
+  // delete booking item
+  const handleDeleteBooking = (bookingId: string) => {
+    // setup sweet alert
+    Swal.fire({
+      title: "Confirm Deletion",
+      text: `Are you sure you want to delete this booking?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Delete",
+      cancelButtonText: "Cancel",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const toastId = toast.loading("Deleting the booking...");
+
+        try {
+          const res = await deletebookingById(bookingId).unwrap();
+
+          // if success
+          if (res && res.message) {
+            toast.success(res.message, { id: toastId, duration: 3000 });
+            refetch();
+          } else {
+            toast.error("Unexpected response received.", {
+              id: toastId,
+              duration: 3000,
+            });
+          }
+          // if fail
+        } catch (err) {
+          const serverMsgErr =
+            (err as TError)?.data?.message ||
+            "An error occurred while deleting the booking. Please try again.";
+
+          toast.error(serverMsgErr, {
+            id: toastId,
+            duration: 3000,
+          });
+        }
+      }
+    });
   };
 
-  // Find payment status by booking ID
-  const getPaymentStatus = (bookingId: string) => {
-    const payment = paymentDatas?.find(
-      (p: TPayment) => p.order_id === bookingId
+  const calculateSubtotal = () => {
+    return bookingItems.reduce(
+      (
+        total: any,
+        item: {
+          [x: string]: any;
+          price: any;
+        }
+      ) => total + item.totalAmount,
+      0
     );
-    return payment ? payment.status : "pending"; // Default to "pending" if no status is found
+  };
+
+  const calculateTotal = () => {
+    const subtotal = calculateSubtotal();
+    const serviceFee = 15; // Example service fee
+    const total = subtotal + serviceFee;
+    return total;
+  };
+
+  // Time format
+  const formatDateTime = (dateTimeString: string) => {
+    try {
+      // Create a Date object from the provided string
+      const date = new Date(dateTimeString);
+
+      // Validate the date
+      if (isNaN(date.getTime())) {
+        throw new Error("Invalid date format");
+      }
+
+      // Format the date and time separately
+      const formattedDate = format(date, "yyyy-MM-dd"); // Adjust format as needed
+      const formattedTime = format(date, "hh:mm a"); // Format time as AM/PM
+
+      return `${formattedDate} at ${formattedTime}`;
+    } catch (error) {
+      console.error(
+        "Date and time formatting error:",
+        error,
+        "Original dateTimeString:",
+        dateTimeString
+      );
+      return "Invalid date";
+    }
   };
 
   return (
-    <>
-      <table className="min-w-full divide-y divide-gray-200 overflow-x-auto">
-        <thead className="bg-gray-50">
-          <tr>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Room Name
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Date
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Time
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Status
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Payment
-            </th>
-          </tr>
-        </thead>
-        <tbody className="bg-white divide-y divide-gray-200">
-          {bookings?.map((booking: TBooking) => (
-            <tr key={booking._id}>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm font-medium text-gray-900">
-                  {booking.room.name as string}
-                </div>
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm text-gray-500">
-                  {new Date(booking.date).toLocaleDateString()}
-                </div>
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm text-gray-500">
-                  {[
-                    formatTimeWithAMPM(booking.slots[0]?.startTime),
-                    formatTimeWithAMPM(booking.slots[0]?.endTime),
-                  ].join(", ")}
-                </div>
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <div
-                  className={`text-sm font-medium ${
-                    booking.isConfirmed === "confirmed"
-                      ? "text-green-600"
-                      : "text-red-600"
-                  }`}
-                >
-                  {booking.isConfirmed}
-                </div>
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                {getPaymentStatus(booking._id) === "pending" ? (
-                  <button
-                    onClick={() => handlePayment(booking)}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded"
-                  >
-                    Pay
-                  </button>
-                ) : (
-                  <span className="text-green-600 font-bold">Paid</span>
-                )}
-              </td>
+    <div className="p-5 space-y-6 md:space-y-0 flex justify-center items-center lg:items-start  flex-col lg:justify-between   lg:flex-row gap-y-5 justify-items-center md:space-x-6">
+      {/* Left side: Booking Items */}
+      <div className="flex-1">
+        <h2 className="text-center text-black mb-4 text-xl font-bold">
+          My Bookings
+        </h2>
+        <table className="min-w-full divide-y divide-gray-200 overflow-x-auto">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Room Name
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                UserName
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Date & Time
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Status
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Action
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {bookingItems?.map((booking: TBooking) => (
+              <tr key={booking?._id}>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  {booking.room.name}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  {booking.user.name}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  {formatDateTime(booking?.date)}
+                  {/* {booking?.date} */}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  {booking.isConfirmed}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <button
+                    className="text-red-500 hover:text-red-700 btn btn-sm"
+                    onClick={() => handleDeleteBooking(booking._id)}
+                  >
+                    Remove
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Right side: Booking Summary */}
+      <div className="w-full md:w-1/3 bg-white p-6 rounded-lg shadow">
+        <h3 className="text-xl font-semibold text-gray-800 mb-4">
+          Booking Summary
+        </h3>
+        <div className="mb-4">
+          <p className="text-gray-600">
+            Subtotal: ${calculateSubtotal().toFixed(2)}
+          </p>
+          <p className="text-gray-600">Service Fee: $15.00</p>
+        </div>
+        <div className="border-t border-gray-300 my-4"></div>
+        <div className="mb-4">
+          <p className="text-lg font-semibold text-gray-800">
+            Total: ${calculateTotal().toFixed(2)}
+          </p>
+        </div>
+        <button
+          className="w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600"
+          onClick={handleOrder}
+        >
+          Proceed to Payment
+        </button>
+      </div>
+    </div>
   );
 };
 
-export default MyBookings;
+export default MyBooking;

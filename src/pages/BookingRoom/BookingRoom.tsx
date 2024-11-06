@@ -13,6 +13,7 @@ import { useCreatebookingMutation } from "@/redux/features/booking/bookingApi";
 import { useNavigate } from "react-router-dom";
 import { TError } from "@/types";
 import { IoIosCloseCircle } from "react-icons/io";
+import { toast } from "sonner";
 
 const BookingRoom = ({ roomId }: { roomId: string }) => {
   const [error, setError] = useState("");
@@ -38,7 +39,7 @@ const BookingRoom = ({ roomId }: { roomId: string }) => {
     return <Loading />;
   }
 
-  console.log(roomId);
+  console.log("slotData", slots);
 
   const verifiedUser = user
     ? users?.find((u: { email: any }) => u.email === user.email)
@@ -52,7 +53,7 @@ const BookingRoom = ({ roomId }: { roomId: string }) => {
     try {
       const bookingInfo = {
         room: roomId,
-        email: user?.email,
+        email: verifiedUser?.email,
         user: verifiedUser?._id,
         date: selectedDate ? format(selectedDate, "yyyy-MM-dd") : null,
         slots: selectedSlots,
@@ -63,9 +64,8 @@ const BookingRoom = ({ roomId }: { roomId: string }) => {
       const res = await createbooking(bookingInfo).unwrap();
       if (res) {
         reset();
+        toast.success("booking successful");
         navigate("/user/my-bookings");
-
-        return <p>Booking Room Successfully</p>;
       }
     } catch (err) {
       const serverMsgErr =

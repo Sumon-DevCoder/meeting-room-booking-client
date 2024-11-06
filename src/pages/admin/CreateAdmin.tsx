@@ -7,12 +7,15 @@ import { TUser } from "@/types/booking.types";
 import {
   useDeleteUserByIdMutation,
   useGetUsersQuery,
-  useUpdateUserByIdMutation,
 } from "@/redux/features/user/userApi";
+import axiosInstance from "@/config/axiosInstance";
 
 const MakeUser = () => {
-  const { data: userData, isLoading: isUserLoading } = useGetUsersQuery({});
-  const [updateUserById] = useUpdateUserByIdMutation();
+  const {
+    data: userData,
+    isLoading: isUserLoading,
+    refetch,
+  } = useGetUsersQuery({});
   const [deleteUserById] = useDeleteUserByIdMutation();
 
   const users = userData?.data?.result || [];
@@ -21,12 +24,13 @@ const MakeUser = () => {
     return <Loading />;
   }
 
-  const handleRoleChange = async (id: string, role: string) => {
-    console.log(id, role);
+  const handleRoleChange = async (id: string, userRole: string) => {
+    console.log(id, userRole);
     try {
-      const res = await updateUserById({ id, role }).unwrap();
+      const res = await axiosInstance.put(`/users/${id}`, { role: userRole });
       console.log("res", res);
-      toast.success(`Role updated to ${role}`);
+      toast.success(`Role updated to ${userRole}`);
+      refetch();
     } catch (error) {
       console.error("Failed to update role:", error);
       const errorMsg =
