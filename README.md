@@ -1,6 +1,6 @@
 # Meeting Room Booking Service
 
-A comprehensive Meeting Room Booking Service that allows users to book services online, manage their bookings through a secure dashboard, and process payments using AmarPay. The service is built using modern technologies such as React, TypeScript, Redux, NextUI, Tailwind CSS, Node.js, Express, MongoDB, and Cloudinary for image hosting.
+A comprehensive Meeting Room Booking Service that allows users to book services online, manage their bookings through a secure dashboard, and process payments using AmarPay. The service is built using modern technologies such as React, TypeScript, Redux, NextUI, Tailwind CSS, Node.js, Express, MongoDB, and Imgbb for image hosting.
 
 ## Live URL
 
@@ -108,6 +108,32 @@ To run this project locally, follow these steps:
    ```bash
    npm run dev
    ```
+7. **Create a `.env` file in the root directory and add your environment variables**:
+
+   ```bash
+   DB_URL=mongodb+srv://<username>:<password>@cluster0.0i0xa.mongodb.net/meetingRoomDB?retryWrites=true&w=majority&appName=Cluster0
+   PORT=5000
+   BCRYPT_SALT_ROUND=12
+   NODE_ENV=development
+   # payment credential (REDACTED)
+   STORE_ID="aamarpaytest"
+   SIGNETURE_KEY="dbb74894e82415a2f7ff0ec3a97e4183"
+   PAYMENT_URL="https://sandbox.aamarpay.com/jsonpost.php"
+   PAYMENT_VERIFY_URL="https://sandbox.aamarpay.com/api/v1/trxcheck/request.php"
+   # admin credentials (REDACTED)
+   admin_email=****\*\*\*****
+   admin_password=****\*\*\*****
+   admin_mobile_number=****\*\*\*****
+   admin_image=****\*\*\*****
+   # jwt credentials (REDACTED)
+   JWT_ACCESS_SECRET=secret
+   JWT_ACCESS_EXPIRES_iN=365d
+   JWT_REFRESH_SECRET=refreshscret
+   JWT_REFRESH_EXPIRES_IN=365d
+
+ 
+   BACKEND_LIVE_URL=https://meeting-room-booking-server-zeta.vercel.app/
+      ```
 
 ## Usage
 
