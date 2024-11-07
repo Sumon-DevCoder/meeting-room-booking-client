@@ -1,6 +1,6 @@
 # Meeting Room Booking Service
 
-A comprehensive Meeting Room Booking Service that allows users to book services online, manage their bookings through a secure dashboard, and process payments using AmarPay. The service is built using modern technologies such as React, TypeScript, Redux, NextUI, Tailwind CSS, Node.js, Express, MongoDB, and Cloudinary for image hosting.
+A comprehensive Meeting Room Booking Service that allows users to book services online, manage their bookings through a secure dashboard, and process payments using AmarPay. The service is built using modern technologies such as React, TypeScript, Redux, NextUI, Tailwind CSS, Node.js, Express, MongoDB, and Imgbb for image hosting.
 
 ## Live URL
 
