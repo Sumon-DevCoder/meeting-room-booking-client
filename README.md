@@ -87,7 +87,7 @@ To run this project locally, follow these steps:
    ```env
    VITE_WORKSPACE=development
    VITE_BASE_URL=http://localhost:5000/api
-   VITE_LIVE_URL=https://meeting-room-booking-server-zeta.vercel.app
+   VITE_LIVE_URL=http://localhost:5000
    VITE_IMGBB_API_KEY=import.meta.env.VITE_IMGBB_API_KEY
    VITE_AMARPAY_API_KEY=your_amarpay_api_key
    ```
@@ -128,7 +128,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 For more information, visit our backend gitHub [website](https://github.com/Sumon-DevCoder/meeting-room-booking-client).
 FrontEnd live link [website](https://meeting-room-booking-client-ochre.vercel.app/).
-BackEnd live link [website](https://meeting-room-booking-server-zeta.vercel.app/)/api.
+BackEnd live link [website](http://localhost:5000/)/api.
 
 ## Acknowledgements
 

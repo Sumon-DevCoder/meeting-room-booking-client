@@ -26,7 +26,7 @@ const MeetingRoomDetails = () => {
     return <Loading />;
   }
 
-  console.log(room);
+  console.log("room", data);
 
   // If room not found
   if (!room) {

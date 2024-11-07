@@ -39,8 +39,6 @@ const BookingRoom = ({ roomId }: { roomId: string }) => {
     return <Loading />;
   }
 
-  console.log("slotData", slots);
-
   const verifiedUser = user
     ? users?.find((u: { email: any }) => u.email === user.email)
     : null;
@@ -49,6 +47,8 @@ const BookingRoom = ({ roomId }: { roomId: string }) => {
 
   const onSubmit = async () => {
     const selectedSlots = watch("timeSlots");
+
+    console.log("selectedSlots", selectedSlots);
 
     try {
       const bookingInfo = {

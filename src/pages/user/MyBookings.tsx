@@ -225,7 +225,7 @@ const MyBooking = () => {
       </div>
 
       {/* Right side: Booking Summary */}
-      <div className="w-full md:w-1/3 bg-white p-6 rounded-lg shadow">
+      <div className="w-full md:w-1/3 bg-white p-6 rounded-lg shadow lg:sticky lg:top-20">
         <h3 className="text-xl font-semibold text-gray-800 mb-4">
           Booking Summary
         </h3>

@@ -26,13 +26,31 @@ const BookingList = () => {
 
   console.log(bookings);
 
-  // Date and time formatting
-  const formatDateTime = (dateString: string, timeString: string) => {
-    const date = new Date(dateString);
-    return `${date.toLocaleDateString()} ${format(
-      new Date(`${date.toISOString().split("T")[0]}T${timeString}`),
-      "hh:mm a"
-    )}`;
+  // Time format
+  const formatDateTime = (dateTimeString: string) => {
+    try {
+      // Create a Date object from the provided string
+      const date = new Date(dateTimeString);
+
+      // Validate the date
+      if (isNaN(date.getTime())) {
+        throw new Error("Invalid date format");
+      }
+
+      // Format the date and time separately
+      const formattedDate = format(date, "yyyy-MM-dd"); // Adjust format as needed
+      const formattedTime = format(date, "hh:mm a"); // Format time as AM/PM
+
+      return `${formattedDate} at ${formattedTime}`;
+    } catch (error) {
+      console.error(
+        "Date and time formatting error:",
+        error,
+        "Original dateTimeString:",
+        dateTimeString
+      );
+      return "Invalid date";
+    }
   };
 
   // Handle booking status update
@@ -112,8 +130,8 @@ const BookingList = () => {
             <td className="px-6 py-4 whitespace-nowrap">{booking.room.name}</td>
             <td className="px-6 py-4 whitespace-nowrap">{booking.user.name}</td>
             <td className="px-6 py-4 whitespace-nowrap">
-              {formatDateTime(booking.date, booking.slots[0]?.startTime)} -{" "}
-              {formatDateTime(booking.date, booking.slots[0]?.endTime)}
+              {formatDateTime(booking.date)}
+              {formatDateTime(booking.date)}
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
               <span

@@ -39,7 +39,7 @@ const AdminDashboard = () => {
       {/* Welcome Message */}
       <div className="bg-blue-100 p-4 rounded-lg mb-6">
         <h2 className="text-xl font-semibold text-gray-700">
-          Welcome, {currentUserInfo.name || "Admin"} (Admin)
+          Welcome, {currentUserInfo?.name || "Admin"} (Admin)
         </h2>
         <p className="text-gray-600">
           Here’s a quick overview of your dashboard.
