@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import {
@@ -10,55 +10,43 @@ import { useCreateorderMutation } from "@/redux/features/order/orderApi";
 import Swal from "sweetalert2";
 import { toast } from "sonner";
 import { useEffect } from "react";
-import CheckUserInfo from "@/components/CheckUserRole/CheckUserInfo";
-import useCurrentUserData from "@/hoooks/useCurrentData";
 import Loading from "@/components/Loading/Loading";
 import { TError } from "@/types";
 import { TBooking } from "@/types/booking.types";
 import { format } from "date-fns";
+import useCurrentUserInfoData from "@/hoooks/useCurrentUserInfoData";
 
 const MyBooking = () => {
-  const { user } = CheckUserInfo();
+  const { user, isUserLoading } = useCurrentUserInfoData();
 
-  // import current user info data
-  const { currentUserInfo, isUserLoading } = useCurrentUserData();
-
-  // import getBooking by user
   const {
     data: bookingData,
     refetch,
     isLoading,
-  } = useGetbookingByUserQuery(user?.email);
+  } = useGetbookingByUserQuery(user?.email, { skip: !user?.email });
 
-  // import create order mutation
   const [createOrder] = useCreateorderMutation();
-
-  // delete order mutation
   const [deletebookingById] = useDeletebookingByIdMutation();
+
   const bookingItems = bookingData?.data || [];
 
-  // setup refetch
   useEffect(() => {
-    refetch();
-  }, [refetch]);
+    if (user?.email) {
+      refetch();
+    }
+  }, [user?.email, refetch]);
 
-  // setup loading
   if (isUserLoading || isLoading) {
     return <Loading />;
   }
 
-  // console.log for checking
-  console.log("bookingData", bookingData);
-  console.log("currentUserInfo", currentUserInfo);
-
-  // create order
   const handleOrder = async () => {
     const paymentInfo = {
       user: {
-        name: currentUserInfo?.name,
-        email: currentUserInfo?.email,
-        phone: currentUserInfo?.phone,
-        address: currentUserInfo?.address,
+        name: user?.name,
+        email: user?.email,
+        phone: user?.phone,
+        address: user?.address,
       },
       bookings: bookingItems,
     };
@@ -66,19 +54,17 @@ const MyBooking = () => {
     try {
       const res = await createOrder(paymentInfo).unwrap();
       if (res.success) {
-        console.log(res);
         window.location.href = res.data.payment_url;
       } else {
-        console.error("Payment initiation failed:", res.message);
+        toast.error("Payment initiation failed.");
       }
     } catch (error) {
-      console.log(error);
+      console.error("Order creation error:", error);
+      toast.error("Failed to create the order. Please try again.");
     }
   };
 
-  // delete booking item
   const handleDeleteBooking = (bookingId: string) => {
-    // setup sweet alert
     Swal.fire({
       title: "Confirm Deletion",
       text: `Are you sure you want to delete this booking?`,
@@ -91,30 +77,19 @@ const MyBooking = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const toastId = toast.loading("Deleting the booking...");
-
         try {
           const res = await deletebookingById(bookingId).unwrap();
-
-          // if success
           if (res && res.message) {
-            toast.success(res.message, { id: toastId, duration: 3000 });
+            toast.success(res.message, { id: toastId });
             refetch();
           } else {
-            toast.error("Unexpected response received.", {
-              id: toastId,
-              duration: 3000,
-            });
+            toast.error("Unexpected response received.", { id: toastId });
           }
-          // if fail
         } catch (err) {
           const serverMsgErr =
             (err as TError)?.data?.message ||
             "An error occurred while deleting the booking. Please try again.";
-
-          toast.error(serverMsgErr, {
-            id: toastId,
-            duration: 3000,
-          });
+          toast.error(serverMsgErr, { id: toastId });
         }
       }
     });
@@ -122,127 +97,118 @@ const MyBooking = () => {
 
   const calculateSubtotal = () => {
     return bookingItems.reduce(
-      (
-        total: any,
-        item: {
-          [x: string]: any;
-          price: any;
-        }
-      ) => total + item.totalAmount,
+      (total: any, item: { totalAmount: any }) => total + item.totalAmount,
       0
     );
   };
 
   const calculateTotal = () => {
     const subtotal = calculateSubtotal();
-    const serviceFee = 15; // Example service fee
-    const total = subtotal + serviceFee;
-    return total;
+    const serviceFee = 15;
+    return subtotal + serviceFee;
   };
 
-  // Time format
   const formatDateTime = (dateTimeString: string) => {
     try {
-      // Create a Date object from the provided string
       const date = new Date(dateTimeString);
-
-      // Validate the date
-      if (isNaN(date.getTime())) {
-        throw new Error("Invalid date format");
-      }
-
-      // Format the date and time separately
-      const formattedDate = format(date, "yyyy-MM-dd"); // Adjust format as needed
-      const formattedTime = format(date, "hh:mm a"); // Format time as AM/PM
-
+      if (isNaN(date.getTime())) throw new Error("Invalid date format");
+      const formattedDate = format(date, "yyyy-MM-dd");
+      const formattedTime = format(date, "hh:mm a");
       return `${formattedDate} at ${formattedTime}`;
     } catch (error) {
-      console.error(
-        "Date and time formatting error:",
-        error,
-        "Original dateTimeString:",
-        dateTimeString
-      );
+      console.error("Date formatting error:", error);
       return "Invalid date";
     }
   };
 
   return (
-    <div className="p-5 space-y-6 md:space-y-0 flex justify-center items-center lg:items-start  flex-col lg:justify-between   lg:flex-row gap-y-5 justify-items-center md:space-x-6">
-      {/* Left side: Booking Items */}
-      <div className="flex-1">
-        <h2 className="text-center text-black mb-4 text-xl font-bold">
+    <div className="p-5 space-y-6 flex flex-col lg:flex-row gap-y-5">
+      {/* Left Side: Booking Items */}
+      <div className="flex-1 animate-fade-in">
+        <h2 className="text-center text-black mb-4 text-2xl font-bold">
           My Bookings
         </h2>
-        <table className="min-w-full divide-y divide-gray-200 overflow-x-auto">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Room Name
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                UserName
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Date & Time
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Status
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Action
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {bookingItems?.map((booking: TBooking) => (
-              <tr key={booking?._id}>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  {booking.room.name}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  {booking.user.name}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  {formatDateTime(booking?.date)}
-                  {/* {booking?.date} */}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  {booking.isConfirmed}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <button
-                    className="text-red-500 hover:text-red-700 btn btn-sm"
-                    onClick={() => handleDeleteBooking(booking._id)}
-                  >
-                    Remove
-                  </button>
-                </td>
+        {bookingItems.length > 0 ? (
+          <table className="min-w-full divide-y divide-gray-200 overflow-x-auto bg-gradient-to-r from-blue-100 to-purple-200 rounded-lg shadow-md">
+            <thead className="bg-gradient-to-r from-purple-300 to-blue-300">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase">
+                  Room Name
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase">
+                  User Name
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase">
+                  Date & Time
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase">
+                  Status
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase">
+                  Action
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {bookingItems.map((booking: TBooking) => (
+                <tr
+                  key={booking._id}
+                  className="hover:bg-gray-100 transition duration-200"
+                >
+                  <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                    {booking.room.name}
+                  </td>
+                  <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                    {booking.user.name}
+                  </td>
+                  <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                    {formatDateTime(booking.date)}
+                  </td>
+                  <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                    <span
+                      className={`px-2 py-1 rounded-full text-white ${
+                        booking.isConfirmed ? "bg-green-500" : "bg-yellow-500"
+                      }`}
+                    >
+                      {booking.isConfirmed ? "Confirmed" : "Pending"}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4">
+                    <button
+                      className="text-red-500 hover:text-red-700 btn btn-sm transition duration-200 transform hover:scale-105"
+                      onClick={() => handleDeleteBooking(booking._id)}
+                    >
+                      Remove
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <p className="text-center text-gray-600">No items available.</p>
+        )}
       </div>
 
-      {/* Right side: Booking Summary */}
-      <div className="w-full md:w-1/3 bg-white p-6 rounded-lg shadow lg:sticky lg:top-20">
-        <h3 className="text-xl font-semibold text-gray-800 mb-4">
+      {/* Right Side: Booking Summary */}
+      <div className="w-full md:w-1/3 bg-gradient-to-r from-green-900 to-green-500 p-6 rounded-lg shadow-lg animate-slide-in">
+        <h3 className="text-xl font-semibold text-white mb-4">
           Booking Summary
         </h3>
         <div className="mb-4">
-          <p className="text-gray-600">
+          <p className="text-white">
             Subtotal: ${calculateSubtotal().toFixed(2)}
           </p>
-          <p className="text-gray-600">Service Fee: $15.00</p>
+          <p className="text-white">Service Fee: $15.00</p>
         </div>
-        <div className="border-t border-gray-300 my-4"></div>
+        <div className="border-t border-green-300 my-4"></div>
         <div className="mb-4">
-          <p className="text-lg font-semibold text-gray-800">
+          <p className="text-lg font-semibold text-white">
             Total: ${calculateTotal().toFixed(2)}
           </p>
         </div>
         <button
-          className="w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600"
+          className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-2 px-4 rounded-md hover:shadow-lg hover:scale-105 transition duration-300"
           onClick={handleOrder}
         >
           Proceed to Payment

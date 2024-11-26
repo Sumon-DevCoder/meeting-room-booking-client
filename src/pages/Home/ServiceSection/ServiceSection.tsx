@@ -31,11 +31,11 @@ const ServiceSection = () => {
   };
 
   return (
-    <section className="py-12 bg-gray-100">
+    <section className="py-12 bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
       <div className="container mx-auto text-center">
         <h2
-          className="text-2xl md:text-3xl font-bold mb-8"
-          data-aos="fade-up" // AOS animation for heading
+          className="text-2xl md:text-3xl font-bold mb-8 text-gray-900 dark:text-gray-100"
+          data-aos="fade-left"
         >
           Our Highlighted Services
         </h2>
@@ -46,12 +46,16 @@ const ServiceSection = () => {
               options={defaultOptions}
               style={{ height: 250, width: 250 }}
               key={service?.id}
-              className="bg-white rounded-lg shadow-lg p-6"
+              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300"
               data-aos="fade-up"
-              data-aos-delay={`${index * 100}`} // Delay for staggered animation effect
+              data-aos-delay={`${index * 100}`}
             >
-              <h3 className="text-xl font-semibold mb-4">{service.title}</h3>
-              <p className="text-gray-600">{service.description}</p>
+              <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">
+                {service.title}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                {service.description}
+              </p>
             </Tilt>
           ))}
         </div>

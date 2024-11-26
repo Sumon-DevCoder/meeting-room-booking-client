@@ -159,7 +159,7 @@ const ContactUs = () => {
                           id="name"
                           autoComplete="given-name"
                           placeholder="Your name"
-                          className="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md dark:text-gray-300 sm:mb-0"
+                          className="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md dark:bg-slate-700 dark:border-slate-600 dark:text-white"
                           name="name"
                           required
                         />
@@ -174,7 +174,7 @@ const ContactUs = () => {
                           id="email"
                           autoComplete="email"
                           placeholder="Your email address"
-                          className="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md dark:text-gray-300 sm:mb-0"
+                          className="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md dark:bg-slate-700 dark:border-slate-600 dark:text-white"
                           name="email"
                           required
                         />
@@ -189,7 +189,7 @@ const ContactUs = () => {
                           id="text"
                           autoComplete="email"
                           placeholder="Your Subject"
-                          className="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md dark:text-gray-300 sm:mb-0"
+                          className="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md dark:bg-slate-700 dark:border-slate-600 dark:text-white"
                           name="text"
                           required
                         />
@@ -206,7 +206,7 @@ const ContactUs = () => {
                         cols={30}
                         rows={5}
                         placeholder="Write your message..."
-                        className="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md dark:text-gray-300 sm:mb-0"
+                        className="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md dark:bg-slate-700 dark:border-slate-600 dark:text-white"
                         required
                       ></textarea>
                     </div>
@@ -215,7 +215,7 @@ const ContactUs = () => {
                     <button
                       type="submit"
                       onClick={handleEmail}
-                      className="w-full bg-blue-800 text-white px-6 py-3 font-xl rounded-md sm:mb-0"
+                      className="w-full bg-blue-800 text-white px-6 py-3 font-xl rounded-md sm:mb-0 dark:bg-blue-600"
                     >
                       Send Message
                     </button>

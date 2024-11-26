@@ -17,12 +17,29 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [login] = authApi.useLoginMutation();
+  const [activeRole, setActiveRole] = useState<string | null>("admin");
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+    reset,
+  } = useForm({
+    defaultValues: {
+      email: "mustafiz247@gmail.com",
+      password: "Mustafiz247@",
+    },
+  });
   const [showPassword, setShowPassword] = useState(false);
+
+  const handleDefaultValueChange = (role: string) => {
+    setActiveRole(role);
+    const newValues =
+      role === "admin"
+        ? { email: "mustafiz247@gmail.com", password: "Mustafiz247@" }
+        : { email: "sumon2@gmail.com", password: "Sumon2@" };
+
+    reset(newValues);
+  };
 
   const onSubmit = async (data: FieldValues) => {
     const toastId = toast.loading("Logging in");
@@ -36,9 +53,6 @@ const Login = () => {
       // Call the login mutation
       const res = await login(userInfo).unwrap();
 
-      // redirect path
-      const from = location.state?.from?.pathname || "/";
-
       if (res) {
         const user = verifyToken(res?.token) as TUser; // set user in store
         const BearerToken = `Bearer ${res?.token}`;
@@ -47,6 +61,9 @@ const Login = () => {
 
         // success
         toast.success("Login Successful", { id: toastId, duration: 3000 });
+        // redirect path
+        const from =
+          location.state?.from?.pathname || `/${user?.role}/dashboard`;
         navigate(from, { replace: true });
       }
     } catch (err) {
@@ -81,6 +98,30 @@ const Login = () => {
             <h3 className="py-4 text-2xl text-center text-gray-800 dark:text-white">
               Login to Your Account
             </h3>
+
+            <div className="text-center space-x-2">
+              <button
+                onClick={() => handleDefaultValueChange("admin")}
+                className={`btn btn-sm btn-outline ${
+                  activeRole === "admin"
+                    ? "btn-active bg-blue-500 text-white"
+                    : ""
+                }`}
+              >
+                Admin Credintials
+              </button>
+              <button
+                onClick={() => handleDefaultValueChange("user")}
+                className={`btn btn-sm btn-outline ${
+                  activeRole === "user"
+                    ? "btn-active bg-blue-500 text-white"
+                    : ""
+                }`}
+              >
+                User Credintials
+              </button>
+            </div>
+
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="px-8 pt-6 pb-8 mb-4 bg-gray-100 dark:bg-gray-800 rounded"

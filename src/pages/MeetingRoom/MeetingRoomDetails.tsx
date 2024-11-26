@@ -50,7 +50,7 @@ const MeetingRoomDetails = () => {
   } = room;
 
   return (
-    <div className="bg-white max-w-screen-lg m-auto shadow-lg rounded-lg overflow-hidden font-roboto hover:shadow-2xl transform">
+    <div className="bg-white mt-10 dark:bg-gray-800 max-w-screen-lg m-auto shadow-lg rounded-lg overflow-hidden font-roboto hover:shadow-2xl transform">
       <div className="p-4">
         {/* Swiper Image Slider Section */}
         <Swiper
@@ -71,7 +71,9 @@ const MeetingRoomDetails = () => {
               )
             )
           ) : (
-            <p>No images available</p>
+            <p className="text-gray-700 dark:text-gray-300">
+              No images available
+            </p>
           )}
         </Swiper>
       </div>
@@ -80,10 +82,10 @@ const MeetingRoomDetails = () => {
       <div className="p-6 flex justify-between">
         {/* Left Section */}
         <div className="space-y-2">
-          <h3 className="text-2xl font-semibold text-indigo-700 mb-2">
+          <h3 className="text-2xl font-semibold text-indigo-700 dark:text-indigo-300 mb-2">
             {name}
           </h3>
-          <div className="text-gray-500 space-y-1">
+          <div className="text-gray-500 dark:text-gray-300 space-y-1">
             <p>
               Room No.: <span className="font-medium">{roomNo}</span>
             </p>
@@ -98,14 +100,14 @@ const MeetingRoomDetails = () => {
 
         {/* Right Section */}
         <div className="text-right">
-          <p className="text-gray-900 font-bold text-lg mb-2 text-start">
+          <p className="text-gray-900 dark:text-gray-100 font-bold text-lg mb-2 text-start">
             ${pricePerSlot} per slot
           </p>
           <div>
-            <p className="text-gray-700 text-start font-bold text-lg">
+            <p className="text-gray-700 dark:text-gray-300 text-start font-bold text-lg">
               Amenities:
             </p>
-            <ul className="text-start list-disc pl-5 text-gray-600">
+            <ul className="text-start list-disc pl-5 text-gray-600 dark:text-gray-400">
               {amenities.length > 0 ? (
                 amenities.map(
                   (
@@ -131,7 +133,7 @@ const MeetingRoomDetails = () => {
 
       <div className="flex justify-center mb-4 px-4">
         <button
-          className="mt-5 w-full py-3 px-6 bg-indigo-600 text-white font-semibold rounded-md transition duration-300 hover:bg-indigo-700 hover:shadow-md"
+          className="mt-5 w-full py-3 px-6 bg-indigo-600 dark:bg-indigo-700 text-white dark:text-gray-200 font-semibold rounded-md transition duration-300 hover:bg-indigo-700 hover:shadow-md"
           onClick={() =>
             (
               document.getElementById("my_modal_1") as HTMLDialogElement

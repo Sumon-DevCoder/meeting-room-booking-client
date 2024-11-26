@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import CheckUserInfo from "@/components/CheckUserRole/CheckUserInfo";
+import useCurrentUserInfo from "@/hoooks/useCurrentUserInfo";
 import { useGetorderByUserQuery } from "@/redux/features/order/orderApi";
 import {
   Key,
@@ -10,8 +10,8 @@ import {
 } from "react";
 
 const OrderManagement = () => {
-  const { user } = CheckUserInfo();
-  const { data: orderData } = useGetorderByUserQuery(user?.email);
+  const { email } = useCurrentUserInfo();
+  const { data: orderData } = useGetorderByUserQuery(email);
 
   const orders = orderData?.data || [];
 

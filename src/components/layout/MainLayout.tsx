@@ -3,12 +3,8 @@ import Sidebar from "./Sidebar"; // Assuming you have this component for your si
 import { Outlet, Link } from "react-router-dom"; // Import Outlet and Link for routing
 import { SetStateAction, useState } from "react"; // Import useState for state management
 import { Content } from "antd/es/layout/layout"; // Content component from Ant Design
-import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  BellOutlined,
-  SearchOutlined,
-} from "@ant-design/icons"; // Import icons
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import { BellOutlined, SearchOutlined } from "@ant-design/icons"; // Import icons
 import DropdownProfile from "../DropdownProfile/DropdownProfile";
 
 const MainLayout = () => {
@@ -30,14 +26,22 @@ const MainLayout = () => {
     <Layout className="min-h-screen">
       <Sidebar collapsed={collapsed} />
       <Layout>
-        <Layout.Header
-          className="sticky top-0 z-10 bg-slate-400"
+        {/* header */}
+        <div
+          className="sticky top-0 z-10 bg-gradient-to-r from-indigo-900 bg-[#262626]"
           style={{ padding: 0 }}
         >
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center ">
             <Button
               type="text"
-              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              className=""
+              icon={
+                collapsed ? (
+                  <AiOutlineArrowRight className="text-lg text-white" />
+                ) : (
+                  <AiOutlineArrowLeft className="text-lg text-white" />
+                )
+              }
               onClick={() => setCollapsed(!collapsed)}
               style={{
                 fontSize: "16px",
@@ -53,7 +57,6 @@ const MainLayout = () => {
                 Home
               </Link>
 
-              {/* Search Bar */}
               <div className="flex items-center mx-4 hidden md:block">
                 <Input
                   placeholder="Search..."
@@ -64,7 +67,6 @@ const MainLayout = () => {
                 />
               </div>
 
-              {/* Notifications */}
               <Badge count={notifications.length}>
                 <Button
                   type="text"
@@ -72,17 +74,16 @@ const MainLayout = () => {
                   onClick={() => console.log("View Notifications")} // Replace with your logic to show notifications
                 />
               </Badge>
-
-              <div className="mr-4">
+              <div className="mr-5">
                 <DropdownProfile />
               </div>
             </div>
           </div>
-        </Layout.Header>
+        </div>
 
-        <Content style={{ margin: "10px 10px 0" }}>
+        <Content className="bg-green-400" style={{ margin: "10px 10px 0" }}>
           <div
-            className="min-h-screen bg-slate-200 md:p-6"
+            className="min-h-screen bg-green-400"
             style={{
               background: colorBgContainer,
               borderRadius: borderRadiusLG,

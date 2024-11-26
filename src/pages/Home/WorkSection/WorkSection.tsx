@@ -3,11 +3,11 @@ const WorkSection = () => {
     <div className="max-w-screen-xl m-auto">
       <section
         id="works"
-        className="relative bg-slate-600 rounded-lg py-10 sm:py-16 lg:py-16 my-20"
+        className="relative dark:bg-gray-900 rounded-lg py-10 sm:py-16 lg:py-16"
       >
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-4xl text-white font-extrabold mx-auto md:text-3xl lg:text-4xl">
+            <h2 className="text-4xl text-slate-700 font-extrabold mx-auto md:text-3xl lg:text-4xl">
               How It Works
             </h2>
             <p className="max-w-2xl mx-auto mt-4 text-base text-gray-400 leading-relaxed md:text-2xl">

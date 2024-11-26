@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <div>
-      <div className="mt-8 bg-gray-900 pt-9">
+      <div className="bg-gradient-to-r from-sky-900 to-sky-900 dark:from-blue-900 dark:to-green-900 pt-9">
         <div className="mx-auto w-full  px-4 md:px-0 ">
           <div className="flex flex-col gap-5 lg:gap-0 justify-between sm:px-[18px] md:flex-row lg:px-10">
             <div className="md:w-[316px]">
               <h1 className="text-white font-extrabold text-[24px]">
                 <Link
-                  to={"/"}
-                  className="btn btn-ghost lg:text-xl bg-gradient-to-r from-indigo-500"
+                  to={`/`}
+                  className="btn btn-ghost text-[19px] md:text-xl bg-gradient-to-r from-blue-800 text-slate-200 font-medium"
                 >
                   Meeting Room Booking
                 </Link>
@@ -84,6 +84,7 @@ const Footer = () => {
                     viewBox="0 0 20 20"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
+                    className="dark:text-black"
                   >
                     <path
                       d="M10 0C4.485 0 0 4.485 0 10s4.485 10 10 10 10-4.485 10-10S15.515 0 10 0zm0 18C5.477 18 2 14.523 2 10S5.477 2 10 2s8 3.477 8 8-3.477 8-8 8z"
@@ -114,6 +115,7 @@ const Footer = () => {
                     viewBox="0 0 24 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
+                    className="dark:text-black"
                   >
                     <path
                       d="M12 2C10.34 2 8.68 2.63 7.5 3.77C6.31 4.91 5.5 6.5 5.5 8.5C5.5 10.9 8.5 14.5 12 18C15.5 14.5 18.5 10.9 18.5 8.5C18.5 6.5 17.69 4.91 16.5 3.77C15.32 2.63 13.66 2 12 2ZM12 20C11.55 20 11.1 19.95 10.66 19.85C10.76 19.95 10.87 20 11 20H13C13.13 20 13.24 19.95 13.34 19.85C12.9 19.95 12.45 20 12 20Z"
@@ -140,6 +142,7 @@ const Footer = () => {
                     viewBox="0 0 20 15"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
+                    className="dark:text-black"
                   >
                     <path
                       d="M19 0H1C0.801088 0 0.610322 0.0790178 0.46967 0.21967C0.329018 0.360322 0.25 0.551088 0.25 0.75V13.5C0.25 13.8978 0.408035 14.2794 0.68934 14.5607C0.970644 14.842 1.35218 15 1.75 15H18.25C18.6478 15 19.0294 14.842 19.3107 14.5607C19.592 14.2794 19.75 13.8978 19.75 13.5V0.75C19.75 0.551088 19.671 0.360322 19.5303 0.21967C19.3897 0.0790178 19.1989 0 19 0ZM10 7.98281L2.92844 1.5H17.0716L10 7.98281ZM7.25406 7.5L1.75 12.5447V2.45531L7.25406 7.5ZM8.36406 8.51719L9.48906 9.55312C9.62743 9.68014 9.80842 9.75062 9.99625 9.75062C10.1841 9.75062 10.3651 9.68014 10.5034 9.55312L11.6284 8.51719L17.0659 13.5H2.92844L8.36406 8.51719ZM12.7459 7.5L18.25 2.45438V12.5456L12.7459 7.5Z"
@@ -186,7 +189,8 @@ const Footer = () => {
           </div>
           <div className="border-t border-white/[20%] mt-8 pt-4">
             <p className="text-center text-white text-[14px] pb-3">
-              © 2024 Meeting Booking Room. All Rights Reserved.
+              ©{new Date().getFullYear()} Meeting Booking Room. All Rights
+              Reserved
             </p>
           </div>
         </div>

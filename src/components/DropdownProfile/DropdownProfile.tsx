@@ -12,28 +12,28 @@ import { toast } from "sonner";
 import { logout } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
-import CheckUserInfo from "../CheckUserRole/CheckUserInfo";
 import { Link } from "react-router-dom";
-import useCurrentUserData from "@/hoooks/useCurrentData";
 
 // Import icons from react-icons
 import { FaUserCircle } from "react-icons/fa";
 import { MdDashboard, MdLogout } from "react-icons/md";
 import { BsCalendar2Check } from "react-icons/bs";
-
-// Import motion for animations
 import { motion } from "framer-motion";
+import useCurrentUserInfoData from "@/hoooks/useCurrentUserInfoData";
+import Loading from "../Loading/Loading";
 
 const DropdownProfile = () => {
-  const { user, isAdmin } = CheckUserInfo();
   const dispatch = useAppDispatch();
-  const { currentUserInfo } = useCurrentUserData();
+  const { user, isUserLoading } = useCurrentUserInfoData();
 
-  console.log(currentUserInfo);
+  // is user loading
+  if (isUserLoading) {
+    return <Loading />;
+  }
 
   const handleLogout = async () => {
     try {
-      await dispatch(logout());
+      dispatch(logout());
       toast.success("Logout Successful");
     } catch (err: any) {
       toast.error("Logout Failed. Please try again.");
@@ -47,8 +47,15 @@ const DropdownProfile = () => {
           <DropdownMenuTrigger asChild>
             <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
               <div className="avatar">
-                <div className="w-12 rounded-full">
-                  <img src={currentUserInfo?.img} />
+                <div className="w-10 rounded-full">
+                  {user?.img ? (
+                    <img src={user?.img} alt="User Avatar" />
+                  ) : (
+                    <img
+                      src="https://i.ibb.co/j8KxL3f/blank-profile-picture-973460-640.png"
+                      alt="Default Avatar"
+                    />
+                  )}
                 </div>
               </div>
             </motion.div>
@@ -58,15 +65,14 @@ const DropdownProfile = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <DropdownMenuContent>
+            <DropdownMenuContent className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white rounded-lg shadow-lg p-4">
               <DropdownMenuLabel>
                 <Link to={"/user/profile"}>
-                  <FaUserCircle className="inline mr-2" />{" "}
-                  {currentUserInfo?.name}
+                  <FaUserCircle className="inline mr-2" /> {user?.name}
                 </Link>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              {isAdmin ? (
+              {user?.role === "admin" ? (
                 <DropdownMenuItem>
                   <Link to="/admin/dashboard">
                     <MdDashboard className="inline mr-2" /> Dashboard

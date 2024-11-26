@@ -1,27 +1,27 @@
 const WhyChooseUs = () => {
   return (
     <div>
-      <div className="max-w-screen-xl m-auto">
-        <div className="bg-slate-600">
+      <div className="max-w-screen-xl m-auto dark:bg-gray-900 bg-slate-100">
+        <div className="">
           <section
             id="features"
-            className="relative block px-6 py-10 md:py-10 md:px-10 border-t border-b border-neutral-900 bg-neutral-900/30"
+            className="relative block px-6 py-10 md:py-10 md:px-10 transition-colors duration-500"
           >
             <div className="relative mx-auto max-w-5xl text-center">
               <span
-                className="text-gray-400 my-3 font-oswald flex items-center justify-center font-medium uppercase tracking-wider"
+                className="text-gray-500 dark:text-gray-300 my-3 font-oswald flex items-center justify-center font-medium uppercase tracking-wider"
                 data-aos="fade-up"
               >
                 Why Choose Us
               </span>
               <h2
-                className="block w-full bg-gradient-to-b from-white to-gray-400 bg-clip-text font-bold text-transparent text-3xl sm:text-4xl"
+                className="block w-full bg-gradient-to-b from-gray-700 to-gray-400 bg-clip-text font-bold text-transparent text-3xl sm:text-4xl dark:from-gray-200 dark:to-gray-600 dark:text-white transition-colors duration-500"
                 data-aos="fade-up"
               >
                 Seamless Meeting Room Booking Experience
               </h2>
               <p
-                className="mx-auto my-4 w-full max-w-xl bg-transparent text-center font-medium leading-relaxed tracking-wide text-gray-400"
+                className="mx-auto my-4 w-full max-w-xl bg-transparent text-center font-medium leading-relaxed tracking-wide text-gray-600 dark:text-gray-300 transition-colors duration-500"
                 data-aos="fade-up"
               >
                 Our platform is designed to provide an intuitive experience for
@@ -33,7 +33,7 @@ const WhyChooseUs = () => {
             <div className="relative mx-auto max-w-7xl z-10 grid grid-cols-1 gap-10 pt-14 sm:grid-cols-2 lg:grid-cols-3">
               {/* User-Friendly Design Card */}
               <div
-                className="rounded-md border border-neutral-800 bg-neutral-900/50 p-8 text-center shadow transition duration-500 hover:scale-105 hover:shadow-2xl transform"
+                className="rounded-md bg-white dark:bg-neutral-800/50 p-8 text-center shadow-lg hover:shadow-2xl hover:scale-105 transition duration-500 transform dark:hover:scale-105 dark:hover:shadow-xl"
                 data-aos="fade-up"
               >
                 <div
@@ -46,7 +46,7 @@ const WhyChooseUs = () => {
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="icon icon-tabler icon-tabler-color-swatch"
+                    className="icon icon-tabler icon-tabler-color-swatch text-white dark:text-gray-300"
                     width="24"
                     height="24"
                     viewBox="0 0 24 24"
@@ -63,8 +63,10 @@ const WhyChooseUs = () => {
                     <line x1="17" y1="17" x2="17" y2="17.01"></line>
                   </svg>
                 </div>
-                <h3 className="mt-6 text-gray-400">User-Friendly Design</h3>
-                <p className="my-4 mb-0 font-normal leading-relaxed tracking-wide text-gray-400">
+                <h3 className="mt-6 text-gray-700 dark:text-gray-200 text-lg font-semibold transition-colors duration-500">
+                  User-Friendly Design
+                </h3>
+                <p className="my-4 mb-0 font-normal leading-relaxed tracking-wide text-gray-600 dark:text-gray-300 transition-colors duration-500">
                   Experience an easy-to-navigate interface that allows you to
                   book meeting rooms quickly and efficiently.
                 </p>
@@ -72,7 +74,7 @@ const WhyChooseUs = () => {
 
               {/* Secure Processes Card */}
               <div
-                className="rounded-md border border-neutral-800 bg-neutral-900/50 p-8 text-center shadow"
+                className="rounded-md bg-white dark:bg-neutral-800/50 p-8 text-center shadow-lg hover:shadow-2xl hover:scale-105 transition duration-500 transform dark:hover:scale-105 dark:hover:shadow-xl"
                 data-aos="fade-up"
               >
                 <div
@@ -85,7 +87,7 @@ const WhyChooseUs = () => {
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="icon icon-tabler icon-tabler-bolt"
+                    className="icon icon-tabler icon-tabler-bolt text-white dark:text-gray-300"
                     width="24"
                     height="24"
                     viewBox="0 0 24 24"
@@ -99,8 +101,10 @@ const WhyChooseUs = () => {
                     <polyline points="13 3 13 10 19 10 11 21 11 14 5 14 13 3"></polyline>
                   </svg>
                 </div>
-                <h3 className="mt-6 text-gray-400">Secure Processes</h3>
-                <p className="my-4 mb-0 font-normal leading-relaxed tracking-wide text-gray-400">
+                <h3 className="mt-6 text-gray-700 dark:text-gray-200 text-lg font-semibold transition-colors duration-500">
+                  Secure Processes
+                </h3>
+                <p className="my-4 mb-0 font-normal leading-relaxed tracking-wide text-gray-600 dark:text-gray-300 transition-colors duration-500">
                   Rest assured that your booking information is protected with
                   industry-standard security measures.
                 </p>
@@ -108,7 +112,7 @@ const WhyChooseUs = () => {
 
               {/* Robust Management Tools Card */}
               <div
-                className="rounded-md border border-neutral-800 bg-neutral-900/50 p-8 text-center shadow"
+                className="rounded-md bg-white dark:bg-neutral-800/50 p-8 text-center shadow-lg hover:shadow-2xl hover:scale-105 transition duration-500 transform dark:hover:scale-105 dark:hover:shadow-xl"
                 data-aos="fade-up"
               >
                 <div
@@ -121,7 +125,7 @@ const WhyChooseUs = () => {
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="icon icon-tabler icon-tabler-tools"
+                    className="icon icon-tabler icon-tabler-tools text-white dark:text-gray-300"
                     width="24"
                     height="24"
                     viewBox="0 0 24 24"
@@ -140,8 +144,10 @@ const WhyChooseUs = () => {
                     <line x1="16" y1="17" x2="14.5" y2="18.5"></line>
                   </svg>
                 </div>
-                <h3 className="mt-6 text-gray-400">Robust Management Tools</h3>
-                <p className="my-4 mb-0 font-normal leading-relaxed tracking-wide text-gray-400">
+                <h3 className="mt-6 text-gray-700 dark:text-gray-200 text-lg font-semibold transition-colors duration-500">
+                  Robust Management Tools
+                </h3>
+                <p className="my-4 mb-0 font-normal leading-relaxed tracking-wide text-gray-600 dark:text-gray-300 transition-colors duration-500">
                   Our platform equips administrators with powerful tools for
                   efficient management of bookings and resources.
                 </p>

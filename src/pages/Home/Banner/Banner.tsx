@@ -4,7 +4,7 @@ import meetingRoomImg from "../../../assets/modern_workspace_banner.jpg";
 const Banner = () => {
   return (
     <div
-      className="relative md:h-[450px] bg-cover bg-center mt-[2px]"
+      className="relative md:h-[450px] bg-center"
       style={{ backgroundImage: `url(${meetingRoomImg})` }}
     >
       {/* Background overlay */}
@@ -24,7 +24,7 @@ const Banner = () => {
           data-aos-delay="200"
           className="text-md md:text-xl mb-6"
         >
-          Efficient, hassle-free room booking for all your meeting needs.
+          Efficient, hassle-free room booking for all your meeting needs
         </p>
 
         <div data-aos="zoom-in" data-aos-delay="400">

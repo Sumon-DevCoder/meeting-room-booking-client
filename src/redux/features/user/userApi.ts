@@ -16,6 +16,13 @@ export const userApi = baseApi.injectEndpoints({
       }),
       providesTags: ["users"],
     }),
+    getUserByEmail: builder.query({
+      query: (email) => ({
+        method: "GET",
+        url: `/users/${email}`,
+      }),
+      providesTags: ["users"],
+    }),
     createUser: builder.mutation({
       query: (userData) => ({
         method: "POST",
@@ -49,5 +56,6 @@ export const {
   useGetUsersQuery,
   useUpdateUserByIdMutation,
   useCreateUserMutation,
+  useGetUserByEmailQuery,
   useDeleteUserByIdMutation,
 } = userApi;

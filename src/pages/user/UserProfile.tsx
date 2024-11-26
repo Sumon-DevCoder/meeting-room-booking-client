@@ -1,67 +1,112 @@
+import React, { useEffect } from "react";
 import Loading from "@/components/Loading/Loading";
-import useCurrentUserData from "@/hoooks/useCurrentData";
+import useCurrentUserInfoData from "@/hoooks/useCurrentUserInfoData";
+import AOS from "aos";
+import "aos/dist/aos.css"; // Import AOS styles
 
 const UserProfile = () => {
-  const { currentUserInfo, isUserLoading } = useCurrentUserData();
+  const { user, isUserLoading } = useCurrentUserInfoData();
 
-  console.log(currentUserInfo);
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({ duration: 1000 }); // Set the animation duration
+    AOS.refresh(); // Refresh AOS when component updates
+  }, []);
 
   if (isUserLoading) {
     return <Loading />;
   }
 
   return (
-    <div className="flex justify-center items-center -pt-10 min-h-screen">
-      <div className="bg-white rounded-lg shadow-lg overflow-hidden w-full max-w-3xl">
-        {/* Header Section */}
-        <div className="flex items-center p-6 bg-blue-600 text-white">
-          <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-white mr-4">
-            <img
-              src={currentUserInfo?.img}
-              alt="User Profile"
-              className="object-cover w-full h-full"
-            />
-          </div>
-          <div>
-            <h2 className="text-2xl font-bold">{currentUserInfo?.name}</h2>
-            <p className="text-lg opacity-90">{currentUserInfo?.email}</p>
-          </div>
+    <div className="bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-600 animate-gradient-xy shadow-lg rounded-lg w-full p-4 transition-transform duration-300">
+      {/* Profile Header */}
+      <div
+        className="flex items-center gap-6 mb-8 border-b pb-6"
+        data-aos="fade-up"
+      >
+        <div
+          className="w-32 h-32 rounded-full overflow-hidden border-4 border-blue-600 transition-transform duration-300 hover:rotate-6 hover:scale-110 transform"
+          data-aos="zoom-in"
+        >
+          <img
+            src={user?.img || "/default-profile.png"}
+            alt="User Profile"
+            className="object-cover w-full h-full"
+          />
         </div>
+        <div className="flex-grow text-white">
+          <h1 className="text-3xl font-bold" data-aos="fade-left">
+            {user?.name || "N/A"}
+          </h1>
+          <p className="text-lg" data-aos="fade-left" data-aos-delay="200">
+            {user?.email || "N/A"}
+          </p>
+          <p className="text-sm mt-1" data-aos="fade-left" data-aos-delay="400">
+            Role: {user?.role === "user" ? "USER" : "Admin"}
+          </p>
+        </div>
+      </div>
 
-        {/* Contact Information Section */}
-        <div className="p-6 border-b border-gray-200">
-          <h3 className="text-xl font-semibold text-blue-600 mb-4">
+      {/* User Details */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div
+          className="bg-white/80 backdrop-blur-sm p-4 rounded-lg shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl hover:bg-blue-50"
+          data-aos="fade-up"
+        >
+          <h3
+            className="text-lg font-semibold text-blue-600 mb-2"
+            data-aos="slide-right"
+          >
             Contact Information
           </h3>
-          <div className="space-y-2">
-            <div className="flex justify-between">
-              <span className="text-gray-700">Address:</span>
-              <span className="text-gray-800">{currentUserInfo?.address}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-700">Phone:</span>
-              <span className="text-gray-800">{currentUserInfo?.phone}</span>
-            </div>
-          </div>
+          <p
+            className="text-gray-700"
+            data-aos="fade-left"
+            data-aos-delay="100"
+          >
+            <span className="font-bold">Phone:</span> {user?.phone || "N/A"}
+          </p>
+          <p
+            className="text-gray-700"
+            data-aos="fade-left"
+            data-aos-delay="200"
+          >
+            <span className="font-bold">Email:</span> {user?.email || "N/A"}
+          </p>
+          <p
+            className="text-gray-700"
+            data-aos="fade-left"
+            data-aos-delay="300"
+          >
+            <span className="font-bold">Address:</span> {user?.address || "N/A"}
+          </p>
         </div>
-
-        {/* User Activities Section */}
-        <div className="p-6">
-          <h3 className="text-xl font-semibold text-blue-600 mb-4">
-            Recent Activities
+        <div
+          className="bg-white/80 backdrop-blur-sm p-4 rounded-lg shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl hover:bg-blue-50"
+          data-aos="fade-up"
+        >
+          <h3
+            className="text-lg font-semibold text-blue-600 mb-2"
+            data-aos="slide-right"
+          >
+            Additional Information
           </h3>
-          <ul className="space-y-3">
-            <li className="border-b border-gray-200 pb-2 text-gray-600">
-              Logged in from a new device
-            </li>
-            <li className="border-b border-gray-200 pb-2 text-gray-600">
-              Updated profile picture
-            </li>
-            <li className="border-b border-gray-200 pb-2 text-gray-600">
-              Changed password
-            </li>
-            <li className="text-gray-600">Made a purchase</li>
-          </ul>
+          <p
+            className="text-gray-700"
+            data-aos="fade-left"
+            data-aos-delay="100"
+          >
+            <span className="font-bold">Role:</span>{" "}
+            {user?.role === "user" ? "USER" : "Admin"}
+          </p>
+          <p
+            className="text-gray-700"
+            data-aos="fade-left"
+            data-aos-delay="200"
+          >
+            <span className="font-bold">Joined On:</span>{" "}
+            {user?.joinDate || "N/A"}
+          </p>
         </div>
       </div>
     </div>

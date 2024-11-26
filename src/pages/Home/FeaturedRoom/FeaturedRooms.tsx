@@ -14,8 +14,8 @@ const FeaturedRooms = () => {
   const { data: rooms } = data || [];
 
   return (
-    <div className="border-2 bg-slate-100  max-w-7xl m-auto rounded-md shadow-xl mb-10">
-      <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center mt-10 ">
+    <div className="py-1 bg-slate-100 dark:bg-slate-900  m-auto">
+      <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center mt-10 text-gray-900 dark:text-white">
         Featured Rooms
       </h2>
 
@@ -26,7 +26,7 @@ const FeaturedRooms = () => {
             ?.map?.((room: TRoom) => <RoomCard key={room?._id} room={room} />)
         ) : (
           <div className="col-span-1 md:col-span-4 flex justify-center items-center h-10">
-            <p className="text-center text-gray-600 font-semibold text-lg">
+            <p className="text-center text-gray-600 dark:text-gray-300 font-semibold text-lg">
               No rooms available at the moment. Please check back later.
             </p>
           </div>

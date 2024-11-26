@@ -36,7 +36,7 @@ const Testimonial = () => {
   }
 
   return (
-    <div className="bg-slate-400 p-10 max-w-screen-xl m-auto rounded-lg">
+    <div className="bg-gray-900 p-10  m-auto">
       <div className="flex justify-center">
         <h2 className="text-2xl font-bold text-center mb-4 border-b-2 border-gray-300 pb-2 inline-block">
           What Our Clients Say
