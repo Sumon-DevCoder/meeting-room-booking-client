@@ -50,7 +50,7 @@ const MeetingRoomDetails = () => {
   } = room;
 
   return (
-    <div className="bg-white mt-10 dark:bg-gray-800 max-w-screen-lg m-auto shadow-lg rounded-lg overflow-hidden font-roboto hover:shadow-2xl transform">
+    <div className="bg-gray-900 dark:bg-gray-900  m-auto  overflow-hidden font-roboto hover:shadow-2xl transform">
       <div className="p-4">
         {/* Swiper Image Slider Section */}
         <Swiper

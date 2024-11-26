@@ -2,11 +2,12 @@ import { authApi } from "@/redux/features/auth/authApi";
 import { TError } from "@/types";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { motion } from "framer-motion";
 import axios from "axios"; // Ensure axios is installed
+import { IoArrowBackCircle } from "react-icons/io5";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -100,23 +101,33 @@ const Register = () => {
       <div className="mx-auto">
         <motion.div
           className="flex justify-center px-6 py-5"
-          initial={{ opacity: 0, y: 20 }} // Start slightly below and transparent
-          animate={{ opacity: 1, y: 0 }} // Animate to original position and full opacity
-          transition={{ duration: 0.5 }} // Duration of the animation
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
         >
           <div className="w-full xl:w-3/4 lg:w-11/12 flex justify-center">
+            <div className="pr-5 pt-1 hidden md:block">
+              <NavLink
+                to="/"
+                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition duration-300 flex items-center"
+              >
+                <IoArrowBackCircle className="mr-2" />
+                Back
+              </NavLink>
+            </div>
+
             <motion.div
-              className="w-full lg:w-7/12 shadow-xl bg-gray-100 dark:bg-gray-700 p-5 rounded-lg lg:rounded-l-none"
-              initial={{ scale: 0.95 }} // Scale down slightly at start
-              animate={{ scale: 1 }} // Animate to full scale
+              className="w-full lg:w-7/12 shadow-xl bg-gray-100 dark:bg-gray-900 p-5 rounded-lg lg:rounded-l-none"
+              initial={{ scale: 0.95 }}
+              animate={{ scale: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <h3 className="py-4 text-2xl text-center text-gray-800 dark:text-white">
+              <h3 className="py-4 text-2xl text-center text-gray-900 dark:text-white">
                 Create an Account!
               </h3>
               <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="px-8 pt-6 pb-8 mb-4 bg-gray-100 dark:bg-gray-800 rounded"
+                className="px-8 pt-6 pb-8 mb-4 bg-gray-100 dark:bg-gray-900 rounded"
               >
                 <div className="mb-4 md:flex md:justify-between">
                   <div className="mb-4 md:mr-2 md:mb-0">
@@ -127,7 +138,7 @@ const Register = () => {
                       Name
                     </label>
                     <input
-                      className="w-full px-3 py-2 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                      className="w-full px-3 py-2 text-sm leading-tight text-gray-700 dark:text-white border border-gray-300 dark:border-gray-600 rounded shadow appearance-none focus:outline-none focus:shadow-outline bg-white dark:bg-gray-900"
                       id="firstName"
                       type="text"
                       placeholder="Enter Name"
@@ -153,7 +164,7 @@ const Register = () => {
                       Email
                     </label>
                     <input
-                      className="w-full px-3 py-2 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                      className="w-full px-3 py-2 text-sm leading-tight text-gray-700 dark:text-white border border-gray-300 dark:border-gray-600 rounded shadow appearance-none focus:outline-none focus:shadow-outline bg-white dark:bg-gray-900"
                       id="lastName"
                       type="email"
                       placeholder="Enter Email"
@@ -180,7 +191,7 @@ const Register = () => {
                     Address
                   </label>
                   <input
-                    className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                    className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border border-gray-300 dark:border-gray-600 rounded shadow appearance-none focus:outline-none focus:shadow-outline bg-white dark:bg-gray-900"
                     id="address"
                     type="text"
                     placeholder="Enter Address"
@@ -207,7 +218,7 @@ const Register = () => {
                       Phone
                     </label>
                     <input
-                      className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                      className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border border-gray-300 dark:border-gray-600 rounded shadow appearance-none focus:outline-none focus:shadow-outline bg-white dark:bg-gray-900"
                       id="phone"
                       type="number"
                       placeholder="Enter Number"
@@ -226,7 +237,7 @@ const Register = () => {
                       </p>
                     )}
                   </div>
-                  <div className="md:ml-2 ">
+                  <div className="md:ml-2">
                     <label
                       className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
                       htmlFor="c_password"
@@ -235,7 +246,7 @@ const Register = () => {
                     </label>
                     <div className="relative">
                       <input
-                        className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                        className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border border-gray-300 dark:border-gray-600 rounded shadow appearance-none focus:outline-none focus:shadow-outline bg-white dark:bg-gray-900"
                         id="c_password"
                         type={showPassword ? "text" : "password"}
                         placeholder="Enter Password"
@@ -251,15 +262,14 @@ const Register = () => {
                       />
                       <button
                         type="button"
-                        onClick={() => setShowPassword(!showPassword)} // Toggle the state
+                        onClick={() => setShowPassword(!showPassword)}
                         className="absolute top-2 right-0 flex items-center px-3 text-gray-500 focus:outline-none"
                       >
                         {showPassword ? (
                           <HiEyeOff className="text-xl" />
                         ) : (
                           <HiEye className="text-xl" />
-                        )}{" "}
-                        {/* Eye icon toggle */}
+                        )}
                       </button>
                     </div>
                     {errors.password && (
@@ -286,7 +296,7 @@ const Register = () => {
                         setUserImg(e.target.files[0]); // Set the file to state
                       }
                     }}
-                    className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                    className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border border-gray-300 dark:border-gray-600 rounded shadow appearance-none focus:outline-none focus:shadow-outline bg-white dark:bg-gray-900"
                   />
                 </div>
 
@@ -305,15 +315,7 @@ const Register = () => {
                 </div>
                 <hr className="mb-6 border-t" />
                 <div className="text-center">
-                  {/* <a
-                  className="inline-block text-sm text-blue-500 dark:text-blue-500 align-baseline hover:text-blue-800"
-                  href="#"
-                >
-                  Forgot Password?
-                </a> */}
-                </div>
-                <div className="text-center">
-                  <p className="inline-block text-md text-black dark:text-blue-500 align-baseline ">
+                  <p className="inline-block text-md text-black dark:text-blue-500 align-baseline">
                     Already have an account?{" "}
                     <Link
                       className="font-semibold text-indigo-500 underline"

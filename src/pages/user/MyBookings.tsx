@@ -15,6 +15,8 @@ import { TError } from "@/types";
 import { TBooking } from "@/types/booking.types";
 import { format } from "date-fns";
 import useCurrentUserInfoData from "@/hoooks/useCurrentUserInfoData";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const MyBooking = () => {
   const { user, isUserLoading } = useCurrentUserInfoData();
@@ -31,6 +33,7 @@ const MyBooking = () => {
   const bookingItems = bookingData?.data || [];
 
   useEffect(() => {
+    AOS.init({ duration: 800, easing: "ease-in-out", once: true });
     if (user?.email) {
       refetch();
     }
@@ -122,76 +125,90 @@ const MyBooking = () => {
   };
 
   return (
-    <div className="p-5 space-y-6 flex flex-col lg:flex-row gap-y-5">
+    <div className="p-5 flex flex-col lg:flex-row gap-y-5 gap-x-3">
       {/* Left Side: Booking Items */}
-      <div className="flex-1 animate-fade-in">
-        <h2 className="text-center text-black mb-4 text-2xl font-bold">
+      <div className="flex-1 animate-fade-in" data-aos="fade-up">
+        <h2
+          className="text-center text-black mb-4 text-2xl font-bold"
+          data-aos="fade-right"
+        >
           My Bookings
         </h2>
         {bookingItems.length > 0 ? (
-          <table className="min-w-full divide-y divide-gray-200 overflow-x-auto bg-gradient-to-r from-blue-100 to-purple-200 rounded-lg shadow-md">
-            <thead className="bg-gradient-to-r from-purple-300 to-blue-300">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase">
-                  Room Name
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase">
-                  User Name
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase">
-                  Date & Time
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase">
-                  Status
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase">
-                  Action
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {bookingItems.map((booking: TBooking) => (
-                <tr
-                  key={booking._id}
-                  className="hover:bg-gray-100 transition duration-200"
-                >
-                  <td className="px-6 py-4 text-sm font-medium text-gray-900">
-                    {booking.room.name}
-                  </td>
-                  <td className="px-6 py-4 text-sm font-medium text-gray-900">
-                    {booking.user.name}
-                  </td>
-                  <td className="px-6 py-4 text-sm font-medium text-gray-900">
-                    {formatDateTime(booking.date)}
-                  </td>
-                  <td className="px-6 py-4 text-sm font-medium text-gray-900">
-                    <span
-                      className={`px-2 py-1 rounded-full text-white ${
-                        booking.isConfirmed ? "bg-green-500" : "bg-yellow-500"
-                      }`}
-                    >
-                      {booking.isConfirmed ? "Confirmed" : "Pending"}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4">
-                    <button
-                      className="text-red-500 hover:text-red-700 btn btn-sm transition duration-200 transform hover:scale-105"
-                      onClick={() => handleDeleteBooking(booking._id)}
-                    >
-                      Remove
-                    </button>
-                  </td>
+          <div className="overflow-x-auto" data-aos="fade-left">
+            <table className="min-w-full divide-y divide-gray-200 bg-gradient-to-r from-blue-100 to-purple-200 rounded-lg shadow-md">
+              <thead className="bg-gradient-to-r from-purple-300 to-blue-300">
+                <tr>
+                  <th
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase"
+                    data-aos="fade-down"
+                  >
+                    Room Name
+                  </th>
+                  <th
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase"
+                    data-aos="fade-down"
+                  >
+                    User Name
+                  </th>
+                  <th
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase"
+                    data-aos="fade-down"
+                  >
+                    Date & Time
+                  </th>
+                  <th
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase"
+                    data-aos="fade-down"
+                  >
+                    Action
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {bookingItems.map((booking: TBooking, index: number) => (
+                  <tr
+                    key={booking._id}
+                    className={`hover:bg-gray-100 transition duration-200`}
+                    data-aos="fade-up"
+                  >
+                    <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                      {booking.room.name}
+                    </td>
+                    <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                      {booking.user.name}
+                    </td>
+                    <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                      {formatDateTime(booking.date)}
+                    </td>
+                    <td className="px-6 py-4">
+                      <button
+                        className="text-red-500 hover:text-red-700 btn btn-sm transition duration-200 transform hover:scale-105"
+                        onClick={() => handleDeleteBooking(booking._id)}
+                      >
+                        Remove
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         ) : (
-          <p className="text-center text-gray-600">No items available.</p>
+          <p
+            className="text-center text-gray-600 animate-fade-in"
+            data-aos="fade-up"
+          >
+            No items available.
+          </p>
         )}
       </div>
 
       {/* Right Side: Booking Summary */}
-      <div className="w-full md:w-1/3 bg-gradient-to-r from-green-900 to-green-500 p-6 rounded-lg shadow-lg animate-slide-in">
+      <div
+        className="w-full md:w-1/3 md:mt-11 bg-gradient-to-r from-green-900 to-green-500 p-6 rounded-lg shadow-lg"
+        data-aos="fade-left"
+      >
         <h3 className="text-xl font-semibold text-white mb-4">
           Booking Summary
         </h3>
@@ -208,8 +225,9 @@ const MyBooking = () => {
           </p>
         </div>
         <button
-          className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-2 px-4 rounded-md hover:shadow-lg hover:scale-105 transition duration-300"
+          className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-2 px-4 rounded-md hover:shadow-lg transition duration-300"
           onClick={handleOrder}
+          data-aos="fade-up"
         >
           Proceed to Payment
         </button>

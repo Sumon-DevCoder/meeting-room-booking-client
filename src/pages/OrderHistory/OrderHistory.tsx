@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { motion } from "framer-motion";
 import useCurrentUserInfo from "@/hoooks/useCurrentUserInfo";
 import { useGetorderByUserQuery } from "@/redux/features/order/orderApi";
-import {
-  Key,
-  ReactElement,
-  JSXElementConstructor,
-  ReactNode,
-  ReactPortal,
-} from "react";
+import { Key, ReactNode } from "react";
 
 const OrderManagement = () => {
   const { email } = useCurrentUserInfo();
@@ -18,61 +13,42 @@ const OrderManagement = () => {
   console.log("orders", orderData);
 
   return (
-    <div className="overflow-x-auto bg-gray-800 rounded-lg shadow-md p-4">
-      <table className="min-w-full divide-y divide-gray-200 table-auto">
-        <thead className="bg-gradient-to-r from-green-500 to-green-700 text-white">
+    <div className="overflow-x-auto rounded-lg shadow-lg p-4">
+      <table className="min-w-full divide-y divide-gray-700 table-auto">
+        <thead className="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 text-white">
           <tr>
-            <th className="px-6 py-3 text-left text-xs font-semibold">
+            <th className="px-6 py-3 text-left text-xs font-bold tracking-wide uppercase">
               Payment Status
             </th>
-            <th className="px-6 py-3 text-left text-xs font-semibold">
+            <th className="px-6 py-3 text-left text-xs font-bold tracking-wide uppercase">
               Order Status
             </th>
-            <th className="px-6 py-3 text-left text-xs font-semibold">
+            <th className="px-6 py-3 text-left text-xs font-bold tracking-wide uppercase">
               Total Price
             </th>
-            <th className="px-6 py-3 text-left text-xs font-semibold">
+            <th className="px-6 py-3 text-left text-xs font-bold tracking-wide uppercase">
               Transaction ID
             </th>
           </tr>
         </thead>
-        <tbody className="bg-gray-600 divide-y divide-gray-200 text-white">
+        <tbody className="bg-gray-800 divide-y divide-gray-700 text-gray-200">
           {orders?.map(
             (order: {
               _id: Key | null | undefined;
-              paymentStatus:
-                | string
-                | number
-                | boolean
-                | ReactElement<any, string | JSXElementConstructor<any>>
-                | Iterable<ReactNode>
-                | ReactPortal
-                | null
-                | undefined;
-              status:
-                | string
-                | number
-                | boolean
-                | ReactElement<any, string | JSXElementConstructor<any>>
-                | Iterable<ReactNode>
-                | null
-                | undefined;
-              totalPrice:
-                | string
-                | number
-                | boolean
-                | ReactElement<any, string | JSXElementConstructor<any>>
-                | Iterable<ReactNode>
-                | ReactPortal
-                | null
-                | undefined;
-              transactionId: any;
+              paymentStatus: string | number | boolean | ReactNode;
+              status: string | number | boolean | ReactNode;
+              totalPrice: string | number | boolean | ReactNode;
+              transactionId: string | null;
             }) => (
-              <tr
+              <motion.tr
                 key={order._id}
-                className="transition-transform duration-300 ease-in-out transform hover:scale-105 hover:bg-gray-700"
+                initial={{ opacity: 0, x: -100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 100 }}
+                transition={{ duration: 0.3 }}
+                className="transition-transform duration-300 ease-in-out  hover:bg-gradient-to-r hover:from-gray-800 hover:via-gray-700 hover:to-gray-800"
               >
-                <td className="px-6 py-4 whitespace-nowrap text-green-400">
+                <td className="px-6 py-4 whitespace-nowrap text-green-400 text-sm font-medium">
                   {order.paymentStatus}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
@@ -86,13 +62,15 @@ const OrderManagement = () => {
                     {order.status}
                   </span>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-400">
                   ${order.totalPrice}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                  {order.transactionId || "N/A"}
+                  {order.transactionId || (
+                    <span className="text-gray-500">N/A</span>
+                  )}
                 </td>
-              </tr>
+              </motion.tr>
             )
           )}
         </tbody>

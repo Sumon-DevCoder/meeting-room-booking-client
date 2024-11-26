@@ -40,8 +40,9 @@ const BookingRoom = ({ roomId }: { roomId: string | undefined }) => {
 
   const onSubmit = async () => {
     const selectedSlots = watch("timeSlots");
-
-    console.log("dddd", slots);
+    const slotValue = Array.isArray(selectedSlots)
+      ? selectedSlots
+      : [selectedSlots];
 
     try {
       const bookingInfo = {
@@ -49,7 +50,7 @@ const BookingRoom = ({ roomId }: { roomId: string | undefined }) => {
         email: user?.email,
         user: user?._id,
         date: selectedDate ? format(selectedDate, "yyyy-MM-dd") : null,
-        slots: selectedSlots,
+        slots: slotValue,
       };
 
       console.log("bookingInfo", bookingInfo);

@@ -1,6 +1,6 @@
 const Loading = () => {
   return (
-    <div className="min-h-screen flex justify-center -mt-24">
+    <div className="min-h-screen flex justify-center ">
       <div
         aria-label="Loading..."
         role="status"

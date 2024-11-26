@@ -1,17 +1,11 @@
 import OrderManagement from "@/pages/OrderHistory/OrderHistory";
 import MyBookings from "@/pages/user/MyBookings";
-import UserDashboard from "@/pages/user/UserDashboard";
 import UserProfile from "@/pages/user/UserProfile";
 
 export const userPaths = [
   {
-    name: "Dashboard",
-    path: "dashboard",
-    element: <UserDashboard />,
-  },
-  {
     name: "Profile",
-    path: "profile",
+    path: "dashboard",
     element: <UserProfile />,
   },
   {

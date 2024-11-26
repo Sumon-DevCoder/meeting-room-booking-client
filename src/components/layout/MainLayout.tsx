@@ -1,20 +1,17 @@
-import { Layout, theme, Button, Input, Badge } from "antd"; // Import necessary components from Ant Design
+import { Layout, Button, Input } from "antd"; // Import necessary components from Ant Design
 import Sidebar from "./Sidebar"; // Assuming you have this component for your sidebar
 import { Outlet, Link } from "react-router-dom"; // Import Outlet and Link for routing
 import { SetStateAction, useState } from "react"; // Import useState for state management
 import { Content } from "antd/es/layout/layout"; // Content component from Ant Design
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
-import { BellOutlined, SearchOutlined } from "@ant-design/icons"; // Import icons
+import { SearchOutlined } from "@ant-design/icons"; // Import icons
 import DropdownProfile from "../DropdownProfile/DropdownProfile";
+import useDarkMode from "@/hoooks/useDarkMode";
 
 const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(false); // State for sidebar collapsed status
   const [searchQuery, setSearchQuery] = useState(""); // State for search input
-  const notifications = []; // Mock notifications array
-
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
+  const [isDarkMode, toggleDarkMode] = useDarkMode();
 
   // Function to handle search input
   const handleSearch = (e: { target: { value: SetStateAction<string> } }) => {
@@ -67,13 +64,36 @@ const MainLayout = () => {
                 />
               </div>
 
-              <Badge count={notifications.length}>
-                <Button
-                  type="text"
-                  icon={<BellOutlined />}
-                  onClick={() => console.log("View Notifications")} // Replace with your logic to show notifications
-                />
-              </Badge>
+              <button
+                onClick={toggleDarkMode}
+                className={`p-2 rounded-full transition-all duration-300 ${
+                  isDarkMode ? " hover:bg-slate-700" : " hover:bg-gray-800"
+                }`}
+              >
+                {!isDarkMode ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-6 h-6 text-white"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-6 h-6 text-gray-300"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                    ></path>
+                  </svg>
+                )}
+              </button>
               <div className="mr-5">
                 <DropdownProfile />
               </div>
@@ -81,15 +101,9 @@ const MainLayout = () => {
           </div>
         </div>
 
-        <Content className="bg-green-400" style={{ margin: "10px 10px 0" }}>
-          <div
-            className="min-h-screen bg-green-400"
-            style={{
-              background: colorBgContainer,
-              borderRadius: borderRadiusLG,
-            }}
-          >
-            <Outlet /> {/* Render the matched child route */}
+        <Content className="">
+          <div className="min-h-screen bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-600">
+            <Outlet />
           </div>
         </Content>
       </Layout>

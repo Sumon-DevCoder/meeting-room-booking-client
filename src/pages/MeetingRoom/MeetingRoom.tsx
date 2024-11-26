@@ -71,7 +71,7 @@ const MeetingRooms = () => {
         Meeting Rooms
       </h1>
 
-      <div className="flex flex-wrap gap-4 mb-6 justify-center dark:bg-black">
+      <div className="flex flex-wrap gap-4 mb-6 justify-center px-2 lg:px-0">
         <input
           type="text"
           placeholder="Search by room name..."

@@ -65,9 +65,9 @@ const DropdownProfile = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <DropdownMenuContent className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white rounded-lg shadow-lg p-4">
+            <DropdownMenuContent className="bg-gradient-to-r from-slate-500 via-slate-500  text-white rounded-lg shadow-lg p-4">
               <DropdownMenuLabel>
-                <Link to={"/user/profile"}>
+                <Link to={"/user/dashboard"}>
                   <FaUserCircle className="inline mr-2" /> {user?.name}
                 </Link>
               </DropdownMenuLabel>
