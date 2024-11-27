@@ -17,7 +17,7 @@ import useAuth from "@/hoooks/useAuthContext";
 import Swal from "sweetalert2";
 
 const Login = () => {
-  const { signIn, signInWithGoogle } = useAuth();
+  const { signInWithGoogle } = useAuth();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -35,6 +35,24 @@ const Login = () => {
     },
   });
   const [showPassword, setShowPassword] = useState(false);
+
+  //  signIn with google
+  const handleSignWithGoogle = () => {
+    signInWithGoogle()
+      .then(() => {
+        // auto navigate
+        navigate(location?.state ? location?.state : "/");
+
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "Login Successful",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
+      .catch((error: { message: any }) => setError(error.message));
+  };
 
   // handle default value
   const handleDefaultValueChange = (role: string) => {
@@ -88,24 +106,6 @@ const Login = () => {
         });
       }
     }
-  };
-
-  //  signIn with google
-  const handleSignWithGoogle = () => {
-    signInWithGoogle()
-      .then(() => {
-        // auto navigate
-        navigate(location?.state ? location?.state : "/");
-
-        Swal.fire({
-          position: "top-center",
-          icon: "success",
-          title: "Login Successful",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      })
-      .catch((error: { message: any }) => setError(error.message));
   };
 
   return (
