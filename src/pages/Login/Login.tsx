@@ -13,11 +13,9 @@ import { Link } from "react-router-dom";
 import { TError } from "@/types";
 import { motion } from "framer-motion";
 import { IoArrowBackCircle } from "react-icons/io5";
-import useAuth from "@/hoooks/useAuthContext";
-import Swal from "sweetalert2";
+import SocialLogin from "@/components/SocialLogin/SocialLogin";
 
 const Login = () => {
-  const { signInWithGoogle } = useAuth();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -35,24 +33,6 @@ const Login = () => {
     },
   });
   const [showPassword, setShowPassword] = useState(false);
-
-  //  signIn with google
-  const handleSignWithGoogle = () => {
-    signInWithGoogle()
-      .then(() => {
-        // auto navigate
-        navigate(location?.state ? location?.state : "/");
-
-        Swal.fire({
-          position: "top-center",
-          icon: "success",
-          title: "Login Successful",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      })
-      .catch((error: { message: any }) => setError(error.message));
-  };
 
   // handle default value
   const handleDefaultValueChange = (role: string) => {
@@ -132,11 +112,10 @@ const Login = () => {
               <h3 className="py-4 text-2xl text-center text-gray-800 dark:text-white">
                 Login to Your Account
               </h3>
-
               <div className="text-center space-x-2">
                 <button
                   onClick={() => handleDefaultValueChange("admin")}
-                  className={`btn btn-sm btn-outline ${
+                  className={`btn btn-sm btn-outline  ${
                     activeRole === "admin"
                       ? "btn-active bg-blue-500 text-white dark:text-blue-400"
                       : "text-gray-800 dark:text-white"
@@ -155,7 +134,6 @@ const Login = () => {
                   User Credentials
                 </button>
               </div>
-
               <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="px-8 pt-6 pb-8 mb-4 bg-gray-100 dark:bg-gray-800 rounded"
@@ -237,10 +215,6 @@ const Login = () => {
                   </button>
                 </div>
 
-                <div>
-                  <button onClick={handleSignWithGoogle}>Google </button>
-                </div>
-
                 <div className="text-center">
                   <p className="inline-block text-md text-black dark:text-blue-500 align-baseline">
                     Don't have an account?{" "}
@@ -253,6 +227,7 @@ const Login = () => {
                   </p>
                 </div>
               </form>
+              <SocialLogin />2
             </motion.div>
           </div>
         </div>
@@ -262,6 +237,3 @@ const Login = () => {
 };
 
 export default Login;
-function setError(message: any) {
-  throw new Error("Function not implemented.");
-}

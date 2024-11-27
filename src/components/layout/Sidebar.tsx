@@ -25,9 +25,41 @@ const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
     case userRole.USER:
       sidebarItems = sidebarItemsGenerator(userPaths, userRole.USER);
       break;
-    default:
-      break;
   }
+
+  // Add common sections
+  const commonItems = [
+    {
+      key: "home",
+      icon: <i className="fas fa-home"></i>, // Replace with any Ant Design icon
+      label: (
+        <Link to="/" className="text-slate-200 hover:text-indigo-300">
+          Home
+        </Link>
+      ),
+    },
+    {
+      key: "Rooms",
+      icon: <i className="fas fa-info-circle"></i>, // Replace with any Ant Design icon
+      label: (
+        <Link
+          to="/meeting-rooms"
+          className="text-slate-200 hover:text-indigo-300"
+        >
+          Rooms
+        </Link>
+      ),
+    },
+    {
+      key: "contact",
+      icon: <i className="fas fa-envelope"></i>, // Replace with any Ant Design icon
+      label: (
+        <Link to="/contact" className="text-slate-200 hover:text-indigo-300">
+          Contact
+        </Link>
+      ),
+    },
+  ];
 
   return (
     <Sider
@@ -36,22 +68,47 @@ const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
       collapsed={collapsed}
       breakpoint="lg"
       collapsedWidth="0"
-      onCollapse={(collapsed, type) => {
-        console.log(collapsed, type);
-      }}
+      className="bg-gradient-to-b from-indigo-900 to-indigo-700 text-slate-200"
     >
       <Link to="/">
-        <div className="demo-logo-vertical border-b-2 bg-gradient-to-r from-indigo-900  border-indigo-700 rounded-md text-center hover:bg-slate-600 text-slate-200 font-bold p-2">
+        <div className="border-b-2 border-indigo-600 text-center font-bold p-4 text-lg bg-indigo-800 hover:bg-indigo-700 rounded-md">
           MR Booking
         </div>
       </Link>
       <Menu
-        className="sticky top-0"
+        className="sticky top-0 text-slate-200"
         theme="dark"
         mode="inline"
-        defaultSelectedKeys={["4"]}
-        items={sidebarItems}
-      />
+        defaultSelectedKeys={["home"]}
+        style={{
+          backgroundColor: "transparent", // Transparent to let Tailwind gradients show
+        }}
+      >
+        {/* Render role-specific items */}
+        {sidebarItems?.map((item) => (
+          <Menu.Item key={item.key} icon={item.icon}>
+            {item.label}
+          </Menu.Item>
+        ))}
+
+        {/* Divider with spacing */}
+        <div style={{ margin: "16px 0" }}>
+          <Menu.Divider
+            style={{
+              backgroundColor: "rgba(255, 255, 255, 0.2)",
+            }}
+          />
+        </div>
+
+        {/* Render common items */}
+        <div>
+          {commonItems.map((item) => (
+            <Menu.Item key={item.key} icon={item.icon}>
+              {item.label}
+            </Menu.Item>
+          ))}
+        </div>
+      </Menu>
     </Sider>
   );
 };

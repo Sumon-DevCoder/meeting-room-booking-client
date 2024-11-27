@@ -8,6 +8,7 @@ export type TAuthContext = {
   user: any;
   logOut: () => Promise<void>;
   signInWithGoogle: () => Promise<UserCredential>;
+  signInWithFacebook: () => Promise<UserCredential>;
   setUser: React.Dispatch<React.SetStateAction<any>>;
   updateUserProfile: (
     userInfo: any,

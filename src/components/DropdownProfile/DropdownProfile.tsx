@@ -9,8 +9,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { toast } from "sonner";
-import { logout } from "@/redux/features/auth/authSlice";
-import { useAppDispatch } from "@/redux/hooks";
+import { currentUser, logout } from "@/redux/features/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import { Link } from "react-router-dom";
 
@@ -24,12 +24,16 @@ import Loading from "../Loading/Loading";
 
 const DropdownProfile = () => {
   const dispatch = useAppDispatch();
-  const { user, isUserLoading } = useCurrentUserInfoData();
+  const { user, isUserLoading } = useCurrentUserInfoData(); // Fetch user data
+  const stateUser = useAppSelector(currentUser); // Get user from redux store
 
-  // is user loading
+  // If user data is still loading, show the loading indicator
   if (isUserLoading) {
     return <Loading />;
   }
+
+  // Fallback to Redux state user if user from hook is not available
+  const currentUserData = user || stateUser;
 
   const handleLogout = async () => {
     try {
@@ -42,14 +46,14 @@ const DropdownProfile = () => {
 
   return (
     <div>
-      {user ? (
+      {currentUserData ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
               <div className="avatar">
                 <div className="w-10 rounded-full">
-                  {user?.img ? (
-                    <img src={user?.img} alt="User Avatar" />
+                  {currentUserData.img ? (
+                    <img src={currentUserData.img} alt="User Avatar" />
                   ) : (
                     <img
                       src="https://i.ibb.co/j8KxL3f/blank-profile-picture-973460-640.png"
@@ -65,14 +69,15 @@ const DropdownProfile = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <DropdownMenuContent className="bg-gradient-to-r from-slate-500 via-slate-500  text-white rounded-lg shadow-lg p-4">
+            <DropdownMenuContent className="bg-gradient-to-r from-slate-500 via-slate-500 text-white rounded-lg shadow-lg p-4">
               <DropdownMenuLabel>
-                <Link to={"/user/dashboard"}>
-                  <FaUserCircle className="inline mr-2" /> {user?.name}
+                <Link to="/user/dashboard">
+                  <FaUserCircle className="inline mr-2" />{" "}
+                  {currentUserData.name}
                 </Link>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              {user?.role === "admin" ? (
+              {currentUserData.role === "admin" ? (
                 <DropdownMenuItem>
                   <Link to="/admin/dashboard">
                     <MdDashboard className="inline mr-2" /> Dashboard
@@ -80,7 +85,7 @@ const DropdownProfile = () => {
                 </DropdownMenuItem>
               ) : (
                 <DropdownMenuItem>
-                  <Link to={"/user/my-bookings"}>
+                  <Link to="/user/my-bookings">
                     <BsCalendar2Check className="inline mr-2" /> My Bookings
                   </Link>
                 </DropdownMenuItem>
@@ -96,7 +101,7 @@ const DropdownProfile = () => {
           </motion.div>
         </DropdownMenu>
       ) : (
-        <PrimaryButton path={"/login"} name="Login" />
+        <PrimaryButton path="/login" name="Login" />
       )}
     </div>
   );

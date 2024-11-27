@@ -3,6 +3,7 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import {
   GoogleAuthProvider,
+  FacebookAuthProvider, // Import the Facebook provider
   User,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -18,6 +19,7 @@ import { TAuthContext } from "@/types/auth.types";
 // auth context
 export const AuthContext = createContext<TAuthContext | null>(null);
 const googleProvider = new GoogleAuthProvider();
+const facebookProvider = new FacebookAuthProvider(); // Initialize Facebook provider
 
 // auth provider
 const AuthProvider = ({ children }: { children: ReactNode }) => {
@@ -55,6 +57,12 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const signInWithGoogle = () => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
+  };
+
+  // signInWithFacebook
+  const signInWithFacebook = () => {
+    setLoading(true);
+    return signInWithPopup(auth, facebookProvider); // Use Facebook provider
   };
 
   // onAuthStateChanged
@@ -100,6 +108,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     user,
     logOut,
     signInWithGoogle,
+    signInWithFacebook, // Add signInWithFacebook to context
     setUser,
     updateUserProfile,
   };

@@ -129,7 +129,7 @@ const MyBooking = () => {
       {/* Left Side: Booking Items */}
       <div className="flex-1 animate-fade-in" data-aos="fade-up">
         <h2
-          className="text-center text-black mb-4 text-2xl font-bold"
+          className="text-center text-slate-200 mb-4 text-2xl font-bold"
           data-aos="fade-right"
         >
           My Bookings

@@ -1,7 +1,7 @@
 const WhyChooseUs = () => {
   return (
     <div>
-      <div className="max-w-screen-xl m-auto dark:bg-gray-900 bg-slate-100">
+      <div className="m-auto dark:bg-gray-900 bg-slate-100">
         <div className="">
           <section
             id="features"

@@ -1,6 +1,6 @@
 const WorkSection = () => {
   return (
-    <div className="max-w-screen-xl m-auto">
+    <div className="m-auto">
       <section
         id="works"
         className="relative dark:bg-gray-900 rounded-lg py-10 sm:py-16 lg:py-16"

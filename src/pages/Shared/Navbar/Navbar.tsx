@@ -3,13 +3,14 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import DropdownProfile from "@/components/DropdownProfile/DropdownProfile";
-import useCurrentUserInfo from "@/hoooks/useCurrentUserInfo";
 import { RxDropdownMenu } from "react-icons/rx";
 import useDarkMode from "@/hoooks/useDarkMode";
 import { FaSignInAlt } from "react-icons/fa";
+import { useAppSelector } from "@/redux/hooks";
+import { currentUser } from "@/redux/features/auth/authSlice";
 
 const Navbar = () => {
-  const { role, email } = useCurrentUserInfo();
+  const user = useAppSelector(currentUser);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, toggleDarkMode] = useDarkMode();
 
@@ -67,7 +68,7 @@ const Navbar = () => {
       >
         <li>Contact</li>
       </NavLink>
-      {role === "admin" && (
+      {user?.role === "admin" && (
         <NavLink
           to="/admin/dashboard"
           className={({ isActive }) =>
@@ -81,9 +82,9 @@ const Navbar = () => {
           <li>Dashboard</li>
         </NavLink>
       )}
-      {role === "user" && (
+      {user?.role === "user" && (
         <NavLink
-          to="/user/profile"
+          to="/user/dashboard"
           className={({ isActive }) =>
             ` border-slate-200 ${
               isActive
@@ -186,7 +187,7 @@ const Navbar = () => {
             </button>
           </div>
           <div>
-            {email ? (
+            {user ? (
               <DropdownProfile />
             ) : (
               <NavLink

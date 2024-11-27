@@ -10,7 +10,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 const AdminDashboard = () => {
-  const { currentUserInfo, isUserLoading } = useCurrentUserData();
+  const { user, isUserLoading } = useCurrentUserData();
   const { data, isLoading: isRoomLoading } = useGetRoomsQuery({});
   const { data: bookings, isLoading: isBookingLoading } = useGetAllbookingQuery(
     {}
@@ -51,7 +51,7 @@ const AdminDashboard = () => {
         data-aos="fade-down"
       >
         <h2 className="text-xl font-semibold">
-          Welcome, {currentUserInfo?.name || "Admin"} (Admin)
+          Welcome, {user?.name || "Admin"} (Admin)
         </h2>
         <p>Here’s a quick overview of your dashboard.</p>
       </div>
@@ -113,19 +113,22 @@ const AdminDashboard = () => {
         className="bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300 rounded-lg shadow-md p-6 mb-6"
         data-aos="fade-left"
       >
-        <h2 className="text-xl font-semibold text-gray-700 mb-4">
+        <h2 className="text-xl font-semibold text-gray-700 mb-4 text-center sm:text-left">
           Overall Progress
         </h2>
-        <div className="flex flex-col space-y-4">
-          <div className="flex justify-between">
-            <span>Total Rooms Booked</span>
-            <span>
+        <div className="flex flex-col space-y-6">
+          {/* Total Rooms Booked */}
+          <div className="flex flex-wrap justify-between items-center gap-2">
+            <span className="text-sm font-medium text-gray-600">
+              Total Rooms Booked
+            </span>
+            <span className="text-sm font-semibold text-gray-800">
               {bookingData?.length} / {data?.data?.result?.length}
             </span>
           </div>
-          <div className="bg-gray-200 h-4 rounded">
+          <div className="w-full bg-gray-200 h-4 rounded">
             <div
-              className="bg-blue-600 h-full rounded"
+              className="bg-blue-600 h-full rounded max-w-screen-lg"
               style={{
                 width: `${
                   ((bookingData?.length || 0) /
@@ -135,11 +138,17 @@ const AdminDashboard = () => {
               }}
             ></div>
           </div>
-          <div className="flex justify-between">
-            <span>Active Users</span>
-            <span>{usersData?.data?.result?.length}</span>
+
+          {/* Active Users */}
+          <div className="flex flex-wrap justify-between items-center gap-2">
+            <span className="text-sm font-medium text-gray-600">
+              Active Users
+            </span>
+            <span className="text-sm font-semibold text-gray-800">
+              {usersData?.data?.result?.length}
+            </span>
           </div>
-          <div className="bg-gray-200 h-4 rounded">
+          <div className="w-full bg-gray-200 h-4 rounded">
             <div
               className="bg-purple-600 h-full rounded"
               style={{

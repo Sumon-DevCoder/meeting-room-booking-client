@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 
 // sidebar type
 export type TSidebarItem = {
+  icon: ReactNode;
   key: string;
   label: ReactNode;
   children?: TSidebarItem[];

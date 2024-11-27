@@ -8,6 +8,7 @@ import { HiEye, HiEyeOff } from "react-icons/hi";
 import { motion } from "framer-motion";
 import axios from "axios"; // Ensure axios is installed
 import { IoArrowBackCircle } from "react-icons/io5";
+import SocialLogin from "@/components/SocialLogin/SocialLogin";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -125,6 +126,9 @@ const Register = () => {
               <h3 className="py-4 text-2xl text-center text-gray-900 dark:text-white">
                 Create an Account!
               </h3>
+
+              <SocialLogin />
+
               <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="px-8 pt-6 pb-8 mb-4 bg-gray-100 dark:bg-gray-900 rounded"
