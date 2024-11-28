@@ -32,9 +32,11 @@ const FeaturedRooms = () => {
           </div>
         )}
       </div>
-      <div className="flex justify-center mb-10">
-        <PrimaryButton name="See More" path="/meeting-rooms" />
-      </div>
+      {rooms?.result?.length && (
+        <div className="flex justify-center mb-10">
+          <PrimaryButton name="See More" path="/meeting-rooms" />
+        </div>
+      )}
     </div>
   );
 };

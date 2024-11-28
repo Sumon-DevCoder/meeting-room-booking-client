@@ -11,7 +11,7 @@ const Banner = () => {
       <div className="absolute inset-0 bg-black opacity-50"></div>
 
       {/* Animated content */}
-      <div className="relative flex flex-col items-center justify-center h-full text-white text-center p-4">
+      <div className="relative flex  flex-col items-center justify-center h-full text-white text-center p-4">
         <h1
           data-aos="fade-up"
           className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4"

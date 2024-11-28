@@ -31,7 +31,6 @@ const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
   const commonItems = [
     {
       key: "home",
-      icon: <i className="fas fa-home"></i>, // Replace with any Ant Design icon
       label: (
         <Link to="/" className="text-slate-200 hover:text-indigo-300">
           Home
@@ -40,7 +39,6 @@ const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
     },
     {
       key: "Rooms",
-      icon: <i className="fas fa-info-circle"></i>, // Replace with any Ant Design icon
       label: (
         <Link
           to="/meeting-rooms"
@@ -52,7 +50,6 @@ const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
     },
     {
       key: "contact",
-      icon: <i className="fas fa-envelope"></i>, // Replace with any Ant Design icon
       label: (
         <Link to="/contact" className="text-slate-200 hover:text-indigo-300">
           Contact
@@ -86,9 +83,7 @@ const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
       >
         {/* Render role-specific items */}
         {sidebarItems?.map((item) => (
-          <Menu.Item key={item.key} icon={item.icon}>
-            {item.label}
-          </Menu.Item>
+          <Menu.Item key={item.key}>{item.label}</Menu.Item>
         ))}
 
         {/* Divider with spacing */}
@@ -101,11 +96,9 @@ const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
         </div>
 
         {/* Render common items */}
-        <div>
+        <div className="ml-5">
           {commonItems.map((item) => (
-            <Menu.Item key={item.key} icon={item.icon}>
-              {item.label}
-            </Menu.Item>
+            <Menu.Item key={item.key}>{item.label}</Menu.Item>
           ))}
         </div>
       </Menu>

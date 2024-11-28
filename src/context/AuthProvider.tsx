@@ -87,7 +87,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         } else {
           // Handle logout cleanup
           const res = await axios.post(
-            "https://shop-house-server.vercel.app/logout",
+            "http://localhost:5173/logout",
             loggedUser,
             { withCredentials: true }
           );

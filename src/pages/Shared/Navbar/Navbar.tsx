@@ -8,9 +8,11 @@ import useDarkMode from "@/hoooks/useDarkMode";
 import { FaSignInAlt } from "react-icons/fa";
 import { useAppSelector } from "@/redux/hooks";
 import { currentUser } from "@/redux/features/auth/authSlice";
+import useNavLinks from "@/hoooks/useNavLinks";
 
 const Navbar = () => {
   const user = useAppSelector(currentUser);
+  const navLinks = useNavLinks();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, toggleDarkMode] = useDarkMode();
 
@@ -18,90 +20,9 @@ const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const navLinks = (
-    <>
-      <NavLink
-        to="/"
-        className={({ isActive }) =>
-          ` border-slate-200 ${
-            isActive
-              ? "border-b-2 border-b-blue-400 text-blue-400 font-medium"
-              : "  text-slate-100 border-b-2 border-b-slate-100"
-          }`
-        }
-      >
-        <li>Home</li>
-      </NavLink>
-      <NavLink
-        to="/meeting-rooms"
-        className={({ isActive }) =>
-          ` border-slate-200 ${
-            isActive
-              ? "border-b-2 border-b-blue-400 text-blue-400 font-medium"
-              : "  text-slate-100 border-b-2 border-b-slate-100"
-          }`
-        }
-      >
-        <li>Rooms</li>
-      </NavLink>
-      <NavLink
-        to="/about-us"
-        className={({ isActive }) =>
-          ` border-slate-200 ${
-            isActive
-              ? "border-b-2 border-b-blue-400 text-blue-400 font-medium"
-              : " text-slate-100 border-b-2 border-b-slate-100"
-          }`
-        }
-      >
-        <li>About</li>
-      </NavLink>
-      <NavLink
-        to="/contact-us"
-        className={({ isActive }) =>
-          ` border-slate-200 ${
-            isActive
-              ? "border-b-2 border-b-blue-400 text-blue-400 font-medium"
-              : "  text-slate-100 border-b-2 border-b-slate-100"
-          }`
-        }
-      >
-        <li>Contact</li>
-      </NavLink>
-      {user?.role === "admin" && (
-        <NavLink
-          to="/admin/dashboard"
-          className={({ isActive }) =>
-            ` border-slate-200 ${
-              isActive
-                ? " border-b-2 border-b-blue-400 text-blue-400 font-medium"
-                : "  text-slate-100 border-b-2 border-b-slate-100"
-            }`
-          }
-        >
-          <li>Dashboard</li>
-        </NavLink>
-      )}
-      {user?.role === "user" && (
-        <NavLink
-          to="/user/dashboard"
-          className={({ isActive }) =>
-            ` border-slate-200 ${
-              isActive
-                ? " text-white border-b-2"
-                : "text-slate-100 border-b-2 border-b-slate-100"
-            }`
-          }
-        >
-          <li>Dashboard</li>
-        </NavLink>
-      )}
-    </>
-  );
-
   return (
     <div className="sticky top-0 z-50">
-      <div className="navbar bg-gradient-to-r from-gray-800 to-gray-900 shadow-lg px-5 dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-900">
+      <div className="navbar  shadow-lg px-5 dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-900 bg-gradient-to-br from-blue-400 to-purple-700">
         <div className="navbar-start">
           <div className="dropdown">
             <div
@@ -142,7 +63,7 @@ const Navbar = () => {
           </div>
           <Link
             to={`/`}
-            className="btn btn-ghost text-base md:text-xl bg-gradient-to-r from-blue-800 text-slate-200 font-medium"
+            className="btn btn-ghost text-md md:text-xl bg-gradient-to-r from-blue-800 text-slate-200 font-medium"
           >
             Meeting Room Booking
           </Link>

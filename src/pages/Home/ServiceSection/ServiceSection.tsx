@@ -44,16 +44,22 @@ const ServiceSection = () => {
           {services.map((service: TService, index: number) => (
             <Tilt
               options={defaultOptions}
-              style={{ height: 250, width: 250 }}
+              style={{ height: 250, width: 300 }}
               key={service?.id}
-              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300"
+              className="bg-white bg-gradient-to-r from-cyan-500 to-blue-500 dark:from-slate-800 dark:to-slate-700 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300"
               data-aos="fade-up"
               data-aos-delay={`${index * 100}`}
             >
-              <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">
+              <h3
+                data-aos="fade-right"
+                className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200"
+              >
                 {service.title}
               </h3>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p
+                data-aos="fade-right"
+                className="text-gray-600 dark:text-gray-400"
+              >
                 {service.description}
               </p>
             </Tilt>

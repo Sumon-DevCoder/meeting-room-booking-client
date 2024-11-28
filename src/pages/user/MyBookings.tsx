@@ -166,7 +166,7 @@ const MyBooking = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {bookingItems.map((booking: TBooking, index: number) => (
+                {bookingItems.map((booking: TBooking) => (
                   <tr
                     key={booking._id}
                     className={`hover:bg-gray-100 transition duration-200`}

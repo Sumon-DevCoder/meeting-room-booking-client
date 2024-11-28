@@ -7,7 +7,7 @@ import WorkSection from "./WorkSection/WorkSection";
 
 const Home = () => {
   return (
-    <div className="">
+    <div>
       <Banner />
       <ServiceSection />
       <FeaturedRooms />

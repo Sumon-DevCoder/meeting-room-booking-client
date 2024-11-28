@@ -20,17 +20,11 @@ import { MdDashboard, MdLogout } from "react-icons/md";
 import { BsCalendar2Check } from "react-icons/bs";
 import { motion } from "framer-motion";
 import useCurrentUserInfoData from "@/hoooks/useCurrentUserInfoData";
-import Loading from "../Loading/Loading";
 
 const DropdownProfile = () => {
   const dispatch = useAppDispatch();
-  const { user, isUserLoading } = useCurrentUserInfoData(); // Fetch user data
+  const { user } = useCurrentUserInfoData(); // Fetch user data
   const stateUser = useAppSelector(currentUser); // Get user from redux store
-
-  // If user data is still loading, show the loading indicator
-  if (isUserLoading) {
-    return <Loading />;
-  }
 
   // Fallback to Redux state user if user from hook is not available
   const currentUserData = user || stateUser;
@@ -69,9 +63,12 @@ const DropdownProfile = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <DropdownMenuContent className="bg-gradient-to-r from-slate-500 via-slate-500 text-white rounded-lg shadow-lg p-4">
+            <DropdownMenuContent className="bg-gradient-to-r from-slate-500 via-slate-500 text-white rounded-lg shadow-lg p-3 mr-6">
               <DropdownMenuLabel>
-                <Link to="/user/dashboard">
+                <Link
+                  to="/user/dashboard"
+                  className="hover:text-blue-400 hover:underline"
+                >
                   <FaUserCircle className="inline mr-2" />{" "}
                   {currentUserData.name}
                 </Link>
@@ -79,20 +76,26 @@ const DropdownProfile = () => {
               <DropdownMenuSeparator />
               {currentUserData.role === "admin" ? (
                 <DropdownMenuItem>
-                  <Link to="/admin/dashboard">
+                  <Link
+                    to="/admin/dashboard"
+                    className="hover:text-blue-400 hover:underline"
+                  >
                     <MdDashboard className="inline mr-2" /> Dashboard
                   </Link>
                 </DropdownMenuItem>
               ) : (
                 <DropdownMenuItem>
-                  <Link to="/user/my-bookings">
+                  <Link
+                    to="/user/my-bookings"
+                    className="hover:text-blue-400 hover:underline"
+                  >
                     <BsCalendar2Check className="inline mr-2" /> My Bookings
                   </Link>
                 </DropdownMenuItem>
               )}
               <DropdownMenuSeparator />
               <DropdownMenuItem
-                className="cursor-pointer"
+                className="cursor-pointer hover:text-blue-400 hover:underline"
                 onClick={handleLogout}
               >
                 <MdLogout className="inline mr-2" /> Logout

@@ -25,7 +25,7 @@ const SocialLogin = () => {
           role: "user",
         };
 
-        const token = result?.user?.accessToken;
+        const token = result.user.getIdToken();
         const BearerToken = `Bearer ${token}`;
 
         dispatch(setUser({ user: user, token: BearerToken }));
@@ -33,7 +33,7 @@ const SocialLogin = () => {
         console.log(token);
 
         // Auto navigate
-        navigate(location?.state ? location?.state : "/");
+        navigate("/");
 
         Swal.fire({
           icon: "success",
@@ -56,7 +56,7 @@ const SocialLogin = () => {
     signInWithFacebook()
       .then(() => {
         // Auto navigate
-        navigate(location?.state ? location?.state : "/");
+        navigate("/");
 
         Swal.fire({
           icon: "success",
