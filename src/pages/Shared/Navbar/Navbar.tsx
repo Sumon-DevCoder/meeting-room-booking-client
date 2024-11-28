@@ -63,7 +63,7 @@ const Navbar = () => {
           </div>
           <Link
             to={`/`}
-            className="btn btn-ghost text-md md:text-xl bg-gradient-to-r from-blue-800 text-slate-200 font-medium"
+            className="btn btn-ghost text-lg md:text-xl bg-gradient-to-r from-blue-800 text-slate-200 font-medium"
           >
             Meeting Room Booking
           </Link>

@@ -31,7 +31,7 @@ const RoomCard = ({ room }: { room: TRoom }) => {
 
   return (
     <div>
-      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden font-roboto transition duration-500 hover:shadow-2xl transform">
+      <div className=" dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden font-roboto transition duration-500 hover:shadow-2xl transform">
         <img src={img} alt={room.name} className="w-full h-48 object-cover" />
         <div className="p-6">
           <h3 className="text-xl font-semibold text-indigo-700 dark:text-indigo-400">

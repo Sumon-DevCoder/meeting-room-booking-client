@@ -36,9 +36,9 @@ const Testimonial = () => {
   }
 
   return (
-    <div className="bg-gray-900 p-10  m-auto">
+    <div className="bg-gray-200 dark:bg-gray-900 p-10 dark:text-white  m-auto py-24">
       <div className="flex justify-center">
-        <h2 className="text-2xl font-bold text-center mb-4 border-b-2 border-gray-300 pb-2 inline-block">
+        <h2 className="text-3xl font-bold text-center mb-4 border-b-2 border-gray-300 pb-2 inline-block">
           What Our Clients Say
         </h2>
       </div>

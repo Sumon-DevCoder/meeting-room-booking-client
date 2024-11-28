@@ -22,7 +22,7 @@ const WhyChooseUs = () => {
               </motion.span>
 
               <motion.h2
-                className="block w-full bg-gradient-to-b from-gray-700 to-gray-400 bg-clip-text font-bold text-transparent text-3xl sm:text-4xl dark:from-gray-200 dark:to-gray-600 dark:text-white transition-colors duration-500"
+                className="block w-full bg-gradient-to-b from-gray-600 to-gray-400 bg-clip-text font-bold  text-3xl sm:text-4xl dark:from-gray-200 dark:to-gray-600 dark:text-white transition-colors duration-500"
                 data-aos="fade-up"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

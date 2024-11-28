@@ -40,13 +40,13 @@ const ServiceSection = () => {
           Our Highlighted Services
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center md:px-20 lg:px-10 items-center">
           {services.map((service: TService, index: number) => (
             <Tilt
               options={defaultOptions}
-              style={{ height: 250, width: 300 }}
+              style={{ height: 250, width: 250 }}
               key={service?.id}
-              className="bg-white bg-gradient-to-r from-cyan-500 to-blue-500 dark:from-slate-800 dark:to-slate-700 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300"
+              className="bg-white bg-gradient-to-r from-blue-500 dark:from-slate-800 dark:to-slate-700 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300"
               data-aos="fade-up"
               data-aos-delay={`${index * 100}`}
             >

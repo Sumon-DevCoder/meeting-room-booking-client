@@ -10,7 +10,7 @@ const Footer = () => {
               <h1 className="text-white font-extrabold text-[24px]">
                 <Link
                   to={`/`}
-                  className="btn btn-ghost text-[19px] md:text-xl bg-gradient-to-r from-blue-800 text-slate-200 font-medium"
+                  className="btn btn-ghost text-[19px] md:text-md bg-gradient-to-r from-blue-800 text-slate-200 font-medium"
                 >
                   Meeting Room Booking
                 </Link>

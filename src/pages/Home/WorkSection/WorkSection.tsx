@@ -3,14 +3,14 @@ const WorkSection = () => {
     <div className="m-auto">
       <section
         id="works"
-        className="relative dark:bg-gray-900 rounded-lg py-10 sm:py-16 lg:py-16"
+        className="relative bg-gradient-to-t from-slate-700 to-slate-300  dark:from-slate-900 dark:to-slate-700   py-10 sm:py-16 lg:py-16 bg-gray-200"
       >
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-4xl text-slate-700 font-extrabold mx-auto md:text-3xl lg:text-4xl">
+            <h2 className="text-4xl text-slate-100 dark:text-gray-200 font-extrabold mx-auto md:text-3xl lg:text-4xl">
               How It Works
             </h2>
-            <p className="max-w-2xl mx-auto mt-4 text-base text-gray-400 leading-relaxed md:text-2xl">
+            <p className="max-w-2xl mx-auto mt-4 text-base text-gray-200 dark:text-gray-200 leading-relaxed md:text-2xl">
               Follow these simple steps to book your meeting room.
             </p>
           </div>
@@ -43,7 +43,7 @@ const WorkSection = () => {
                     <h3 className="mt-6 text-xl text-white font-semibold leading-tight md:mt-10">
                       {step}
                     </h3>
-                    <p className="mt-4 text-base text-gray-400 md:text-lg">
+                    <p className="mt-4 text-base text-white dark:text-gray-100 md:text-lg">
                       {index === 0
                         ? "Choose the perfect room that fits your needs and capacity."
                         : index === 1

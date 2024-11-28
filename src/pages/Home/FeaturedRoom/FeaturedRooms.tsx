@@ -19,7 +19,7 @@ const FeaturedRooms = () => {
         Featured Rooms
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-10 px-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 my-10 space-y-5 md:space-y-0 px-12  lg:px-20">
         {rooms?.result?.length ? (
           rooms.result
             .slice(0, 4)
