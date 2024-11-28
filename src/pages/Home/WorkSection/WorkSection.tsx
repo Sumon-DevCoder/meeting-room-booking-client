@@ -1,18 +1,24 @@
+import { Fade, Slide, Zoom } from "react-awesome-reveal";
+
 const WorkSection = () => {
   return (
     <div className="m-auto">
       <section
         id="works"
-        className="relative bg-gradient-to-t from-slate-700 to-slate-300  dark:from-slate-900 dark:to-slate-700   py-10 sm:py-16 lg:py-16 bg-gray-200"
+        className="relative bg-gradient-to-t from-slate-700 to-slate-300 dark:from-slate-900 dark:to-slate-700 py-10 sm:py-16 lg:py-16 bg-gray-200"
       >
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-4xl text-slate-100 dark:text-gray-200 font-extrabold mx-auto md:text-3xl lg:text-4xl">
-              How It Works
-            </h2>
-            <p className="max-w-2xl mx-auto mt-4 text-base text-gray-200 dark:text-gray-200 leading-relaxed md:text-2xl">
-              Follow these simple steps to book your meeting room.
-            </p>
+            <Fade>
+              <h2 className="text-4xl text-slate-100 dark:text-gray-200 font-extrabold mx-auto md:text-3xl lg:text-4xl">
+                How It Works
+              </h2>
+            </Fade>
+            <Zoom>
+              <p className="max-w-2xl mx-auto mt-4 text-base text-gray-200 dark:text-gray-200 leading-relaxed md:text-2xl">
+                Follow these simple steps to book your meeting room.
+              </p>
+            </Zoom>
           </div>
           <div className="relative mt-12 lg:mt-20">
             <div className="absolute inset-x-0 hidden xl:px-44 top-2 md:block md:px-20 lg:px-28">
@@ -31,26 +37,30 @@ const WorkSection = () => {
             <div className="relative grid grid-cols-1 text-center gap-y-12 md:grid-cols-3 gap-x-12">
               {["Select a Room", "Choose Date & Time", "Confirm Booking"].map(
                 (step, index) => (
-                  <div
+                  <Slide
                     key={index}
-                    className="hover:scale-105 transition-transform duration-300"
+                    direction={
+                      index === 0 ? "left" : index === 2 ? "right" : "up"
+                    }
                   >
-                    <div className="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow transition-colors duration-300 hover:bg-gray-200">
-                      <span className="text-xl font-semibold text-gray-700">
-                        {index + 1}
-                      </span>
+                    <div className="hover:scale-105 transition-transform duration-300">
+                      <div className="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow transition-colors duration-300 hover:bg-gray-200">
+                        <span className="text-xl font-semibold text-gray-700">
+                          {index + 1}
+                        </span>
+                      </div>
+                      <h3 className="mt-6 text-xl text-white font-semibold leading-tight md:mt-10">
+                        {step}
+                      </h3>
+                      <p className="mt-4 text-base text-white dark:text-gray-100 md:text-lg">
+                        {index === 0
+                          ? "Choose the perfect room that fits your needs and capacity."
+                          : index === 1
+                          ? "Select your desired date and time for the booking."
+                          : "Review your selection and confirm your booking to finalize."}
+                      </p>
                     </div>
-                    <h3 className="mt-6 text-xl text-white font-semibold leading-tight md:mt-10">
-                      {step}
-                    </h3>
-                    <p className="mt-4 text-base text-white dark:text-gray-100 md:text-lg">
-                      {index === 0
-                        ? "Choose the perfect room that fits your needs and capacity."
-                        : index === 1
-                        ? "Select your desired date and time for the booking."
-                        : "Review your selection and confirm your booking to finalize."}
-                    </p>
-                  </div>
+                  </Slide>
                 )
               )}
             </div>

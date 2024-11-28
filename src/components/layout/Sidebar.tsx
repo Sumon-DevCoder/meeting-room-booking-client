@@ -1,11 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Menu } from "antd";
 import Sider from "antd/es/layout/Sider";
 import sidebarItemsGenerator from "../../utils/sidebarItemsGenerator";
 import { adminPaths } from "../../routes/admin.routes";
-import { useAppSelector } from "@/redux/hooks";
-import { currentUser } from "@/redux/features/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { currentUser, logout } from "@/redux/features/auth/authSlice";
 import { userPaths } from "@/routes/user.routes";
 import { Link } from "react-router-dom";
+import { MdLogout } from "react-icons/md";
+import { IoHomeSharp } from "react-icons/io5";
+import { TbBuildingWarehouse } from "react-icons/tb";
+import { toast } from "sonner";
 
 const userRole = {
   ADMIN: "admin",
@@ -15,6 +21,16 @@ const userRole = {
 const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
   const user = useAppSelector(currentUser);
   const role = user?.role;
+  const dispatch = useAppDispatch();
+
+  const handleLogout = async () => {
+    try {
+      dispatch(logout());
+      toast.success("Logout Successful");
+    } catch (err: any) {
+      toast.error("Logout Failed. Please try again.");
+    }
+  };
 
   let sidebarItems;
 
@@ -27,13 +43,18 @@ const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
       break;
   }
 
+  console.log("sidebarItems", sidebarItems);
+
   // Add common sections
   const commonItems = [
     {
       key: "home",
       label: (
-        <Link to="/" className="text-slate-200 hover:text-indigo-300">
-          Home
+        <Link
+          to="/"
+          className="text-slate-200 hover:text-indigo-300 flex  items-center"
+        >
+          <IoHomeSharp className="mr-2" /> Home
         </Link>
       ),
     },
@@ -42,17 +63,21 @@ const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
       label: (
         <Link
           to="/meeting-rooms"
-          className="text-slate-200 hover:text-indigo-300"
+          className="text-slate-200 hover:text-indigo-300 flex  items-center"
         >
-          Rooms
+          <TbBuildingWarehouse className="mr-2" /> Rooms
         </Link>
       ),
     },
     {
-      key: "contact",
+      key: "Logout",
       label: (
-        <Link to="/contact" className="text-slate-200 hover:text-indigo-300">
-          Contact
+        <Link
+          to={"/"}
+          onClick={handleLogout}
+          className="text-slate-200 hover:text-indigo-300 flex  items-center text-md"
+        >
+          <MdLogout className="inline mr-2" /> Logout
         </Link>
       ),
     },
@@ -68,7 +93,7 @@ const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
       className="bg-gradient-to-b from-indigo-900 to-indigo-700 text-slate-200"
     >
       <Link to="/">
-        <div className="border-b-2 border-indigo-600 text-center font-bold p-4 text-lg bg-indigo-800 hover:bg-indigo-700 rounded-md">
+        <div className="border-b-2 border-indigo-600 text-center font-bold p-2 text-lg bg-indigo-800 hover:bg-indigo-700 rounded-md">
           MR Booking
         </div>
       </Link>

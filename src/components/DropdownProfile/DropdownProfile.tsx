@@ -63,7 +63,7 @@ const DropdownProfile = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <DropdownMenuContent className="bg-gradient-to-r from-slate-500 via-slate-500 text-white rounded-lg shadow-lg p-3 mr-6">
+            <DropdownMenuContent className="z-10  bg-gradient-to-r from-slate-500 via-slate-500 text-white rounded-lg shadow-lg p-3 mr-6">
               <DropdownMenuLabel>
                 <Link
                   to="/user/dashboard"
@@ -85,17 +85,14 @@ const DropdownProfile = () => {
                 </DropdownMenuItem>
               ) : (
                 <DropdownMenuItem>
-                  <Link
-                    to="/user/my-bookings"
-                    className="hover:text-blue-400 hover:underline"
-                  >
+                  <Link to="/user/my-bookings" className="hover:underline">
                     <BsCalendar2Check className="inline mr-2" /> My Bookings
                   </Link>
                 </DropdownMenuItem>
               )}
               <DropdownMenuSeparator />
               <DropdownMenuItem
-                className="cursor-pointer hover:text-blue-400 hover:underline"
+                className="cursor-pointer hover:underline"
                 onClick={handleLogout}
               >
                 <MdLogout className="inline mr-2" /> Logout

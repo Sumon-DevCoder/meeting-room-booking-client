@@ -14,7 +14,7 @@ const UserDashboard = () => {
         {/* Header */}
         <Header
           className="bg-white shadow-md px-4 flex items-center justify-between"
-          style={{ position: "sticky", top: 0, zIndex: 1000 }}
+          style={{ position: "sticky", top: 0, zIndex: 10 }}
         >
           <h1 className="text-xl font-bold text-indigo-700">
             Welcome, {userName}!
