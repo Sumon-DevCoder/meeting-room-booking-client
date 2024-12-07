@@ -25,7 +25,7 @@ const MainLayout = () => {
       <Layout>
         {/* header */}
         <div
-          className="sticky top-0 z-10 bg-gradient-to-r from-indigo-900 bg-[#262626]"
+          className="sticky top-0 z-10 shadow-lg bg-white dark:bg-[#262626]"
           style={{ padding: 0 }}
         >
           <div className="flex justify-between items-center ">
@@ -34,9 +34,9 @@ const MainLayout = () => {
               className=""
               icon={
                 collapsed ? (
-                  <AiOutlineArrowRight className="text-lg text-white" />
+                  <AiOutlineArrowRight className="text-lg text-b text-black dark:text-white" />
                 ) : (
-                  <AiOutlineArrowLeft className="text-lg text-white" />
+                  <AiOutlineArrowLeft className="text-lg text-black dark:text-white" />
                 )
               }
               onClick={() => setCollapsed(!collapsed)}
@@ -61,6 +61,7 @@ const MainLayout = () => {
                   onChange={handleSearch}
                   prefix={<SearchOutlined />}
                   style={{ width: 200 }}
+                  className="dark:bg-black text-gray-400 dark:text-white border-gray-400"
                 />
               </div>
 
@@ -73,7 +74,7 @@ const MainLayout = () => {
                 {!isDarkMode ? (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6 text-white"
+                    className="w-6 h-6 dark:text-white"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -102,7 +103,7 @@ const MainLayout = () => {
         </div>
 
         <Content className="">
-          <div className="min-h-screen bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-600">
+          <div className="min-h-screen bg-white dark:bg-black">
             <Outlet />
           </div>
         </Content>

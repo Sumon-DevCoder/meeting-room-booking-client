@@ -49,11 +49,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/meeting-rooms-details/:id",
-        element: (
-          <ProtectedRoute>
-            <MeetingRoomDetails />
-          </ProtectedRoute>
-        ),
+        element: <MeetingRoomDetails />,
       },
       {
         path: "/bookings",

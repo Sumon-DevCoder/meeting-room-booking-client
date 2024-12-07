@@ -104,77 +104,78 @@ const BookingList = () => {
   };
 
   return (
-    <table className="min-w-full divide-y divide-gray-200 overflow-x-auto">
-      <thead className="bg-gray-50">
-        <tr>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-            Room Name
-          </th>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-            User Name
-          </th>
-          <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-center">
-            Date & Time
-          </th>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-            Status
-          </th>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-            Actions
-          </th>
-        </tr>
-      </thead>
-      <tbody className="bg-white divide-y divide-gray-200">
-        {bookings.map((booking: TBooking) => (
-          <tr key={booking?._id}>
-            <td className="px-6 py-4 whitespace-nowrap">
-              {booking.room?.name}
-            </td>
-            <td className="px-6 py-4 whitespace-nowrap">
-              {booking.user?.name}
-            </td>
-            <td className="px-6 py-4 whitespace-nowrap">
-              {formatDateTime(booking?.date)}
-              {formatDateTime(booking?.date)}
-            </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-              <span
-                className={
-                  booking.isConfirmed === "confirmed"
-                    ? "text-green-600"
-                    : "text-red-600"
-                }
-              >
-                {booking.isConfirmed}
-              </span>
-            </td>
-            <td className="px-6 py-4 whitespace-nowrap">
-              {booking.isConfirmed === "unconfirmed" ? (
-                <button
-                  onClick={() => handleStatusChange(booking, "confirmed")}
-                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-3 rounded"
-                >
-                  Approve
-                </button>
-              ) : (
-                <button
-                  onClick={() => handleStatusChange(booking, "unconfirmed")}
-                  className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-3 rounded"
-                >
-                  Reject
-                </button>
-              )}
-              <button
-                onClick={() => handleDeleteBooking(booking)}
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 ml-2 rounded"
-              >
-                Delete
-              </button>
-            </td>
+    <div className="p-4">
+      <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 overflow-x-auto">
+        <thead className="bg-gray-50 dark:bg-gray-800">
+          <tr>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+              Room Name
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+              User Name
+            </th>
+            <th className="px-6 py-3 text-xs font-medium text-gray-500 dark:text-gray-300 uppercase text-center">
+              Date & Time
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+              Status
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">
+              Actions
+            </th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
+          {bookings.map((booking: TBooking) => (
+            <tr key={booking?._id}>
+              <td className="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-gray-100">
+                {booking.room?.name}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-gray-100">
+                {booking.user?.name}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap text-gray-500 dark:text-gray-400">
+                {formatDateTime(booking?.date)}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                <span
+                  className={
+                    booking.isConfirmed === "confirmed"
+                      ? "text-green-600"
+                      : "text-red-600"
+                  }
+                >
+                  {booking.isConfirmed}
+                </span>
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                {booking.isConfirmed === "unconfirmed" ? (
+                  <button
+                    onClick={() => handleStatusChange(booking, "confirmed")}
+                    className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-3 rounded"
+                  >
+                    Approve
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => handleStatusChange(booking, "unconfirmed")}
+                    className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-5 rounded"
+                  >
+                    Reject
+                  </button>
+                )}
+                <button
+                  onClick={() => handleDeleteBooking(booking)}
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 ml-2 rounded"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

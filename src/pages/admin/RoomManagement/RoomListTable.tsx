@@ -36,7 +36,6 @@ const RoomListTable = () => {
         const toastId = toast.loading("Deleting the room...");
 
         try {
-          console.log("roomId", roomId);
           const res = await deleteRoom(roomId).unwrap();
 
           if (res && res.message) {
@@ -62,78 +61,88 @@ const RoomListTable = () => {
   };
 
   return (
-    <table className="min-w-full divide-y divide-gray-200 overflow-x-auto">
-      <thead className="bg-gray-50">
-        <tr>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-            Room Image
-          </th>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-            Room Name
-          </th>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-            Room No.
-          </th>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-            Floor No.
-          </th>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-            Capacity
-          </th>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-            Price per Slot
-          </th>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-            Actions
-          </th>
-        </tr>
-      </thead>
-      <tbody className="bg-white divide-y divide-gray-200">
-        {rooms.map((room: TRoom) => (
-          <tr key={room._id}>
-            <td className="px-6 py-4 whitespace-nowrap">
-              <img
-                className="h-10 w-10 rounded"
-                src={room.img || "/default-room-image.jpg"}
-                alt={room.name || "Room Image"}
-              />
-            </td>
-            <td className="px-6 py-4 whitespace-nowrap">
-              <div className="text-sm font-medium text-gray-900">
-                {room.name}
-              </div>
-            </td>
-            <td className="px-6 py-4 whitespace-nowrap">
-              <div className="text-sm text-gray-500">{room.roomNo}</div>
-            </td>
-            <td className="px-6 py-4 whitespace-nowrap">
-              <div className="text-sm text-gray-500">{room.floorNo}</div>
-            </td>
-            <td className="px-6 py-4 whitespace-nowrap">
-              <div className="text-sm text-gray-500">{room.capacity}</div>
-            </td>
-            <td className="px-6 py-4 whitespace-nowrap">
-              <div className="text-sm text-gray-500">${room.pricePerSlot}</div>
-            </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-              <Link to={`/admin/rooms/${room?._id}`}>
-                <button className="btn btn-sm px-3 py-2 text-white bg-gradient-to-r from-indigo-500 to-purple-500 rounded-md hover:bg-gradient-to-l hover:from-purple-500 hover:to-indigo-500">
-                  Update
-                </button>
-              </Link>
-              <button
-                onClick={() =>
-                  handleRoomDelete(room._id as string, room.name as string)
-                }
-                className="btn btn-sm ml-2 px-3 py-2 text-white bg-gradient-to-r from-red-500 to-red-700 rounded-md hover:bg-gradient-to-l hover:from-red-700 hover:to-red-500"
-              >
-                Delete
-              </button>
-            </td>
+    <div className="px-5 pt-4">
+      <table className="w-full m-auto divide-y divide-gray-200 dark:divide-gray-700 overflow-x-auto px-32">
+        <thead className="bg-gray-50 dark:bg-gray-800">
+          <tr>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+              Room Image
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+              Room Name
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+              Room No.
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+              Floor No.
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+              Capacity
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+              Price per Slot
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+              Actions
+            </th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
+          {rooms.map((room: TRoom) => (
+            <tr key={room._id}>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <img
+                  className="h-10 w-10 rounded"
+                  src={room.img || "/default-room-image.jpg"}
+                  alt={room.name || "Room Image"}
+                />
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                  {room.name}
+                </div>
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="text-sm text-gray-500 dark:text-gray-400">
+                  {room.roomNo}
+                </div>
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="text-sm text-gray-500 dark:text-gray-400">
+                  {room.floorNo}
+                </div>
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="text-sm text-gray-500 dark:text-gray-400">
+                  {room.capacity}
+                </div>
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="text-sm text-gray-500 dark:text-gray-400">
+                  ${room.pricePerSlot}
+                </div>
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                <Link to={`/admin/rooms/${room?._id}`}>
+                  <button className="btn btn-sm px-3 py-2 border-none text-white bg-gradient-to-r from-indigo-500 to-purple-500 rounded-md hover:bg-gradient-to-l hover:from-purple-500 hover:to-indigo-500">
+                    Update
+                  </button>
+                </Link>
+                <button
+                  onClick={() =>
+                    handleRoomDelete(room._id as string, room.name as string)
+                  }
+                  className="btn btn-sm ml-2 px-3 py-2 border-none text-white bg-gradient-to-r from-red-500 to-red-700 rounded-md hover:bg-gradient-to-l hover:from-red-700 hover:to-red-500"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

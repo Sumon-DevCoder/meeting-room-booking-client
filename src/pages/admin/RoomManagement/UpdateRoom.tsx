@@ -140,8 +140,8 @@ const UpdateRoom = () => {
   };
 
   return (
-    <div className="mx-auto w-full bg-white shadow-md rounded-lg p-8">
-      <h2 className="text-2xl font-semibold text-indigo-700 text-center mb-4">
+    <div className="mx-auto w-full bg-white dark:bg-gray-800 shadow-md rounded-lg p-8">
+      <h2 className="text-2xl font-semibold text-indigo-700 dark:text-indigo-400 text-center mb-4">
         Update Meeting Room
       </h2>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -149,7 +149,7 @@ const UpdateRoom = () => {
         <div className="mb-5">
           <label
             htmlFor="room-name"
-            className="mb-2 block text-sm font-medium text-indigo-700"
+            className="mb-2 block text-sm font-medium text-indigo-700 dark:text-indigo-400"
           >
             Room Name
           </label>
@@ -159,7 +159,7 @@ const UpdateRoom = () => {
             id="room-name"
             defaultValue={room?.name}
             placeholder="Room Name"
-            className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+            className="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300 outline-none focus:border-indigo-500 focus:shadow-md"
           />
           {errors.roomName && (
             <p className="text-red-500">{errors.roomName.message as string}</p>
@@ -171,7 +171,7 @@ const UpdateRoom = () => {
           <div className="w-full px-2 sm:w-1/3">
             <label
               htmlFor="room-no"
-              className="mb-2 block text-sm font-medium text-indigo-700"
+              className="mb-2 block text-sm font-medium text-indigo-700 dark:text-indigo-400"
             >
               Room Number
             </label>
@@ -187,7 +187,7 @@ const UpdateRoom = () => {
               })}
               id="room-no"
               placeholder="Room Number"
-              className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+              className="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300 outline-none focus:border-indigo-500 focus:shadow-md"
             />
             {errors.roomNo && (
               <p className="text-red-500">{errors.roomNo.message as string}</p>
@@ -196,7 +196,7 @@ const UpdateRoom = () => {
           <div className="w-full px-2 sm:w-1/3">
             <label
               htmlFor="floor-no"
-              className="mb-2 block text-sm font-medium text-indigo-700"
+              className="mb-2 block text-sm font-medium text-indigo-700 dark:text-indigo-400"
             >
               Floor Number
             </label>
@@ -212,7 +212,7 @@ const UpdateRoom = () => {
               })}
               id="floor-no"
               placeholder="Floor Number"
-              className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+              className="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300 outline-none focus:border-indigo-500 focus:shadow-md"
             />
             {errors.floorNo && (
               <p className="text-red-500">{errors.floorNo.message as string}</p>
@@ -221,7 +221,7 @@ const UpdateRoom = () => {
           <div className="w-full px-2 sm:w-1/3">
             <label
               htmlFor="capacity"
-              className="mb-2 block text-sm font-medium text-indigo-700"
+              className="mb-2 block text-sm font-medium text-indigo-700 dark:text-indigo-400"
             >
               Capacity
             </label>
@@ -234,7 +234,7 @@ const UpdateRoom = () => {
               })}
               id="capacity"
               placeholder="Capacity"
-              className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+              className="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300 outline-none focus:border-indigo-500 focus:shadow-md"
             />
             {errors.capacity && (
               <p className="text-red-500">
@@ -249,7 +249,7 @@ const UpdateRoom = () => {
           <div className="w-full px-2 sm:w-1/2">
             <label
               htmlFor="price-per-slot"
-              className="mb-2 block text-sm font-medium text-indigo-700"
+              className="mb-2 block text-sm font-medium text-indigo-700 dark:text-indigo-400"
             >
               Price per Slot
             </label>
@@ -262,7 +262,7 @@ const UpdateRoom = () => {
               })}
               id="price-per-slot"
               placeholder="Price"
-              className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+              className="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300 outline-none focus:border-indigo-500 focus:shadow-md"
             />
             {errors.pricePerSlot && (
               <p className="text-red-500">
@@ -273,7 +273,7 @@ const UpdateRoom = () => {
           <div className="w-full px-2 sm:w-1/2">
             <label
               htmlFor="img"
-              className="mb-2 block text-sm font-medium text-indigo-700"
+              className="mb-2 block text-sm font-medium text-indigo-700 dark:text-indigo-400"
             >
               Upload Room Images (3 images)
             </label>
@@ -286,7 +286,7 @@ const UpdateRoom = () => {
               id="img"
               accept="image/*"
               multiple
-              className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+              className="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300 outline-none focus:border-indigo-500 focus:shadow-md"
             />
             {errors.img && (
               <p className="text-red-500">{errors.img.message as string}</p>
@@ -296,7 +296,7 @@ const UpdateRoom = () => {
 
         {/* Amenities section */}
         <div className="mb-5">
-          <label className="mb-2 block text-sm font-medium text-indigo-700">
+          <label className="mb-2 block text-sm font-medium text-indigo-700 dark:text-indigo-400">
             Select Amenities
           </label>
           {amenitiesOptions.map((amenity) => (
@@ -308,12 +308,14 @@ const UpdateRoom = () => {
                 value={amenity}
                 className="mr-2"
               />
-              <label className="text-sm text-gray-700">{amenity}</label>
+              <label className="text-sm text-gray-700 dark:text-gray-300">
+                {amenity}
+              </label>
             </div>
           ))}
           <label
             htmlFor="additional-amenities"
-            className="mb-2 block text-sm font-medium text-indigo-700 mt-4"
+            className="mb-2 block text-sm font-medium text-indigo-700 dark:text-indigo-400 mt-4"
           >
             Additional Amenities (comma separated)
           </label>
@@ -322,14 +324,14 @@ const UpdateRoom = () => {
             {...register("additionalAmenities")}
             id="additional-amenities"
             placeholder="Additional Amenities"
-            className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+            className="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300 outline-none focus:border-indigo-500 focus:shadow-md"
           />
         </div>
 
         {/* Submit Button */}
         <button
           type="submit"
-          className="mt-4 w-full rounded-md bg-indigo-600 py-3 text-white font-semibold hover:bg-indigo-700 transition duration-200"
+          className="mt-4 w-full rounded-md bg-indigo-600 dark:bg-indigo-500 py-3 text-white font-semibold hover:bg-indigo-700 dark:hover:bg-indigo-600 transition duration-200"
         >
           Update Room
         </button>

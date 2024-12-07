@@ -66,7 +66,8 @@ const Login = () => {
         // success
         toast.success("Login Successful", { id: toastId, duration: 3000 });
         // redirect path
-        const from = location.state?.from || `/${user?.role}/dashboard`;
+        // const from = location.state?.from || `/${user?.role}/dashboard`;
+        const from = `/${user?.role}/dashboard`;
 
         console.log(location.state?.from);
         navigate(from, { replace: true });

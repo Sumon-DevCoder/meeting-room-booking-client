@@ -127,17 +127,14 @@ const MyBooking = () => {
   return (
     <div className="p-5 flex flex-col lg:flex-row gap-y-5 gap-x-3">
       {/* Left Side: Booking Items */}
-      <div className="flex-1 animate-fade-in" data-aos="fade-up">
-        <h2
-          className="text-center text-slate-200 mb-4 text-2xl font-bold"
-          data-aos="fade-right"
-        >
+      <div className="flex-1 ">
+        <h2 className="text-center text-black dark:text-white mb-4 text-2xl font-bold">
           My Bookings
         </h2>
         {bookingItems.length > 0 ? (
-          <div className="overflow-x-auto" data-aos="fade-left">
-            <table className="min-w-full divide-y divide-gray-200 bg-gradient-to-r from-blue-100 to-purple-200 rounded-lg shadow-md">
-              <thead className="bg-gradient-to-r from-purple-300 to-blue-300">
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200 dark:bg-gray-800 bg-gradient-to-r from-blue-100 to-purple-200 rounded-lg shadow-md">
+              <thead className="bg-gradient-to-r from-purple-300 to-blue-300 dark:from-gray-400 dark:to-gray-300">
                 <tr>
                   <th
                     className="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase"
@@ -152,7 +149,7 @@ const MyBooking = () => {
                     User Name
                   </th>
                   <th
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase hidden md:block"
                     data-aos="fade-down"
                   >
                     Date & Time
@@ -165,20 +162,19 @@ const MyBooking = () => {
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200">
                 {bookingItems.map((booking: TBooking) => (
                   <tr
                     key={booking?._id}
-                    className={`hover:bg-gray-100 transition duration-200`}
-                    data-aos="fade-up"
+                    className={`transition duration-200 text-black dark:text-white`}
                   >
-                    <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                    <td className="px-6 py-4 text-sm font-medium text-black dark:text-white">
                       {booking?.room?.name}
                     </td>
-                    <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                    <td className="px-6 py-4 text-sm font-medium text-black dark:text-white">
                       {booking?.user?.name}
                     </td>
-                    <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                    <td className="px-6 py-4 text-sm font-medium text-black dark:text-white hidden md:block">
                       {formatDateTime(booking?.date)}
                     </td>
                     <td className="px-6 py-4">
@@ -196,7 +192,7 @@ const MyBooking = () => {
           </div>
         ) : (
           <p
-            className="text-center text-gray-600 animate-fade-in"
+            className="text-center text-black dark:text-white animate-fade-in"
             data-aos="fade-up"
           >
             No items available.
@@ -205,29 +201,27 @@ const MyBooking = () => {
       </div>
 
       {/* Right Side: Booking Summary */}
-      <div
-        className="w-full md:w-1/3 md:mt-11 bg-gradient-to-r from-green-900 to-green-500 p-6 rounded-lg shadow-lg"
-        data-aos="fade-left"
-      >
-        <h3 className="text-xl font-semibold text-white mb-4">
+      <div className="w-full md:w-1/3 bg-slate-100 dark:bg-slate-800 p-6 rounded-lg shadow-lg">
+        <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-3">
           Booking Summary
         </h3>
-        <div className="mb-4">
-          <p className="text-white">
+        <div className="mb-3">
+          <p className="text-gray-700 dark:text-gray-300">
             Subtotal: ${calculateSubtotal().toFixed(2)}
           </p>
-          <p className="text-white">Service Fee: $15.00</p>
+          <p className="text-gray-700 dark:text-gray-300">
+            Service Fee: $15.00
+          </p>
         </div>
-        <div className="border-t border-green-300 my-4"></div>
-        <div className="mb-4">
-          <p className="text-lg font-semibold text-white">
+        <div className="border-t border-gray-300 dark:border-gray-700 my-3"></div>
+        <div className="mb-3">
+          <p className="text-lg font-bold text-gray-800 dark:text-gray-200">
             Total: ${calculateTotal().toFixed(2)}
           </p>
         </div>
         <button
-          className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-2 px-4 rounded-md hover:shadow-lg transition duration-300"
+          className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 transition duration-200"
           onClick={handleOrder}
-          data-aos="fade-up"
         >
           Proceed to Payment
         </button>

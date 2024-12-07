@@ -43,34 +43,18 @@ const RoomCard = ({ room }: { room: TRoom }) => {
     });
   };
 
-  // Handle details button click
-  const handleDetailsClick = () => {
-    handleLoginCheck(() => {
-      navigate(`/meeting-rooms-details/${_id}`);
-    });
-  };
-
   return (
     <div>
       <div className="dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden font-roboto transition duration-500 hover:shadow-2xl transform">
         <img src={img} alt={room.name} className="w-full h-48 object-cover" />
         <div className="p-6">
-          <h3
-            data-aos="fade-right"
-            className="text-xl font-semibold text-indigo-700 dark:text-indigo-400"
-          >
+          <h3 className="text-xl font-semibold text-indigo-700 dark:text-indigo-400">
             {name}
           </h3>
-          <p
-            data-aos="fade-right"
-            className="text-gray-500 mt-2 dark:text-gray-300"
-          >
+          <p className="text-gray-500 mt-2 dark:text-gray-300">
             Capacity: <span className="font-medium">{capacity}</span>
           </p>
-          <p
-            data-aos="fade-right"
-            className="text-gray-900 font-bold text-lg mt-2 dark:text-gray-100"
-          >
+          <p className="text-gray-900 font-bold text-lg mt-2 dark:text-gray-100">
             ${pricePerSlot} per slot
           </p>
 
@@ -78,7 +62,6 @@ const RoomCard = ({ room }: { room: TRoom }) => {
           <div className="flex flex-col md:flex-row justify-between items-center mt-5 gap-4">
             {/* Book Now Button */}
             <button
-              data-aos="zoom-in"
               className="w-full p-2 bg-indigo-600 text-white font-semibold rounded-md transition duration-300 hover:bg-indigo-700 hover:shadow-md dark:bg-indigo-700 dark:hover:bg-indigo-800"
               onClick={handleBookNowClick}
             >
@@ -95,10 +78,8 @@ const RoomCard = ({ room }: { room: TRoom }) => {
 
             {/* See Details Button */}
             <Link
-              data-aos="zoom-in"
-              onClick={handleDetailsClick}
               className="w-full p-2 bg-indigo-600 text-white font-semibold rounded-md text-center transition duration-300 hover:bg-indigo-700 hover:shadow-md dark:bg-indigo-700 dark:hover:bg-indigo-800"
-              to="#"
+              to={`/meeting-rooms-details/${_id}`}
             >
               Details
             </Link>

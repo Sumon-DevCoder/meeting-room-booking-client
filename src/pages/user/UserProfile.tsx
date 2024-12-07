@@ -2,23 +2,11 @@ import Loading from "@/components/Loading/Loading";
 import useCurrentUserInfoData from "@/hoooks/useCurrentUserInfoData";
 import { useGetbookingByUserQuery } from "@/redux/features/booking/bookingApi";
 import { TBooking } from "@/types/booking.types";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import { useEffect } from "react";
 
 const UserProfile = () => {
   const { user, isUserLoading } = useCurrentUserInfoData();
   const { data: userBookings, isLoading: isBookingLoading } =
     useGetbookingByUserQuery(user?.email);
-
-  // Initialize AOS once
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-    });
-    AOS.refresh();
-  }, []);
 
   if (isUserLoading || isBookingLoading) {
     return <Loading />;
@@ -36,64 +24,41 @@ const UserProfile = () => {
 
   return (
     <div>
-      <div className="bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-600 animate-gradient-xy w-full p-4 sm:p-6 lg:p-8 transition-transform duration-300">
+      <div className="bg-white dark:bg-black animate-gradient-xy w-full p-4 sm:p-6 lg:p-8 transition-transform duration-300">
         <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start">
           {/* Profile Section */}
           <div className="text-center lg:text-left">
-            <div
-              className="w-32 h-32 rounded-full overflow-hidden border-4 border-blue-600 transition-transform duration-300 hover:rotate-6 hover:scale-110 mx-auto lg:mx-0"
-              data-aos="zoom-in"
-            >
+            <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-blue-600 transition-transform duration-300 hover:rotate-6 hover:scale-110 mx-auto lg:mx-0">
               <img
                 src={user?.img || "/default-profile.png"}
                 alt="User Profile"
                 className="object-cover w-full h-full"
               />
             </div>
-            <div className="mt-4 text-white">
-              <h1
-                className="text-2xl sm:text-3xl font-bold"
-                data-aos="fade-left"
-              >
+            <div className="mt-4 text-slate-700 dark:text-white">
+              <h1 className="text-2xl sm:text-3xl font-bold">
                 {user?.name || "N/A"}
               </h1>
-              <p
-                className="text-sm sm:text-lg"
-                data-aos="fade-left"
-                data-aos-delay="200"
-              >
+              <p className="text-sm sm:text-lg text-slate-700 dark:text-white">
                 {user?.email || "N/A"}
               </p>
-              <p
-                className="text-sm mt-1"
-                data-aos="fade-left"
-                data-aos-delay="400"
-              >
+              <p className="text-sm mt-1 text-slate-700 dark:text-white">
                 Role: {user?.role === "user" ? "USER" : "Admin"}
               </p>
             </div>
           </div>
 
           {/* Dashboard Section */}
-          <div
-            className="user-dashboard w-full lg:w-2/3 mt-6 lg:mt-0 lg:ml-8"
-            data-aos="fade-up"
-          >
+          <div className="user-dashboard w-full lg:w-2/3 mt-6 lg:mt-0 lg:ml-8">
             {/* Title */}
-            <h1
-              className="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 mb-6 animate-gradient text-center lg:text-left"
-              data-aos="fade-up"
-            >
+            <h1 className="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 mb-6 animate-gradient text-center lg:text-left">
               User Profile Dashboard
             </h1>
 
             {/* User Details Section */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {/* Contact Info Card */}
-              <div
-                className="bg-white/80 backdrop-blur-sm p-4 rounded-lg shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl hover:bg-blue-50"
-                data-aos="fade-up"
-              >
+              <div className="bg-white/80 backdrop-blur-sm p-4 rounded-lg shadow-lg transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl hover:bg-blue-50">
                 <h3 className="text-lg font-semibold text-blue-600 mb-2">
                   Contact Information
                 </h3>
@@ -112,10 +77,7 @@ const UserProfile = () => {
               </div>
 
               {/* Additional Info Card */}
-              <div
-                className="bg-white/80 backdrop-blur-sm p-4 rounded-lg shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl hover:bg-blue-50"
-                data-aos="fade-up"
-              >
+              <div className="bg-white/80 backdrop-blur-sm p-4 rounded-lg shadow-lg transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl hover:bg-blue-50">
                 <h3 className="text-lg font-semibold text-blue-600 mb-2">
                   Additional Information
                 </h3>

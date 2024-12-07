@@ -32,8 +32,6 @@ const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
       break;
   }
 
-  console.log("Generated sidebarItems for ADMIN:", sidebarItems);
-
   // Add common sections
   const commonItems = [
     {

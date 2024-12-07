@@ -75,8 +75,8 @@ const CreateSlots = ({ selectedRoomId }: { selectedRoomId: string }) => {
   };
 
   return (
-    <div className="mx-auto w-full bg-white shadow-md rounded-lg p-8">
-      <h2 className="text-2xl font-semibold text-indigo-700 text-center mb-4">
+    <div className="mx-auto w-full bg-white dark:bg-gray-800 shadow-md rounded-lg p-8 px-10">
+      <h2 className="text-2xl font-semibold text-indigo-700 dark:text-indigo-400 text-center mb-4">
         Create a New Slot
       </h2>
       <form
@@ -87,7 +87,7 @@ const CreateSlots = ({ selectedRoomId }: { selectedRoomId: string }) => {
         <div>
           <label
             htmlFor="room-name"
-            className="mb-2 block text-sm font-medium text-indigo-700"
+            className="mb-2 block text-sm font-medium text-indigo-700 dark:text-indigo-400"
           >
             Room Name
           </label>
@@ -96,7 +96,7 @@ const CreateSlots = ({ selectedRoomId }: { selectedRoomId: string }) => {
             {...register("roomName", { required: "Room Name is required" })}
             id="room-name"
             placeholder="Room Name"
-            className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+            className="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300 outline-none focus:border-indigo-500 focus:shadow-md"
           />
           {errors.roomName && (
             <p className="text-red-500">{errors.roomName.message as string}</p>
@@ -107,7 +107,7 @@ const CreateSlots = ({ selectedRoomId }: { selectedRoomId: string }) => {
         <div>
           <label
             htmlFor="room-no"
-            className="mb-2 block text-sm font-medium text-indigo-700"
+            className="mb-2 block text-sm font-medium text-indigo-700 dark:text-indigo-400"
           >
             Room Number
           </label>
@@ -122,7 +122,7 @@ const CreateSlots = ({ selectedRoomId }: { selectedRoomId: string }) => {
             })}
             id="room-no"
             placeholder="Room Number"
-            className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+            className="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300 outline-none focus:border-indigo-500 focus:shadow-md"
           />
           {errors.roomNo && (
             <p className="text-red-500">{errors.roomNo.message as string}</p>
@@ -133,7 +133,7 @@ const CreateSlots = ({ selectedRoomId }: { selectedRoomId: string }) => {
         <div>
           <label
             htmlFor="start-time"
-            className="mb-2 block text-sm font-medium text-indigo-700"
+            className="mb-2 block text-sm font-medium text-indigo-700 dark:text-indigo-400"
           >
             Start Time
           </label>
@@ -141,7 +141,7 @@ const CreateSlots = ({ selectedRoomId }: { selectedRoomId: string }) => {
             type="time"
             {...register("startTime", { required: "Start Time is required" })}
             id="start-time"
-            className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+            className="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300 outline-none focus:border-indigo-500 focus:shadow-md"
           />
           {errors.startTime && (
             <p className="text-red-500">{errors.startTime.message as string}</p>
@@ -152,7 +152,7 @@ const CreateSlots = ({ selectedRoomId }: { selectedRoomId: string }) => {
         <div>
           <label
             htmlFor="end-time"
-            className="mb-2 block text-sm font-medium text-indigo-700"
+            className="mb-2 block text-sm font-medium text-indigo-700 dark:text-indigo-400"
           >
             End Time
           </label>
@@ -160,7 +160,7 @@ const CreateSlots = ({ selectedRoomId }: { selectedRoomId: string }) => {
             type="time"
             {...register("endTime", { required: "End Time is required" })}
             id="end-time"
-            className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+            className="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300 outline-none focus:border-indigo-500 focus:shadow-md"
           />
           {errors.endTime && (
             <p className="text-red-500">{errors.endTime.message as string}</p>
@@ -171,7 +171,7 @@ const CreateSlots = ({ selectedRoomId }: { selectedRoomId: string }) => {
         <div>
           <label
             htmlFor="date"
-            className="mb-2 block text-sm font-medium text-indigo-700"
+            className="mb-2 block text-sm font-medium text-indigo-700 dark:text-indigo-400"
           >
             Date
           </label>
@@ -192,7 +192,7 @@ const CreateSlots = ({ selectedRoomId }: { selectedRoomId: string }) => {
               },
             })}
             id="date"
-            className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+            className="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300 outline-none focus:border-indigo-500 focus:shadow-md"
           />
           {errors.date && (
             <p className="text-red-500">{errors.date.message as string}</p>
@@ -202,7 +202,7 @@ const CreateSlots = ({ selectedRoomId }: { selectedRoomId: string }) => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="mt-5 col-span-1 md:col-span-2 rounded-md bg-indigo-600 py-3 px-4 text-white font-semibold hover:bg-indigo-700 transition"
+          className="mt-5 col-span-1 md:col-span-2 rounded-md bg-indigo-600 dark:bg-indigo-500 py-3 px-4 text-white font-semibold hover:bg-indigo-700 dark:hover:bg-indigo-600 transition"
         >
           Create Slot
         </button>

@@ -117,8 +117,8 @@ const CreateRoom = () => {
   };
 
   return (
-    <div className="mx-auto w-full  bg-white shadow-md p-8">
-      <h2 className="text-2xl font-semibold text-indigo-700 text-center mb-4">
+    <div className="mx-auto w-full bg-white dark:bg-gray-900 shadow-md p-8">
+      <h2 className="text-2xl font-semibold text-indigo-700 dark:text-indigo-300 text-center mb-4">
         Create a Meeting Room
       </h2>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -126,7 +126,7 @@ const CreateRoom = () => {
         <div className="mb-5">
           <label
             htmlFor="room-name"
-            className="mb-2 block text-sm font-medium text-indigo-700"
+            className="mb-2 block text-sm font-medium text-indigo-700 dark:text-indigo-300"
           >
             Room Name
           </label>
@@ -135,7 +135,7 @@ const CreateRoom = () => {
             {...register("roomName", { required: "Room Name is required" })}
             id="room-name"
             placeholder="Room Name"
-            className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+            className="w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300 outline-none focus:border-indigo-500 focus:shadow-md"
           />
           {errors.roomName && (
             <p className="text-red-500">{errors.roomName.message as string}</p>
@@ -147,7 +147,7 @@ const CreateRoom = () => {
           <div className="w-full px-2 sm:w-1/3">
             <label
               htmlFor="room-no"
-              className="mb-2 block text-sm font-medium text-indigo-700"
+              className="mb-2 block text-sm font-medium text-indigo-700 dark:text-indigo-300"
             >
               Room Number
             </label>
@@ -162,7 +162,7 @@ const CreateRoom = () => {
               })}
               id="room-no"
               placeholder="Room Number"
-              className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+              className="w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300 outline-none focus:border-indigo-500 focus:shadow-md"
             />
             {errors.roomNo && (
               <p className="text-red-500">{errors.roomNo.message as string}</p>
@@ -171,7 +171,7 @@ const CreateRoom = () => {
           <div className="w-full px-2 sm:w-1/3">
             <label
               htmlFor="floor-no"
-              className="mb-2 block text-sm font-medium text-indigo-700"
+              className="mb-2 block text-sm font-medium text-indigo-700 dark:text-indigo-300"
             >
               Floor Number
             </label>
@@ -186,7 +186,7 @@ const CreateRoom = () => {
               })}
               id="floor-no"
               placeholder="Floor Number"
-              className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+              className="w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300 outline-none focus:border-indigo-500 focus:shadow-md"
             />
             {errors.floorNo && (
               <p className="text-red-500">{errors.floorNo.message as string}</p>
@@ -195,7 +195,7 @@ const CreateRoom = () => {
           <div className="w-full px-2 sm:w-1/3">
             <label
               htmlFor="capacity"
-              className="mb-2 block text-sm font-medium text-indigo-700"
+              className="mb-2 block text-sm font-medium text-indigo-700 dark:text-indigo-300"
             >
               Capacity
             </label>
@@ -207,7 +207,7 @@ const CreateRoom = () => {
               })}
               id="capacity"
               placeholder="Capacity"
-              className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+              className="w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300 outline-none focus:border-indigo-500 focus:shadow-md"
             />
             {errors.capacity && (
               <p className="text-red-500">
@@ -222,7 +222,7 @@ const CreateRoom = () => {
           <div className="w-full px-2 sm:w-1/2">
             <label
               htmlFor="price-per-slot"
-              className="mb-2 block text-sm font-medium text-indigo-700"
+              className="mb-2 block text-sm font-medium text-indigo-700 dark:text-indigo-300"
             >
               Price per Slot
             </label>
@@ -234,7 +234,7 @@ const CreateRoom = () => {
               })}
               id="price-per-slot"
               placeholder="Enter price per slot"
-              className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+              className="w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300 outline-none focus:border-indigo-500 focus:shadow-md"
             />
             {errors.pricePerSlot && (
               <p className="text-red-500">
@@ -246,7 +246,7 @@ const CreateRoom = () => {
           <div className="w-full px-2 sm:w-1/2">
             <label
               htmlFor="room-images"
-              className="mb-2 block text-sm font-medium text-indigo-700"
+              className="mb-2 block text-sm font-medium text-indigo-700 dark:text-indigo-300"
             >
               Room Images
             </label>
@@ -259,9 +259,11 @@ const CreateRoom = () => {
               id="room-images"
               multiple
               accept="image/*"
-              className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+              className="w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300 outline-none focus:border-indigo-500 focus:shadow-md"
             />
-            <small className="text-gray-500">Upload at least 3 images</small>
+            <small className="text-gray-500 dark:text-gray-400">
+              Upload at least 3 images
+            </small>
             {errors.img && (
               <p className="text-red-500">{errors.img.message as string}</p>
             )}
@@ -270,18 +272,18 @@ const CreateRoom = () => {
 
         {/* Amenities Section */}
         <div className="mb-5">
-          <label className="block text-sm font-medium text-indigo-700 mb-2">
+          <label className="block text-sm font-medium text-indigo-700 dark:text-indigo-300 mb-2">
             Amenities
           </label>
           <div className="flex flex-wrap">
             {amenitiesOptions.map((amenity) => (
-              <div key={amenity} className="mr-4">
+              <div key={amenity} className="mr-4 dark:text-white">
                 <input
                   type="checkbox"
                   id={amenity}
                   value={amenity}
                   {...register("amenities", {
-                    required: "At least 1 amenities are required",
+                    required: "At least 1 amenity is required",
                   })}
                 />
                 <label htmlFor={amenity} className="ml-2">
@@ -295,7 +297,7 @@ const CreateRoom = () => {
           )}
           <label
             htmlFor="additional-amenities"
-            className="block text-sm font-medium text-indigo-700 mt-4 mb-2"
+            className="block text-sm font-medium text-indigo-700 dark:text-indigo-300 mt-4 mb-2"
           >
             Additional Amenities
           </label>
@@ -303,18 +305,20 @@ const CreateRoom = () => {
             type="text"
             {...register("additionalAmenities")}
             id="additional-amenities"
-            placeholder="Comma-separated list of additional amenities"
-            className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+            placeholder="Enter any other amenities (comma separated)"
+            className="w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300 outline-none focus:border-indigo-500 focus:shadow-md"
           />
         </div>
 
         {/* Submit Button */}
-        <button
-          type="submit"
-          className="mt-5 w-full rounded-md bg-indigo-600 py-3 px-4 text-white font-semibold hover:bg-indigo-700 transition"
-        >
-          Create Room
-        </button>
+        <div className="mb-5 text-center">
+          <button
+            type="submit"
+            className="w-full bg-indigo-600 text-white rounded-md py-3 px-4 text-sm font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          >
+            Create Room
+          </button>
+        </div>
       </form>
     </div>
   );
