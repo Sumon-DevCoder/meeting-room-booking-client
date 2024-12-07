@@ -54,7 +54,24 @@ const SocialLogin = () => {
   // Sign in with Facebook
   const handleSignWithFacebook = () => {
     signInWithFacebook()
-      .then(() => {
+      .then((result) => {
+        // Auto navigate
+
+        console.log("fb credential", result?.user);
+        const user = {
+          email: result?.user?.email,
+          name: result?.user?.displayName,
+          img: result?.user?.photoURL,
+          role: "user",
+        };
+
+        const token = result.user.getIdToken();
+        const BearerToken = `Bearer ${token}`;
+
+        dispatch(setUser({ user: user, token: BearerToken }));
+
+        console.log(token);
+
         // Auto navigate
         navigate("/");
 

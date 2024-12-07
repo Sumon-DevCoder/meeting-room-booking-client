@@ -18,7 +18,7 @@ export const adminPaths = [
     name: "User Management",
     children: [
       {
-        name: "Create Admin",
+        name: "Manage User",
         path: "create-admin",
         element: <CreateAdmin />,
       },

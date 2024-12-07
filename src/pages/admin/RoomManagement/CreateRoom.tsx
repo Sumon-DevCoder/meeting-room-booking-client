@@ -117,7 +117,7 @@ const CreateRoom = () => {
   };
 
   return (
-    <div className="mx-auto w-full  bg-white shadow-md rounded-lg p-8">
+    <div className="mx-auto w-full  bg-white shadow-md p-8">
       <h2 className="text-2xl font-semibold text-indigo-700 text-center mb-4">
         Create a Meeting Room
       </h2>

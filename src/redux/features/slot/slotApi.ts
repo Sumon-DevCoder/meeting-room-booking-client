@@ -11,7 +11,6 @@ export const slotApi = baseApi.injectEndpoints({
     }),
     getSingleSlots: builder.query({
       query: (id) => {
-        console.log("slot api hitting", id);
         return {
           method: "GET",
           url: `/slots/${id}`,
@@ -21,7 +20,6 @@ export const slotApi = baseApi.injectEndpoints({
     }),
     getSlotByRoom: builder.query({
       query: (roomId) => {
-        console.log("api hitting", roomId);
         return {
           method: "GET",
           url: `/slots/room/${roomId}`,
@@ -38,7 +36,6 @@ export const slotApi = baseApi.injectEndpoints({
     }),
     deleteSlotById: builder.mutation({
       query: (slotId) => {
-        console.log("hitting api", slotApi);
         return {
           method: "DELETE",
           url: `/slots/${slotId}`,
@@ -48,7 +45,6 @@ export const slotApi = baseApi.injectEndpoints({
     }),
     updateslotById: builder.mutation({
       query: ({ id, slotInfo }) => {
-        console.log("slot api hitting", { id, slotInfo });
         return {
           method: "PUT",
           url: `/slots/${id}`,

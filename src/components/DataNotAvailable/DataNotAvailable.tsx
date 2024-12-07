@@ -13,8 +13,8 @@ const DataNotAvailable = ({
   buttonName,
 }: DataNotAvailableProps) => {
   return (
-    <div className="flex justify-center items-center flex-col gap-2 h-full pt-10 px-10 md:px-0">
-      <p className="text-center text-gray-600 font-semibold text-xl">
+    <div className="flex justify-center items-center flex-col gap-2 h-full pt-10 px-10 md:px-0 ">
+      <p className="text-center font-semibold text-xl border-2 pb-5">
         {message}
       </p>
       <Link to={path}>

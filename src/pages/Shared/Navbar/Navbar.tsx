@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { Fade } from "react-awesome-reveal";
 import DropdownProfile from "@/components/DropdownProfile/DropdownProfile";
 import { RxDropdownMenu } from "react-icons/rx";
 import useDarkMode from "@/hoooks/useDarkMode";
@@ -22,7 +21,7 @@ const Navbar = () => {
 
   return (
     <div className="sticky top-0 z-50">
-      <div className="navbar  shadow-lg px-5 dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-900 bg-gradient-to-br from-blue-400 to-purple-700">
+      <div className="navbar shadow-lg px-5 bg-gray-100 dark:bg-gray-800">
         <div className="navbar-start">
           <div className="dropdown">
             <div
@@ -35,7 +34,7 @@ const Navbar = () => {
                 // Close Icon
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 text-white"
+                  className="h-5 w-5 text-black dark:text-white"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -49,31 +48,35 @@ const Navbar = () => {
                 </svg>
               ) : (
                 // Menu Icon
-                <RxDropdownMenu className="text-white text-2xl -ml-2 " />
+                <RxDropdownMenu className="text-black dark:text-white text-2xl -ml-2 " />
               )}
             </div>
             {isMenuOpen && (
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-slate-700   z-[1] mt-3 w-32 p-3 space-y-2 shadow gap-1"
+                className="menu menu-sm dropdown-content bg-white dark:bg-slate-700 z-[1] mt-3 text-center w-32 p-3 space-y-2 shadow gap-1 max-h-[calc(100vh-60px)] overflow-y-auto"
               >
                 {navLinks}
               </ul>
             )}
           </div>
-          <Link
-            to={`/`}
-            className="btn btn-ghost text-lg md:text-xl bg-gradient-to-r from-blue-800 text-slate-200 font-medium"
-          >
-            Meeting Room Booking
-          </Link>
+          <Fade>
+            <Link
+              to={`/`}
+              className="btn btn-ghost min-w-48  text-md md:text-lg text-black bg-gradient-to-r dark:from-blue-800 from-blue-300 dark:text-slate-200 font-medium"
+            >
+              Meeting Room Booking
+            </Link>
+          </Fade>
         </div>
+
         {/* lg device navbar */}
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 space-x-5 space-y- font-normal  text-base">
+          <ul className="menu menu-horizontal px-1 space-x-5 font-medium text-base">
             {navLinks}
           </ul>
         </div>
+
         <div className="navbar-end cursor-pointer gap-2">
           <div>
             <button
@@ -85,7 +88,7 @@ const Navbar = () => {
               {!isDarkMode ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-6 h-6 text-white"
+                  className="w-6 h-6 text-gray-900"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -113,7 +116,7 @@ const Navbar = () => {
             ) : (
               <NavLink
                 to={"/login"}
-                className="flex items-center justify-center px-2 py-2 rounded-lg text-white font-medium bg-gradient-to-r from-blue-900 to-green-900 transition-all duration-300 ease-in-out hover:from-purple-900 hover:to-blue-900  transform"
+                className="flex items-center justify-center px-2 py-2 rounded-lg text-white font-medium bg-gradient-to-r from-blue-900 to-green-900 transition-all duration-300 ease-in-out hover:from-purple-900 hover:to-blue-900 transform"
               >
                 <FaSignInAlt className="mr-2" />
                 Login

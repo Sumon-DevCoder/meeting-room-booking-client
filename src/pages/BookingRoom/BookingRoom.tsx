@@ -36,8 +36,6 @@ const BookingRoom = ({ roomId }: { roomId: string | undefined }) => {
     return <Loading />;
   }
 
-  console.log(error);
-
   const onSubmit = async () => {
     const selectedSlots = watch("timeSlots");
     const slotValue = Array.isArray(selectedSlots)
@@ -70,21 +68,34 @@ const BookingRoom = ({ roomId }: { roomId: string | undefined }) => {
 
   const formatTimeWithAMPM = (timeString: string) => {
     const today = new Date();
+
+    // Validate time string format
+    if (!timeString || !/^\d{2}:\d{2}$/.test(timeString)) {
+      throw new Error("Invalid time string format. Expected HH:mm");
+    }
+
+    // Construct a full datetime string using today's date and the time string
     const fullDateTimeString = `${
       today.toISOString().split("T")[0]
     }T${timeString}`;
-    const date = new Date(fullDateTimeString);
+    const date = new Date(fullDateTimeString); // This will parse the time correctly
+
+    // Check if the date is invalid
+    if (isNaN(date.getTime())) {
+      throw new Error("Invalid time string");
+    }
+
     return format(date, "hh:mm a");
   };
 
   return (
     <div className="">
       {slots?.length === 0 ? (
-        <div className="flex flex-col items-center text-center">
+        <div className="flex flex-col items-center text-center bg-white dark:bg-slate-500 p-5 rounded-lg">
           <p className="text-red-400 dark:text-red-300 font-semibold mb-2 text-lg">
             Sorry, there are no available time slots for this room
           </p>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-gray-600 dark:text-white pb-5">
             Please choose a different date or check back later for availability.
           </p>
           <div className="modal-action -mt-1">
@@ -152,8 +163,8 @@ const BookingRoom = ({ roomId }: { roomId: string | undefined }) => {
                       htmlFor={`slot-${slot._id}`}
                       className="text-gray-700 dark:text-gray-300"
                     >
-                      {formatTimeWithAMPM(slot?.startTime)}
-                      {/* {formatTimeWithAMPM(slot?.endTime)} */}
+                      {formatTimeWithAMPM(slot?.startTime)} -{" "}
+                      {formatTimeWithAMPM(slot?.endTime)}
                     </label>
                   </div>
                 ))}

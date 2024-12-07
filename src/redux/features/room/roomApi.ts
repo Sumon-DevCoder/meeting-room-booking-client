@@ -11,7 +11,6 @@ export const roomApi = baseApi.injectEndpoints({
     }),
     getSingleRoom: builder.query({
       query: (roomId) => {
-        console.log("api hitting", roomId);
         return {
           method: "GET",
           url: `/rooms/${roomId}`,
@@ -35,7 +34,6 @@ export const roomApi = baseApi.injectEndpoints({
     }),
     updateRoomById: builder.mutation({
       query: ({ id, roomInfo }) => {
-        console.log("room api hitting", { id, roomInfo });
         return {
           method: "PUT",
           url: `/rooms/${id}`,

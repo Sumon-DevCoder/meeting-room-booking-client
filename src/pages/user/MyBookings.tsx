@@ -168,23 +168,23 @@ const MyBooking = () => {
               <tbody className="bg-white divide-y divide-gray-200">
                 {bookingItems.map((booking: TBooking) => (
                   <tr
-                    key={booking._id}
+                    key={booking?._id}
                     className={`hover:bg-gray-100 transition duration-200`}
                     data-aos="fade-up"
                   >
                     <td className="px-6 py-4 text-sm font-medium text-gray-900">
-                      {booking.room.name}
+                      {booking?.room?.name}
                     </td>
                     <td className="px-6 py-4 text-sm font-medium text-gray-900">
-                      {booking.user.name}
+                      {booking?.user?.name}
                     </td>
                     <td className="px-6 py-4 text-sm font-medium text-gray-900">
-                      {formatDateTime(booking.date)}
+                      {formatDateTime(booking?.date)}
                     </td>
                     <td className="px-6 py-4">
                       <button
                         className="text-red-500 hover:text-red-700 btn btn-sm transition duration-200 transform hover:scale-105"
-                        onClick={() => handleDeleteBooking(booking._id)}
+                        onClick={() => handleDeleteBooking(booking?._id)}
                       >
                         Remove
                       </button>

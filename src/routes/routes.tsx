@@ -7,7 +7,7 @@ import AboutUs from "@/pages/About/About";
 import Home from "@/pages/Home/Home";
 import ContactUs from "@/pages/ContactUs/ContactUs";
 import MeetingRoom from "@/pages/MeetingRoom/MeetingRoom";
-import MeetingRoomDetails from "@/pages/MeetingRoom/MeetingRoomDetails";
+import MeetingRoomDetails from "@/pages/MeetingRoom/MeetingRoomDetails/MeetingRoomDetails";
 import MainLayout from "@/components/layout/MainLayout";
 import routesGenerator from "@/utils/routesGenerator";
 import { adminPaths } from "./admin.routes";

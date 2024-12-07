@@ -126,12 +126,16 @@ const BookingList = () => {
       </thead>
       <tbody className="bg-white divide-y divide-gray-200">
         {bookings.map((booking: TBooking) => (
-          <tr key={booking._id}>
-            <td className="px-6 py-4 whitespace-nowrap">{booking.room.name}</td>
-            <td className="px-6 py-4 whitespace-nowrap">{booking.user.name}</td>
+          <tr key={booking?._id}>
             <td className="px-6 py-4 whitespace-nowrap">
-              {formatDateTime(booking.date)}
-              {formatDateTime(booking.date)}
+              {booking.room?.name}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap">
+              {booking.user?.name}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap">
+              {formatDateTime(booking?.date)}
+              {formatDateTime(booking?.date)}
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
               <span

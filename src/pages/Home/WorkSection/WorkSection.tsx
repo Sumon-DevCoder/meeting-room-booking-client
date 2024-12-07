@@ -5,15 +5,13 @@ const WorkSection = () => {
     <div className="m-auto">
       <section
         id="works"
-        className="relative bg-gradient-to-t from-slate-700 to-slate-300 dark:from-slate-900 dark:to-slate-700 py-10 sm:py-16 lg:py-16 bg-gray-200"
+        className="relative bg-gradient-to-t from-slate-700 to-slate-300 dark:from-slate-900 dark:to-slate-700 py-10 sm:py-16 lg:py-16"
       >
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto text-center">
-            <Fade>
-              <h2 className="text-4xl text-slate-100 dark:text-gray-200 font-extrabold mx-auto md:text-3xl lg:text-4xl">
-                How It Works
-              </h2>
-            </Fade>
+            <h2 className="text-4xl text-slate-100 dark:text-gray-200 font-extrabold mx-auto md:text-3xl lg:text-4xl">
+              <Fade>How It Works</Fade>
+            </h2>
             <Zoom>
               <p className="max-w-2xl mx-auto mt-4 text-base text-gray-200 dark:text-gray-200 leading-relaxed md:text-2xl">
                 Follow these simple steps to book your meeting room.
@@ -23,12 +21,11 @@ const WorkSection = () => {
           <div className="relative mt-12 lg:mt-20">
             <div className="absolute inset-x-0 hidden xl:px-44 top-2 md:block md:px-20 lg:px-28">
               <img
-                alt=""
+                alt="Curved dotted line"
                 loading="lazy"
                 width="1000"
                 height="500"
                 decoding="async"
-                data-nimg="1"
                 className="w-full"
                 style={{ color: "transparent" }}
                 src="https://cdn.rareblocks.xyz/collection/celebration/images/steps/2/curved-dotted-line.svg"

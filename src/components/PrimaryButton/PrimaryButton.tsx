@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import "hover.css/css/hover-min.css";
 
 type TButton = {
   path: string;

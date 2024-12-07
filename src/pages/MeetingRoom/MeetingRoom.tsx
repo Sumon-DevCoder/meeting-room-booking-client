@@ -66,8 +66,8 @@ const MeetingRooms = () => {
   };
 
   return (
-    <section className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold text-center dark:text-slate-200 mb-6">
+    <section className="container mx-auto py-8 bg-gradient-to-r dark:from-slate-900 dark:to-slate-700 max-w-full">
+      <h1 className="text-3xl font-bold text-center dark:text-white mb-6">
         Meeting Rooms
       </h1>
 
@@ -77,13 +77,13 @@ const MeetingRooms = () => {
           placeholder="Search by room name..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="p-2 border rounded-md dark:bg-black"
+          className="p-2 border rounded-md dark:bg-black dark:text-white"
         />
 
         <select
           value={capacityFilter}
           onChange={(e) => setCapacityFilter(e.target.value)}
-          className="p-2 border rounded-md dark:bg-black"
+          className="p-2 border rounded-md dark:bg-black dark:text-white"
         >
           <option value="">Filter by Capacity</option>
           <option value="5">5+</option>
@@ -96,7 +96,7 @@ const MeetingRooms = () => {
         <select
           value={priceFilter}
           onChange={(e) => setPriceFilter(e.target.value)}
-          className="p-2 border rounded-md dark:bg-black"
+          className="p-2 border rounded-md dark:bg-black dark:text-white"
         >
           <option value="">Filter by Price</option>
           <option value="50">Up to $50</option>
@@ -107,7 +107,7 @@ const MeetingRooms = () => {
         <select
           value={sortOrder}
           onChange={(e) => setSortOrder(e.target.value)}
-          className="p-2 border rounded-md dark:bg-black"
+          className="p-2 border rounded-md dark:bg-black dark:text-white"
         >
           <option value="">Sort by Price</option>
           <option value="asc">Low to High</option>
@@ -116,7 +116,7 @@ const MeetingRooms = () => {
 
         <button
           onClick={handleResetFilters}
-          className="p-2 bg-gray-300 rounded-md dark:bg-black"
+          className="p-2 bg-gray-300 rounded-md dark:bg-black dark:text-slate-200"
         >
           Clear Filters
         </button>

@@ -66,8 +66,9 @@ const Login = () => {
         // success
         toast.success("Login Successful", { id: toastId, duration: 3000 });
         // redirect path
-        const from =
-          location.state?.from?.pathname || `/${user?.role}/dashboard`;
+        const from = location.state?.from || `/${user?.role}/dashboard`;
+
+        console.log(location.state?.from);
         navigate(from, { replace: true });
       }
     } catch (err) {
@@ -227,7 +228,7 @@ const Login = () => {
                   </p>
                 </div>
               </form>
-              <SocialLogin />2
+              <SocialLogin />
             </motion.div>
           </div>
         </div>

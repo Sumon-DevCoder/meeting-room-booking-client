@@ -22,7 +22,7 @@ const ServiceSection = () => {
     reverse: false, // reverse the tilt direction
     max: 35, // max tilt rotation (degrees)
     perspective: 1000, // Transform perspective, the lower the more extreme the tilt gets.
-    scale: 1.1, // 2 = 200%, 1.5 = 150%, etc..
+    scale: 1.05, // Slight scale-up effect on tilt
     speed: 1000, // Speed of the enter/exit transition
     transition: true, // Set a transition on enter/exit.
     axis: null, // What axis should be disabled. Can be X or Y.
@@ -40,7 +40,7 @@ const ServiceSection = () => {
           Our Highlighted Services
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center md:px-20 lg:px-10 items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center md:px-20 lg:px-10 items-center">
           {services.map((service: TService, index: number) => (
             <Tilt
               options={defaultOptions}
@@ -58,7 +58,7 @@ const ServiceSection = () => {
               </h3>
               <p
                 data-aos="fade-right"
-                className="text-gray-600 dark:text-gray-400"
+                className="text-gray-600 dark:text-gray-400 text-sm md:text-base"
               >
                 {service.description}
               </p>

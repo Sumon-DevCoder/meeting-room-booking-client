@@ -13,7 +13,7 @@ const useNavLinks = () => {
           ` border-slate-200 ${
             isActive
               ? "border-b-2 border-b-blue-400 text-blue-400 font-medium"
-              : "  text-slate-100 border-b-2 border-b-slate-100"
+              : "  dark:text-slate-100 text-black  border-b-2 border-b-slate-800  dark:border-b-slate-100"
           }`
         }
       >
@@ -25,7 +25,7 @@ const useNavLinks = () => {
           ` border-slate-200 ${
             isActive
               ? "border-b-2 border-b-blue-400 text-blue-400 font-medium"
-              : "  text-slate-100 border-b-2 border-b-slate-100"
+              : "  dark:text-slate-100 text-black  border-b-2 border-b-slate-800  dark:border-b-slate-100"
           }`
         }
       >
@@ -37,7 +37,7 @@ const useNavLinks = () => {
           ` border-slate-200 ${
             isActive
               ? "border-b-2 border-b-blue-400 text-blue-400 font-medium"
-              : " text-slate-100 border-b-2 border-b-slate-100"
+              : " dark:text-slate-100 text-black  border-b-2 border-b-slate-800  dark:border-b-slate-100"
           }`
         }
       >
@@ -49,7 +49,7 @@ const useNavLinks = () => {
           ` border-slate-200 ${
             isActive
               ? "border-b-2 border-b-blue-400 text-blue-400 font-medium"
-              : "  text-slate-100 border-b-2 border-b-slate-100"
+              : "  dark:text-slate-100 text-black  border-b-2 border-b-slate-800  dark:border-b-slate-100"
           }`
         }
       >
@@ -62,7 +62,7 @@ const useNavLinks = () => {
             ` border-slate-200 ${
               isActive
                 ? " border-b-2 border-b-blue-400 text-blue-400 font-medium"
-                : "  text-slate-100 border-b-2 border-b-slate-100"
+                : "  dark:text-slate-100 text-black  border-b-2 border-b-slate-800  dark:border-b-slate-100"
             }`
           }
         >
@@ -76,7 +76,7 @@ const useNavLinks = () => {
             ` border-slate-200 ${
               isActive
                 ? " text-white border-b-2"
-                : "text-slate-100 border-b-2 border-b-slate-100"
+                : "dark:text-slate-100 text-black  border-b-2 border-b-slate-800  dark:border-b-slate-100"
             }`
           }
         >
