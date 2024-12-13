@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { toast } from "sonner";
+import { FaMapMarkerAlt, FaPhoneAlt, FaClock } from "react-icons/fa"; // Import icons
 
 const ContactUs = () => {
-  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
@@ -14,7 +14,7 @@ const ContactUs = () => {
   };
 
   const handleEmail = () => {
-    toast.success("Success");
+    toast.success("Message sent successfully!");
   };
 
   return (
@@ -79,7 +79,7 @@ const ContactUs = () => {
                     transition={{ duration: 0.5 }}
                   >
                     <div className="flex h-10 w-10 items-center justify-center rounded bg-blue-900 text-gray-50">
-                      {/* Address icon */}
+                      <FaMapMarkerAlt size={20} /> {/* Address icon */}
                     </div>
                     <div className="ml-4 mb-4">
                       <h3 className="mb-2 text-lg font-medium leading-6 text-gray-900 dark:text-white">
@@ -99,7 +99,7 @@ const ContactUs = () => {
                     transition={{ duration: 0.5 }}
                   >
                     <div className="flex h-10 w-10 items-center justify-center rounded bg-blue-900 text-gray-50">
-                      {/* Contact icon */}
+                      <FaPhoneAlt size={20} /> {/* Contact icon */}
                     </div>
                     <div className="ml-4 mb-4">
                       <h3 className="mb-2 text-lg font-medium leading-6 text-gray-900 dark:text-white">
@@ -119,7 +119,7 @@ const ContactUs = () => {
                     transition={{ duration: 0.5 }}
                   >
                     <div className="flex h-10 w-10 items-center justify-center rounded bg-blue-900 text-gray-50">
-                      {/* Working hours icon */}
+                      <FaClock size={20} /> {/* Working hours icon */}
                     </div>
                     <div className="ml-4 mb-4">
                       <h3 className="mb-2 text-lg font-medium leading-6 text-gray-900 dark:text-white">

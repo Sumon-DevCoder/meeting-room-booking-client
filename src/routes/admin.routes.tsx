@@ -3,10 +3,10 @@ import BookingListTable from "@/pages/admin/BookingManagement/BookingListTable";
 import CreateAdmin from "@/pages/admin/CreateAdmin";
 import CreateRoom from "@/pages/admin/RoomManagement/CreateRoom";
 import RoomListTable from "@/pages/admin/RoomManagement/RoomListTable";
-import UpdateRoom from "@/pages/admin/RoomManagement/UpdateRoom";
+// import UpdateRoom from "@/pages/admin/RoomManagement/UpdateRoom";
 import SelectRoomSlots from "@/pages/admin/SlotsMangement/SelectRoomSlots";
 import SlotsListTable from "@/pages/admin/SlotsMangement/SlotsListTable";
-import UpdateSlots from "@/pages/admin/SlotsMangement/UpdateSlots";
+// import UpdateSlots from "@/pages/admin/SlotsMangement/UpdateSlots";
 
 export const adminPaths = [
   {
@@ -37,11 +37,11 @@ export const adminPaths = [
         path: "rooms-list",
         element: <RoomListTable />,
       },
-      {
-        name: "Update Room",
-        path: "rooms/:id",
-        element: <UpdateRoom />,
-      },
+      // {
+      //   name: "Update Room",
+      //   path: "rooms/:id",
+      //   element: <UpdateRoom />,
+      // },
     ],
   },
   {
@@ -57,11 +57,11 @@ export const adminPaths = [
         path: "Slots-list",
         element: <SlotsListTable />,
       },
-      {
-        name: "Update Slots",
-        path: "slots/:id",
-        element: <UpdateSlots />,
-      },
+      // {
+      //   name: "Update Slots",
+      //   path: "slots/:id",
+      //   element: <UpdateSlots />,
+      // },
     ],
   },
   {

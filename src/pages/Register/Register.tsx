@@ -107,7 +107,7 @@ const Register = () => {
           transition={{ duration: 0.5 }}
         >
           <div className="w-full xl:w-3/4 lg:w-11/12 flex justify-center">
-            <div className="pr-5 pt-1 hidden md:block">
+            <div className="pr-5 pt-1 hidden lg:block">
               <NavLink
                 to="/"
                 className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition duration-300 flex items-center"

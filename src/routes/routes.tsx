@@ -17,6 +17,8 @@ import SuccessPayment from "@/pages/Payment/SuccessPayment";
 import FailPayment from "@/pages/Payment/FailPayment";
 import CancelPayment from "@/pages/Payment/CancelPayment";
 import BookingRoom from "@/pages/BookingRoom/BookingRoom";
+import UpdateRoom from "@/pages/admin/RoomManagement/UpdateRoom";
+import UpdateSlots from "@/pages/admin/SlotsMangement/UpdateSlots";
 
 const router = createBrowserRouter([
   {
@@ -52,9 +54,25 @@ const router = createBrowserRouter([
         element: <MeetingRoomDetails />,
       },
       {
+        path: "/admin/rooms/:id",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <UpdateRoom />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/admin/slots/:id",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <UpdateSlots />
+          </ProtectedRoute>
+        ),
+      },
+      {
         path: "/bookings",
         element: (
-          <ProtectedRoute>
+          <ProtectedRoute allowedRoles={["user", "admin"]}>
             <BookingRoom roomId={""} />
           </ProtectedRoute>
         ),
@@ -62,7 +80,7 @@ const router = createBrowserRouter([
       {
         path: "/payment-success",
         element: (
-          <ProtectedRoute>
+          <ProtectedRoute allowedRoles={["user", "admin"]}>
             <SuccessPayment />
           </ProtectedRoute>
         ),
@@ -70,7 +88,7 @@ const router = createBrowserRouter([
       {
         path: "/payment-fail",
         element: (
-          <ProtectedRoute>
+          <ProtectedRoute allowedRoles={["user", "admin"]}>
             <FailPayment />
           </ProtectedRoute>
         ),
@@ -78,7 +96,7 @@ const router = createBrowserRouter([
       {
         path: "/payment-cancel",
         element: (
-          <ProtectedRoute>
+          <ProtectedRoute allowedRoles={["user", "admin"]}>
             <CancelPayment />
           </ProtectedRoute>
         ),
@@ -88,7 +106,7 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute allowedRoles={["admin"]}>
         <MainLayout />
       </ProtectedRoute>
     ),
@@ -97,7 +115,7 @@ const router = createBrowserRouter([
   {
     path: "/user",
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute allowedRoles={["user", "admin"]}>
         <MainLayout />
       </ProtectedRoute>
     ),

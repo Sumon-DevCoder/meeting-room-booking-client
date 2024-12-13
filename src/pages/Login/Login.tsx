@@ -95,7 +95,7 @@ const Login = () => {
       <div className="mx-auto">
         <div className="flex justify-center px-6 py-12">
           <div className="w-full xl:w-3/4 lg:w-11/12 flex justify-center">
-            <div className="pr-5 pt-2 hidden md:block">
+            <div className="pr-5 pt-2 hidden lg:block">
               <NavLink
                 to="/"
                 className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition duration-300 flex items-center"
@@ -105,7 +105,7 @@ const Login = () => {
               </NavLink>
             </div>
             <motion.div
-              className="w-full lg:w-7/12 shadow-xl bg-gray-100 dark:bg-gray-800 p-5 rounded-lg lg:rounded-l-none"
+              className="w-full lg:w-7/12 shadow-xl bg-gray-100 dark:bg-gray-800 p-5 rounded-lg   border-2 dark:border-gray-700"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
@@ -229,7 +229,9 @@ const Login = () => {
                   </p>
                 </div>
               </form>
-              <SocialLogin />
+              <div className="-mt-5">
+                <SocialLogin />
+              </div>
             </motion.div>
           </div>
         </div>

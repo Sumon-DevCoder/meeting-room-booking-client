@@ -74,9 +74,11 @@ const UpdateRoom = () => {
     const toastId = toast.loading("Updating...");
 
     // Mapping img
-    const img = await Promise.all(
-      Array.from(data.img).map((file) => uploadImageToImgBB(file))
-    );
+    const img = data.img
+      ? await Promise.all(
+          Array.from(data.img).map((file) => uploadImageToImgBB(file))
+        )
+      : [];
 
     // Mapping amenities
     const selectedAmenities = data.amenities || [];
@@ -89,6 +91,7 @@ const UpdateRoom = () => {
     try {
       const roomInfo = {
         name: data.roomName,
+        description: data.description,
         roomNo: Number(data.roomNo),
         floorNo: Number(data.floorNo),
         capacity: Number(data.capacity),
@@ -128,15 +131,6 @@ const UpdateRoom = () => {
         });
       }
     }
-  };
-
-  const validateFiles = (files: any): Promise<string | true> => {
-    return new Promise((resolve) => {
-      if (files.length < 3) {
-        resolve("At least 3 images are required");
-      }
-      resolve(true);
-    });
   };
 
   return (
@@ -275,14 +269,11 @@ const UpdateRoom = () => {
               htmlFor="img"
               className="mb-2 block text-sm font-medium text-indigo-700 dark:text-indigo-400"
             >
-              Upload Room Images (3 images)
+              Upload Room Images (Optional)
             </label>
             <input
-              //   defaultValue={room?.img}
               type="file"
-              {...register("img", {
-                validate: validateFiles,
-              })}
+              {...register("img")}
               id="img"
               accept="image/*"
               multiple
@@ -292,6 +283,30 @@ const UpdateRoom = () => {
               <p className="text-red-500">{errors.img.message as string}</p>
             )}
           </div>
+        </div>
+
+        <div className="mb-5">
+          <label
+            htmlFor="description"
+            className="mb-2 block text-sm font-medium text-indigo-700 dark:text-indigo-400"
+          >
+            Room Description
+          </label>
+          <textarea
+            id="description"
+            {...register("description", {
+              required: "Description is required",
+            })}
+            defaultValue={room?.description}
+            placeholder="Describe the room"
+            rows={4}
+            className="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300 outline-none focus:border-indigo-500 focus:shadow-md"
+          />
+          {errors.description && (
+            <p className="text-red-500">
+              {errors.description.message as string}
+            </p>
+          )}
         </div>
 
         {/* Amenities section */}

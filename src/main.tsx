@@ -15,7 +15,9 @@ createRoot(document.getElementById("root")!).render(
     <AuthProvider>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <RouterProvider router={router} />
+          <div className="bg-gray-200 dark:bg-gray-800">
+            <RouterProvider router={router} />
+          </div>
           <ScrollToTopButton />
         </PersistGate>
         <Toaster richColors closeButton position="top-center" />
