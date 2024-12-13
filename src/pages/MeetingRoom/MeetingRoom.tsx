@@ -77,13 +77,13 @@ const MeetingRooms = () => {
           placeholder="Search by room name..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="p-2 border rounded-md dark:bg-black dark:text-white"
+          className="p-2 border  rounded-md dark:bg-black dark:text-white border-slate-500"
         />
 
         <select
           value={capacityFilter}
           onChange={(e) => setCapacityFilter(e.target.value)}
-          className="p-2 border rounded-md dark:bg-black dark:text-white"
+          className="p-2 border rounded-md dark:bg-black dark:text-white border-slate-500"
         >
           <option value="">Filter by Capacity</option>
           <option value="5">5+</option>
@@ -96,7 +96,7 @@ const MeetingRooms = () => {
         <select
           value={priceFilter}
           onChange={(e) => setPriceFilter(e.target.value)}
-          className="p-2 border rounded-md dark:bg-black dark:text-white"
+          className="p-2 border rounded-md dark:bg-black dark:text-white border-slate-500"
         >
           <option value="">Filter by Price</option>
           <option value="50">Up to $50</option>
@@ -107,7 +107,7 @@ const MeetingRooms = () => {
         <select
           value={sortOrder}
           onChange={(e) => setSortOrder(e.target.value)}
-          className="p-2 border rounded-md dark:bg-black dark:text-white"
+          className="p-2 border rounded-md dark:bg-black dark:text-white border-slate-500"
         >
           <option value="">Sort by Price</option>
           <option value="asc">Low to High</option>

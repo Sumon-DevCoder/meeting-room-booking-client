@@ -14,8 +14,8 @@ const FeaturedRooms = () => {
   const { data: rooms } = data || [];
 
   return (
-    <div className="py-1 bg-slate-100 dark:bg-slate-900  m-auto">
-      <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center mt-10 text-gray-900 dark:text-white">
+    <div className="py-8 bg-slate-100 dark:bg-slate-900  m-a">
+      <h2 className="text-2xl md:text-3xl font-bold  text-center  text-gray-900 dark:text-white">
         Featured Rooms
       </h2>
 

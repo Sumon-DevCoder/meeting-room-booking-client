@@ -32,9 +32,13 @@ const ServiceSection = () => {
   };
 
   return (
-    <section className="py-12 bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+    <section className="py-8 bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
       <div className="container mx-auto text-center">
-        <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-900 dark:text-gray-100">
+        <h2
+          data-aos="zoom-in"
+          data-aos-delay="4000"
+          className="text-2xl md:text-3xl font-bold mb-8 text-gray-900 dark:text-gray-100"
+        >
           Our Highlighted Services
         </h2>
 
@@ -46,10 +50,18 @@ const ServiceSection = () => {
               key={service?.id}
               className="bg-white bg-gradient-to-r from-slate-100 dark:from-slate-800 dark:to-slate-700 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300"
             >
-              <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">
+              <h3
+                data-aos="fade-right"
+                data-aos-delay="4000"
+                className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200"
+              >
                 {service.title}
               </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">
+              <p
+                data-aos="fade-left"
+                data-aos-delay="4000"
+                className="text-gray-600 dark:text-gray-400 text-sm md:text-base"
+              >
                 {service.description}
               </p>
             </Tilt>

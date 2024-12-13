@@ -12,8 +12,8 @@ const Home = () => {
       <ServiceSection />
       <FeaturedRooms />
       <WhyChooseUs />
-      <Testimonial />
       <WorkSection />
+      <Testimonial />
     </div>
   );
 };

@@ -52,7 +52,7 @@ const MeetingRoomDetails = () => {
   return (
     <div className="bg-slate-100 dark:bg-gray-900">
       {/* details card */}
-      <div className=" m-auto overflow-hidden font-roboto hover:shadow-2xl transform pt-10 px-10">
+      <div className=" m-auto overflow-hidden font-roboto  transform pt-10 px-10">
         {/* Card Container */}
         <div className="flex flex-col md:flex-row">
           {/* Left Side: Image Section */}
@@ -68,7 +68,7 @@ const MeetingRoomDetails = () => {
                     <img
                       src={imageSrc}
                       alt="room img"
-                      className="object-cover h-full w-full"
+                      className="object-cover max-h-96 w-full rounded-md"
                     />
                   </SwiperSlide>
                 ))
@@ -84,7 +84,7 @@ const MeetingRoomDetails = () => {
           <div className="md:w-1/2 p-6 flex flex-col justify-between">
             {/* Details Section */}
             <div>
-              <h3 className="text-2xl font-semibold text-indigo-700 dark:text-indigo-300 mb-4">
+              <h3 className="text-2xl font-semibold text-indigo-700 dark:text-indigo-300">
                 {name}
               </h3>
               <div className="text-gray-500 dark:text-gray-300 space-y-2">

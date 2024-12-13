@@ -2,17 +2,14 @@ const WhyChooseUs = () => {
   return (
     <div>
       <div className="m-auto dark:bg-gray-900 bg-slate-100">
-        <section
-          id="features"
-          className="relative block px-6 py-10 md:py-10 md:px-10 transition-colors duration-500"
-        >
+        <section className="relative block px-6 py-10 md:py-10 md:px-10 duration-500">
           <div className="relative mx-auto max-w-7xl text-center">
             {/* Title */}
-            <span className="text-gray-500 dark:text-gray-300 my-3 font-oswald flex items-center justify-center font-medium uppercase tracking-wider">
+            <span className="text-gray-900 dark:text-gray-300 my-3 font-oswald flex items-center justify-center font-medium uppercase tracking-wider">
               Why Choose Us
             </span>
 
-            <h2 className="block w-full bg-gradient-to-b from-gray-600 to-gray-400 bg-clip-text font-bold text-3xl sm:text-4xl dark:from-gray-200 dark:to-gray-600 dark:text-white transition-colors duration-500">
+            <h2 className="block w-full bg-clip-text font-bold text-3xl sm:text-4xl dark:text-gray-300 transition-colors duration-500">
               Seamless Meeting Room Booking Experience
             </h2>
 
@@ -24,7 +21,7 @@ const WhyChooseUs = () => {
 
           <div className="relative mx-auto max-w-7xl z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 pt-14">
             {/* User-Friendly Design Card */}
-            <div className="rounded-md bg-white dark:bg-neutral-800/50 p-8 text-center shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-105 dark:hover:scale-105 dark:hover:shadow-xl">
+            <div className="rounded-md bg-white dark:bg-neutral-800/50 p-8 text-center hover:shadow-2xl transition duration-500 transform hover:scale-105 dark:hover:scale-105 dark:hover:shadow-xl">
               <div
                 className="button-text mx-auto flex h-12 w-12 items-center justify-center rounded-md border"
                 style={{
@@ -136,24 +133,6 @@ const WhyChooseUs = () => {
               </p>
             </div>
           </div>
-
-          {/* Decorative Borders */}
-          <div
-            className="absolute bottom-0 left-0 z-0 h-1/3 w-full border-b"
-            style={{
-              backgroundImage:
-                "linear-gradient(to right top, rgba(79, 70, 229, 0.2) 0%, transparent 50%, transparent 100%)",
-              borderColor: "rgba(92, 79, 240, 0.2)",
-            }}
-          ></div>
-          <div
-            className="absolute bottom-0 right-0 z-0 h-1/3 w-full border-b"
-            style={{
-              backgroundImage:
-                "linear-gradient(to left top, rgba(79, 70, 229, 0.2) 0%, transparent 50%, transparent 100%)",
-              borderColor: "rgba(92, 79, 240, 0.2)",
-            }}
-          ></div>
         </section>
       </div>
     </div>

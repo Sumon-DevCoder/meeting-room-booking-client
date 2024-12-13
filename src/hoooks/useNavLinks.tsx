@@ -10,11 +10,11 @@ const useNavLinks = () => {
       <NavLink
         to="/"
         className={({ isActive }) =>
-          ` border-slate-200 ${
+          `border-slate-200 ${
             isActive
-              ? "border-b-2 border-b-blue-400 text-blue-400 font-medium"
-              : "  dark:text-slate-100 text-black  border-b-2 border-b-slate-800  dark:border-b-slate-100"
-          }`
+              ? "border-b-2 border-b-[#1054AD] text-[#1054AD] dark:text-[#6AA4F1] dark:border-b-[#6AA4F1] font-medium"
+              : "dark:text-slate-100 text-black border-b-2 border-b-slate-800 dark:border-b-slate-100"
+          } transition-all duration-300 ease-in-out hover:text-[#1054AD] hover:border-b-[#1054AD]`
         }
       >
         <li>Home</li>
@@ -22,11 +22,11 @@ const useNavLinks = () => {
       <NavLink
         to="/meeting-rooms"
         className={({ isActive }) =>
-          ` border-slate-200 ${
+          `border-slate-200 ${
             isActive
-              ? "border-b-2 border-b-blue-400 text-blue-400 font-medium"
-              : "  dark:text-slate-100 text-black  border-b-2 border-b-slate-800  dark:border-b-slate-100"
-          }`
+              ? "border-b-2 border-b-[#1054AD] text-[#1054AD] dark:text-[#6AA4F1] dark:border-b-[#6AA4F1] font-medium"
+              : "dark:text-slate-100 text-black border-b-2 border-b-slate-800 dark:border-b-slate-100"
+          } transition-all duration-300 ease-in-out hover:text-[#1054AD] hover:border-b-[#1054AD]`
         }
       >
         <li>Rooms</li>
@@ -34,11 +34,11 @@ const useNavLinks = () => {
       <NavLink
         to="/about-us"
         className={({ isActive }) =>
-          ` border-slate-200 ${
+          `border-slate-200 ${
             isActive
-              ? "border-b-2 border-b-blue-400 text-blue-400 font-medium"
-              : " dark:text-slate-100 text-black  border-b-2 border-b-slate-800  dark:border-b-slate-100"
-          }`
+              ? "border-b-2 border-b-[#1054AD] text-[#1054AD] dark:text-[#6AA4F1] dark:border-b-[#6AA4F1] font-medium"
+              : "dark:text-slate-100 text-black border-b-2 border-b-slate-800 dark:border-b-slate-100"
+          } transition-all duration-300 ease-in-out hover:text-[#1054AD] hover:border-b-[#1054AD]`
         }
       >
         <li>About</li>
@@ -46,11 +46,11 @@ const useNavLinks = () => {
       <NavLink
         to="/contact-us"
         className={({ isActive }) =>
-          ` border-slate-200 ${
+          `border-slate-200 ${
             isActive
-              ? "border-b-2 border-b-blue-400 text-blue-400 font-medium"
-              : "  dark:text-slate-100 text-black  border-b-2 border-b-slate-800  dark:border-b-slate-100"
-          }`
+              ? "border-b-2 border-b-[#1054AD] text-[#1054AD] dark:text-[#6AA4F1] dark:border-b-[#6AA4F1] font-medium"
+              : "dark:text-slate-100 text-black border-b-2 border-b-slate-800 dark:border-b-slate-100"
+          } transition-all duration-300 ease-in-out hover:text-[#1054AD] hover:border-b-[#1054AD]`
         }
       >
         <li>Contact</li>
@@ -59,11 +59,11 @@ const useNavLinks = () => {
         <NavLink
           to="/admin/dashboard"
           className={({ isActive }) =>
-            ` border-slate-200 ${
+            `border-slate-200 ${
               isActive
-                ? " border-b-2 border-b-blue-400 text-blue-400 font-medium"
-                : "  dark:text-slate-100 text-black  border-b-2 border-b-slate-800  dark:border-b-slate-100"
-            }`
+                ? "border-b-2 border-b-[#1054AD] text-[#1054AD] dark:text-[#6AA4F1] dark:border-b-[#6AA4F1] font-medium"
+                : "dark:text-slate-100 text-black border-b-2 border-b-slate-800 dark:border-b-slate-100"
+            } transition-all duration-300 ease-in-out hover:text-[#1054AD] hover:border-b-[#1054AD]`
           }
         >
           <li>Dashboard</li>
@@ -73,11 +73,11 @@ const useNavLinks = () => {
         <NavLink
           to="/user/dashboard"
           className={({ isActive }) =>
-            ` border-slate-200 ${
+            `border-slate-200 ${
               isActive
-                ? " text-white border-b-2"
-                : "dark:text-slate-100 text-black  border-b-2 border-b-slate-800  dark:border-b-slate-100"
-            }`
+                ? "border-b-2 border-b-[#1054AD] text-[#1054AD] dark:text-[#6AA4F1] dark:border-b-[#6AA4F1] font-medium"
+                : "dark:text-slate-100 text-black border-b-2 border-b-slate-800 dark:border-b-slate-100"
+            } transition-all duration-300 ease-in-out hover:text-[#1054AD] hover:border-b-[#1054AD]`
           }
         >
           <li>Dashboard</li>

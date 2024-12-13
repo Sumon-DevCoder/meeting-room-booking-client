@@ -76,9 +76,10 @@ const CreateRoom = () => {
         pricePerSlot: Number(data.pricePerSlot),
         img,
         amenities,
+        description: data.description, // Add description here
       };
 
-      console.log(RoomInfo);
+      console.log("RoomInfo", RoomInfo);
 
       const res = await createRoom(RoomInfo).unwrap();
 
@@ -107,6 +108,7 @@ const CreateRoom = () => {
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const validateFiles = (files: any): Promise<string | true> => {
     return new Promise((resolve) => {
       if (files.length < 3) {
@@ -268,6 +270,30 @@ const CreateRoom = () => {
               <p className="text-red-500">{errors.img.message as string}</p>
             )}
           </div>
+        </div>
+
+        {/* Description Section */}
+        <div className="mb-5">
+          <label
+            htmlFor="description"
+            className="mb-2 block text-sm font-medium text-indigo-700 dark:text-indigo-300"
+          >
+            Description
+          </label>
+          <textarea
+            {...register("description", {
+              required: "Description is required",
+            })}
+            id="description"
+            placeholder="Enter a brief description of the room"
+            rows={4}
+            className="w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300 outline-none focus:border-indigo-500 focus:shadow-md"
+          />
+          {errors.description && (
+            <p className="text-red-500">
+              {errors.description.message as string}
+            </p>
+          )}
         </div>
 
         {/* Amenities Section */}

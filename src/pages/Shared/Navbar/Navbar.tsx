@@ -82,13 +82,15 @@ const Navbar = () => {
             <button
               onClick={toggleDarkMode}
               className={`p-2 rounded-full transition-all duration-300 ${
-                isDarkMode ? " hover:bg-slate-700" : " hover:bg-gray-800"
+                isDarkMode
+                  ? " bg-slate-700 hover:bg-slate-600"
+                  : " bg-gray-300 hover:bg-gray-200"
               }`}
             >
               {!isDarkMode ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-6 h-6 text-gray-900"
+                  className="w-5 h-5 text-gray-900"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -97,7 +99,7 @@ const Navbar = () => {
               ) : (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-6 h-6 text-gray-300"
+                  className="w-5 h-5 text-gray-300"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -116,7 +118,7 @@ const Navbar = () => {
             ) : (
               <NavLink
                 to={"/login"}
-                className="flex items-center justify-center px-2 py-2 rounded-lg text-white font-medium bg-gradient-to-r from-blue-900 to-green-900 transition-all duration-300 ease-in-out hover:from-purple-900 hover:to-blue-900 transform"
+                className="flex items-center justify-center px-2 py-1.5 rounded-lg text-white font-medium dark:bg-blue-800 bg-blue-600 hover:bg-blue-800 dark:hover:bg-blue-600  transition-all duration-300 ease-in-out hover:from-purple-900 hover:to-blue-900 transform"
               >
                 <FaSignInAlt className="mr-2" />
                 Login

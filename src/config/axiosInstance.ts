@@ -2,7 +2,7 @@ import axios from "axios";
 import { store } from "../redux/store";
 
 const axiosInstance = axios.create({
-  baseURL: "https://meeting-room-booking-server-zeta.vercel.app/api",
+  baseURL: "http://localhost:5000/api",
 });
 
 // Add a request interceptor

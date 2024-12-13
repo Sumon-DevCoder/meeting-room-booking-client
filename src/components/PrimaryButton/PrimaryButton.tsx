@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 type TButton = {
   path: string;
@@ -10,9 +11,10 @@ const PrimaryButton = ({ path, name }: TButton) => {
     <div>
       <Link
         to={path}
-        className="bg-blue-600 hover:bg-blue-700 text-gray-200 animate-bounce font-semibold hvr-grow  py-1 px-2 md:py-2 md:px-4  rounded transition duration-300 "
+        className="bg-blue-600 hover:bg-blue-700 flex items-center gap-1 text-gray-200 animate-bounce font-medium hvr-grow  py-1 px-2 md:py-1.5 md:px-3  rounded transition duration-300 "
       >
         {name}
+        <FaArrowRightLong />
       </Link>
     </div>
   );

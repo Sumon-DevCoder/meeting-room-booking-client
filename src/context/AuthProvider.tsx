@@ -79,7 +79,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         if (currentUser) {
           // Send JWT request
           const res = await axios.post(
-            "https://meeting-room-booking-server-zeta.vercel.app/api/jwt",
+            "http://localhost:5000/api/jwt",
             loggedUser,
             { withCredentials: true }
           );
