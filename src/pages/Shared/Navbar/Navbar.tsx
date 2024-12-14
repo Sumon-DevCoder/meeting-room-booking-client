@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
-import { Fade } from "react-awesome-reveal";
+import { NavLink } from "react-router-dom";
 import DropdownProfile from "@/components/DropdownProfile/DropdownProfile";
-import { RxDropdownMenu } from "react-icons/rx";
+import { IoIosArrowDropdownCircle } from "react-icons/io";
 import useDarkMode from "@/hoooks/useDarkMode";
 import { FaSignInAlt } from "react-icons/fa";
+import { IoCloseCircle } from "react-icons/io5";
 import { useAppSelector } from "@/redux/hooks";
 import { currentUser } from "@/redux/features/auth/authSlice";
 import useNavLinks from "@/hoooks/useNavLinks";
+import BrandLogo from "@/components/BrandLogo/BrandLogo";
 
 const Navbar = () => {
   const user = useAppSelector(currentUser);
@@ -32,42 +33,25 @@ const Navbar = () => {
             >
               {isMenuOpen ? (
                 // Close Icon
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 text-black dark:text-white"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
+                <IoCloseCircle className="text-gray-700 dark:text-gray-300 text-3xl -ml-2 " />
               ) : (
                 // Menu Icon
-                <RxDropdownMenu className="text-black dark:text-white text-2xl -ml-2 " />
+                <IoIosArrowDropdownCircle className="text-gray-700 dark:text-gray-300 text-3xl -ml-2 " />
               )}
             </div>
             {isMenuOpen && (
+              //  small device navbar
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-white dark:bg-slate-700 z-[1] mt-3 text-center w-32 p-3 space-y-2 shadow gap-1 max-h-[calc(100vh-60px)] overflow-y-auto"
+                className="menu menu-sm rounded dropdown-content bg-white dark:bg-slate-700 z-[1] mt-3 text-center w-32 space-y-2 shadow gap-1 max-h-[calc(100vh-60px)] overflow-y-auto"
               >
                 {navLinks}
               </ul>
             )}
           </div>
-          <Fade>
-            <Link
-              to={`/`}
-              className="btn btn-ghost min-w-48  text-md md:text-lg text-black bg-gradient-to-r dark:from-blue-800 from-blue-300 dark:text-slate-200 font-medium"
-            >
-              Meeting Room Booking
-            </Link>
-          </Fade>
+
+          {/* brand logo */}
+          <BrandLogo />
         </div>
 
         {/* lg device navbar */}
@@ -77,7 +61,9 @@ const Navbar = () => {
           </ul>
         </div>
 
+        {/* end navbar */}
         <div className="navbar-end cursor-pointer gap-2">
+          {/* dark mode  */}
           <div>
             <button
               onClick={toggleDarkMode}

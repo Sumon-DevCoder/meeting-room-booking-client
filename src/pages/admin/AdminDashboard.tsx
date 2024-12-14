@@ -38,7 +38,7 @@ const AdminDashboard = () => {
     <div className="admin-dashboard container mx-auto p-6 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-200">
       {/* Welcome Section */}
       <Fade>
-        <div className="bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 text-white p-6 rounded-xl shadow-lg mb-8">
+        <div className="bg-gradient-to-r from-green-600 text-white p-6 rounded-xl  mb-8">
           <h2 className="text-2xl font-semibold">{`Welcome, ${
             user?.name || "Admin"
           }`}</h2>
@@ -58,7 +58,7 @@ const AdminDashboard = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {/* Total Rooms */}
           <Fade>
-            <div className="bg-gradient-to-br from-green-300 to-green-500 text-white rounded-lg shadow-lg p-6 flex justify-between items-center transition-transform transform hover:scale-105">
+            <div className="bg-gradient-to-br from-green-600 to-green-500 text-white rounded-lg shadow-lg p-6 flex justify-between items-center transition-transform transform hover:scale-105">
               <div>
                 <h3 className="text-xl font-semibold">Total Rooms</h3>
                 <p className="text-3xl font-bold">
@@ -72,7 +72,7 @@ const AdminDashboard = () => {
 
           {/* Total Bookings */}
           <Fade>
-            <div className="bg-gradient-to-br from-blue-300 to-blue-500 text-white rounded-lg shadow-lg p-6 flex justify-between items-center transition-transform transform hover:scale-105">
+            <div className="bg-gradient-to-br from-blue-600 to-blue-500 text-white rounded-lg shadow-lg p-6 flex justify-between items-center transition-transform transform hover:scale-105">
               <div>
                 <h3 className="text-xl font-semibold">Total Bookings</h3>
                 <p className="text-3xl font-bold">{bookingData?.length}</p>
@@ -84,7 +84,7 @@ const AdminDashboard = () => {
 
           {/* Active Users */}
           <Fade>
-            <div className="bg-gradient-to-br from-purple-300 to-purple-500 text-white rounded-lg shadow-lg p-6 flex justify-between items-center transition-transform transform hover:scale-105">
+            <div className="bg-gradient-to-br from-purple-600 to-purple-500 text-white rounded-lg shadow-lg p-6 flex justify-between items-center transition-transform transform hover:scale-105">
               <div>
                 <h3 className="text-xl font-semibold">Active Users</h3>
                 <p className="text-3xl font-bold">
@@ -98,7 +98,7 @@ const AdminDashboard = () => {
 
           {/* Pending Bookings */}
           <Fade>
-            <div className="bg-gradient-to-br from-yellow-300 to-yellow-500 text-white rounded-lg shadow-lg p-6 flex justify-between items-center transition-transform transform hover:scale-105">
+            <div className="bg-gradient-to-br from-yellow-700 to-yellow-500 text-white rounded-lg shadow-lg p-6 flex justify-between items-center transition-transform transform hover:scale-105">
               <div>
                 <h3 className="text-xl font-semibold">Pending Bookings</h3>
                 <p className="text-3xl font-bold">{pendingBooking?.length}</p>

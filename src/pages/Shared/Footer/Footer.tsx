@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import BrandLogo from "@/components/BrandLogo/BrandLogo";
 
 const Footer = () => {
   return (
@@ -201,15 +202,10 @@ const Footer = () => {
       <div className="mx-auto w-full  px-4 md:px-0 ">
         <div className="flex flex-col gap-5 lg:gap-0 justify-between sm:px-[18px] md:flex-row lg:px-10">
           <div className="md:w-[316px]">
-            <h1 className="text-white font-extrabold text-[24px]">
-              <Link
-                to={`/`}
-                className="btn btn-ghost text-[19px] md:text-md bg-gradient-to-r from-blue-800 text-slate-900 dark:text-gray-100 font-medium"
-              >
-                Meeting Room Booking
-              </Link>
+            <h1 className="text-white font-extrabold text-[24px] -ml-4">
+              <BrandLogo />
             </h1>
-            <p className="mt-[18px] text-[15px] font-normal dark:text-white/[80%] text-gray-900">
+            <p className="mt-1 text-[15px] font-normal dark:text-white/[80%] text-gray-900">
               Welcome to Meeting Room Booking, your go-to platform for
               effortless meeting room bookings. Discover the perfect space and
               enjoy a hassle-free scheduling experience
