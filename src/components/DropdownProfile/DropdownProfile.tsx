@@ -1,15 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { currentUser } from "@/redux/features/auth/authSlice";
+import { useState, useEffect, useRef } from "react";
 import { useAppSelector } from "@/redux/hooks";
+import { currentUser } from "@/redux/features/auth/authSlice";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import { Link } from "react-router-dom";
 
@@ -17,7 +8,6 @@ import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { MdDashboard, MdLogout } from "react-icons/md";
 import { BsCalendar2Check } from "react-icons/bs";
-import { motion } from "framer-motion";
 import useCurrentUserInfoData from "@/hoooks/useCurrentUserInfoData";
 import useHandleLogout from "@/hoooks/useHandleLogout";
 
@@ -26,71 +16,102 @@ const DropdownProfile = () => {
   const stateUser = useAppSelector(currentUser); // Get user from redux store
   const handleLogout = useHandleLogout();
 
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State to track dropdown visibility
+  const dropdownRef = useRef<HTMLDivElement | null>(null); // Explicitly type the ref
+
+  const handleMouseEnter = () => {
+    setIsDropdownOpen(true); // Open dropdown on hover
+  };
+
+  const handleMouseLeave = () => {
+    setIsDropdownOpen(false); // Close dropdown when mouse leaves
+  };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false); // Close dropdown if clicked outside
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   // Fallback to Redux state user if user from hook is not available
   const currentUserData = user || stateUser;
 
   return (
-    <div>
+    <div className="relative">
       {currentUserData ? (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-              <div className="avatar">
-                <div className="w-10 rounded-full">
-                  {currentUserData.img ? (
-                    <img src={currentUserData.img} alt="User Avatar" />
-                  ) : (
-                    <img
-                      src="https://i.ibb.co/j8KxL3f/blank-profile-picture-973460-640.png"
-                      alt="Default Avatar"
-                    />
-                  )}
-                </div>
-              </div>
-            </motion.div>
-          </DropdownMenuTrigger>
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <DropdownMenuContent className="z-10  bg-gradient-to-r from-slate-500 via-slate-500 text-white rounded-lg shadow-lg p-3 mr-6">
-              <DropdownMenuLabel>
+        <div
+          className="relative"
+          onMouseEnter={handleMouseEnter} // Open on hover
+          onMouseLeave={handleMouseLeave} // Close on hover out
+        >
+          {/* Avatar image */}
+          <div className="avatar w-10 h-10 rounded-full cursor-pointer">
+            {currentUserData.img ? (
+              <img
+                src={currentUserData.img}
+                alt="User Avatar"
+                className="rounded-full"
+              />
+            ) : (
+              <img
+                src="https://i.ibb.co/j8KxL3f/blank-profile-picture-973460-640.png"
+                alt="Default Avatar"
+                className="rounded-full"
+              />
+            )}
+          </div>
+
+          {/* Dropdown Menu */}
+          {isDropdownOpen && (
+            <div
+              ref={dropdownRef}
+              className="absolute -right-4 bg-white border  rounded-lg shadow-lg w-48 dark:bg-gray-800 dark:border-gray-600 transition-all duration-300 ease-in-out opacity-100"
+            >
+              <div className="">
                 <Link
                   to="/user/profile"
-                  className="hover:text-blue-400 hover:underline"
+                  className="block  p-2 border-b-2 hover:rounded-md dark:border-gray-700 hover:bg-gray-300 dark:hover:bg-blue-700 focus:outline-none transition duration-200 ease-in-out dark:text-white"
                 >
                   <FaUserCircle className="inline mr-2" />{" "}
                   {currentUserData.name}
                 </Link>
-              </DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              {currentUserData.role === "admin" ? (
-                <DropdownMenuItem>
+                {currentUserData.role === "admin" ? (
                   <Link
                     to="/admin/dashboard"
-                    className="hover:text-blue-400 hover:underline"
+                    className="block hover:bg-gray-300 p-2 border-b-2 hover:rounded-md dark:border-gray-700 dark:hover:bg-blue-700  focus:outline-none  transition duration-200 ease-in-out dark:text-white"
                   >
                     <MdDashboard className="inline mr-2" /> Dashboard
                   </Link>
-                </DropdownMenuItem>
-              ) : (
-                <DropdownMenuItem>
-                  <Link to="/user/my-bookings" className="hover:underline">
+                ) : (
+                  <Link
+                    to="/user/my-bookings"
+                    className="block hover:bg-gray-300 p-2 border-b-2 dark:border-gray-700 hover:rounded-md dark:hover:bg-blue-700  focus:outline-none transition duration-200 ease-in-out dark:text-white"
+                  >
                     <BsCalendar2Check className="inline mr-2" /> My Bookings
                   </Link>
-                </DropdownMenuItem>
-              )}
-              <DropdownMenuSeparator />
-              <DropdownMenuItem
-                className="cursor-pointer hover:underline"
-                onClick={handleLogout}
-              >
-                <MdLogout className="inline mr-2" /> Logout
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </motion.div>
-        </DropdownMenu>
+                )}
+                <Link
+                  to="/login"
+                  className="block hover:bg-gray-300 p-2 rounded-md dark:hover:bg-blue-700  focus:outline-none transition duration-200 ease-in-out dark:text-white"
+                  onClick={handleLogout}
+                >
+                  <MdLogout className="inline mr-2" /> Logout
+                </Link>
+              </div>
+            </div>
+          )}
+        </div>
       ) : (
         <PrimaryButton path="/login" name="Login" />
       )}

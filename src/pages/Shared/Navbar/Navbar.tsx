@@ -67,7 +67,7 @@ const Navbar = () => {
           <div>
             <button
               onClick={toggleDarkMode}
-              className={`p-2 rounded-full transition-all duration-300 ${
+              className={`p-2 rounded-full transition-all duration-300 -mt-0.5 ${
                 isDarkMode
                   ? " bg-slate-700 hover:bg-slate-600"
                   : " bg-gray-300 hover:bg-gray-200"
