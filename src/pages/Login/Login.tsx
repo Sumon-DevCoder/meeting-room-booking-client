@@ -111,7 +111,7 @@ const Login = () => {
               exit={{ opacity: 0, y: 20 }}
               transition={{ duration: 0.5 }}
             >
-              <h3 className="py-4 text-2xl text-center text-gray-800 dark:text-white">
+              <h3 className="pb-3 pt-2 text-2xl text-center text-gray-800 dark:text-white">
                 Login to Your Account
               </h3>
               <div className="text-center space-x-2">
@@ -138,7 +138,7 @@ const Login = () => {
               </div>
               <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="px-8 pt-6 pb-8 mb-4 bg-gray-100 dark:bg-gray-800 rounded"
+                className="px-8 pt-5 mb-2 bg-gray-100 dark:bg-gray-800 rounded"
               >
                 <div className="mb-4">
                   <label
@@ -216,20 +216,21 @@ const Login = () => {
                     Login
                   </button>
                 </div>
-
-                <div className="text-center">
-                  <p className="inline-block text-md text-black dark:text-blue-500 align-baseline">
-                    Don't have an account?{" "}
-                    <Link
-                      className="font-semibold text-indigo-500 underline"
-                      to={"/register"}
-                    >
-                      Register
-                    </Link>
-                  </p>
-                </div>
               </form>
-              <div className="-mt-5">
+              <hr className="mb-3 border-t" />
+
+              <div className="text-center">
+                <p className="inline-block text-md mb-2 text-black dark:text-blue-500 align-baseline">
+                  Don't have an account?{" "}
+                  <Link
+                    className="font-semibold text-indigo-500 underline"
+                    to={"/register"}
+                  >
+                    Register
+                  </Link>
+                </p>
+              </div>
+              <div className="">
                 <SocialLogin />
               </div>
             </motion.div>

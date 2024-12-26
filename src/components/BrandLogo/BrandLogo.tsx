@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 
 const BrandLogo = () => {
   return (
-    <Link to="/" className="flex items-center -space-x-2">
+    <Link to="/" className="flex items-center -space-x-2  md:-space-x-3.5">
       <img
-        src="/src/assets/logo.png"
+        src="https://i.ibb.co.com/Fsrzypg/logo.png"
         alt="Logo"
         className="h-8 w-auto md:h-12"
       />

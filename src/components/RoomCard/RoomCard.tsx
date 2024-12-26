@@ -82,27 +82,34 @@ const RoomCard = ({ room }: { room: TRoom }) => {
     //     </div>
     //   </div>
     // </div>
-    <div className="dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden font-roboto transition duration-500 hover:shadow-2xl transform">
+    <div className="dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden font-roboto transition duration-500 transform">
       <img src={img} alt={room.name} className="w-full h-48 object-cover" />
       <div className="p-6">
-        <h3 className="text-xl font-semibold text-blue-700 dark:text-blue-400">
+        <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-300">
           {name}
         </h3>
-        <p className="text-gray-500 mt-2 dark:text-gray-300">
-          Capacity: <span className="font-medium">{capacity}</span>
+        <p className="text-gray-700 mt-2 dark:text-gray-300">
+          Capacity:{" "}
+          <span className="text-[#1145B6] font-semibold dark:text-[#9FBAF4]">
+            {capacity}
+          </span>
         </p>
-        <p className="text-gray-900 font-bold text-lg mt-2 dark:text-gray-100">
-          ${pricePerSlot} per slot
+        <p className="text-md  mt-2 dark:text-blue-500">
+          <span className="text-gray-700 dark:text-gray-300">Per Slot :</span>{" "}
+          <span className="text-[#1145B6] dark:text-[#9FBAF4] font-semibold">
+            ${pricePerSlot}
+          </span>
         </p>
 
         {/* Button partition */}
         <div className="flex flex-col md:flex-row justify-between items-center mt-5 gap-4">
           {/* Book Now Button */}
           <button
-            className="w-full p-2 bg-[#0846AA] text-white font-medium rounded-md transition-all duration-300 hover:bg-blue-600 hover:scale-105 hover:shadow-lg dark:bg-blue-600 dark:hover:bg-blue-700"
+            className="w-full px-2 py-1.5 dark:py-2 hover:py-2 hover:border-none dark:bg-gray-600 dark:text-gray-200 bg-gray-300 border-2 dark:border-none border-gray-300 text-gray-800 font-medium rounded-md text-center transition-all duration-300 relative overflow-hidden group"
             onClick={handleBookNowClick}
           >
-            Book Now
+            <span className="absolute inset-0 w-full h-full  bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-all duration-700 origin-left"></span>
+            <span className="relative z-10">Book Now</span>
           </button>
           <dialog id="my_modal_1" className="modal">
             <div className="">
@@ -114,10 +121,11 @@ const RoomCard = ({ room }: { room: TRoom }) => {
 
           {/* Details Button */}
           <Link
-            className="w-full p-2 bg-gray-200  text-gray-800 font-medium rounded-md text-center transition-transform duration-300 hover:bg-gray-300 hover:scale-105 hover:shadow-lg dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
+            className="w-full px-2 py-1.5 dark:py-1.5 hover:py-2 hover:border-none dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600 bg-gray-100 border-2  border-gray-300 text-gray-800 font-medium rounded-md text-center transition-all duration-300 relative overflow-hidden group"
             to={`/meeting-rooms-details/${_id}`}
           >
-            Details
+            <span className="absolute inset-0 w-full h-full  bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-all duration-700 origin-left"></span>
+            <span className="relative z-10">Details</span>
           </Link>
         </div>
       </div>

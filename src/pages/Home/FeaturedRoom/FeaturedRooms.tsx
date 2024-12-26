@@ -1,6 +1,7 @@
 import Loading from "@/components/Loading/Loading";
 import PrimaryButton from "@/components/PrimaryButton/PrimaryButton";
 import RoomCard from "@/components/RoomCard/RoomCard";
+import SectionTitle from "@/components/SectionTitle/SectionTitle";
 import { useGetRoomsQuery } from "@/redux/features/room/roomApi";
 import { TRoom } from "@/types/room.types";
 
@@ -15,9 +16,14 @@ const FeaturedRooms = () => {
 
   return (
     <div className="py-10 bg-slate-100 dark:bg-slate-900 ">
-      <h2 className="text-2xl md:text-3xl font-bold  text-center  text-gray-900 dark:text-white">
-        Featured Rooms
-      </h2>
+      {/* section title */}
+      <SectionTitle
+        title={"Featured Rooms"}
+        subtitle={"Explore Our Best-In-Class Meeting Spaces"}
+        desc={
+          "Discover premium meeting rooms with modern amenities, designed for comfort and professionalism."
+        }
+      />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 my-10 space-y-5 md:space-y-0 px-12  lg:px-20">
         {rooms?.result?.length ? (

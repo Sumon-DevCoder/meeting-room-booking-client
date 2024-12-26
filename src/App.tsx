@@ -10,7 +10,6 @@ const App = () => {
     AOS.init({
       duration: 1000, // Animation duration (in ms)
       easing: "ease-in-out", // Easing function
-      once: true, // Animates only once when scrolled into view
     });
   }, []);
 

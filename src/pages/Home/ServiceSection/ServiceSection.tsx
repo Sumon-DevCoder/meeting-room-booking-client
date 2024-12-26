@@ -8,6 +8,7 @@ import {
 } from "react-icons/fa"; // Import specific icons
 
 const ServiceSection = () => {
+  // data
   const services = [
     {
       id: 1,
@@ -20,7 +21,7 @@ const ServiceSection = () => {
       id: 2,
       title: "Instant Booking Confirmation",
       description:
-        "Receive instant confirmation of your bookings, giving you peace of mind and a hassle-free experience.",
+        "Receive instant confirmation of your bookings, giving you peace of mind and a hassle-free.",
       icon: FaCheckCircle, // Using FontAwesome icon
     },
     {
@@ -39,6 +40,7 @@ const ServiceSection = () => {
     },
   ];
 
+  // tilt animation
   const tiltOptions = {
     reverse: false,
     max: 35,
@@ -55,21 +57,20 @@ const ServiceSection = () => {
     <section className="py-8 bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
       <div className="container mx-auto text-center">
         <h2
-          data-aos="zoom-in"
           data-aos-delay="400"
           className="text-2xl md:text-3xl font-bold mb-8 text-gray-900 dark:text-gray-100"
         >
           Our Highlighted Services
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center md:px-20 lg:px-10 items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center md:px-20 lg:px-10 items-center">
           {services.map((service) => {
             const Icon = service.icon;
 
             return (
               <Tilt
                 options={tiltOptions}
-                style={{ height: 250, width: 250 }}
+                style={{ height: 250, width: 270 }}
                 key={service.id}
                 className="bg-white bg-gradient-to-r from-slate-100 dark:from-slate-800 dark:to-slate-700 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 flex flex-col items-center justify-center" // Centering the content
               >
@@ -81,14 +82,12 @@ const ServiceSection = () => {
                 </div>
                 <h3
                   data-aos="fade-right"
-                  data-aos-delay="400"
                   className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200"
                 >
                   {service.title}
                 </h3>
                 <p
                   data-aos="fade-left"
-                  data-aos-delay="400"
                   className="text-gray-600 dark:text-gray-400 text-sm md:text-base"
                 >
                   {service.description}

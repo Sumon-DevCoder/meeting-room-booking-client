@@ -17,14 +17,10 @@ const DropdownProfile = () => {
   const handleLogout = useHandleLogout();
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State to track dropdown visibility
-  const dropdownRef = useRef<HTMLDivElement | null>(null); // Explicitly type the ref
+  const dropdownRef = useRef<HTMLDivElement | null>(null); // Ref for the dropdown container
 
-  const handleMouseEnter = () => {
-    setIsDropdownOpen(true); // Open dropdown on hover
-  };
-
-  const handleMouseLeave = () => {
-    setIsDropdownOpen(false); // Close dropdown when mouse leaves
+  const toggleDropdown = () => {
+    setIsDropdownOpen((prev) => !prev); // Toggle dropdown visibility
   };
 
   // Close dropdown when clicking outside
@@ -50,13 +46,12 @@ const DropdownProfile = () => {
   return (
     <div className="relative">
       {currentUserData ? (
-        <div
-          className="relative"
-          onMouseEnter={handleMouseEnter} // Open on hover
-          onMouseLeave={handleMouseLeave} // Close on hover out
-        >
+        <div className="relative">
           {/* Avatar image */}
-          <div className="avatar w-10 h-10 rounded-full cursor-pointer">
+          <div
+            className="avatar w-10 h-10 rounded-full cursor-pointer"
+            onClick={toggleDropdown} // Toggle dropdown visibility
+          >
             {currentUserData.img ? (
               <img
                 src={currentUserData.img}
@@ -73,44 +68,43 @@ const DropdownProfile = () => {
           </div>
 
           {/* Dropdown Menu */}
-          {isDropdownOpen && (
-            <div
-              ref={dropdownRef}
-              className="absolute -right-4 bg-white border  rounded-lg shadow-lg w-48 dark:bg-gray-800 dark:border-gray-600 transition-all duration-300 ease-in-out opacity-100"
-            >
-              <div className="">
+          <div
+            ref={dropdownRef}
+            className={`absolute -right-4 bg-white border rounded-lg shadow-lg w-48 dark:bg-gray-800 dark:border-gray-600 transition-all duration-300 ease-in-out ${
+              isDropdownOpen ? "block" : "hidden"
+            }`}
+          >
+            <div>
+              <Link
+                to="/user/profile"
+                className="block p-2 border-b-2 hover:rounded-md dark:border-gray-700 hover:bg-gray-300 dark:hover:bg-blue-700 focus:outline-none transition duration-200 ease-in-out dark:text-white"
+              >
+                <FaUserCircle className="inline mr-2" /> {currentUserData.name}
+              </Link>
+              {currentUserData.role === "admin" ? (
                 <Link
-                  to="/user/profile"
-                  className="block  p-2 border-b-2 hover:rounded-md dark:border-gray-700 hover:bg-gray-300 dark:hover:bg-blue-700 focus:outline-none transition duration-200 ease-in-out dark:text-white"
+                  to="/admin/dashboard"
+                  className="block hover:bg-gray-300 p-2 border-b-2 hover:rounded-md dark:border-gray-700 dark:hover:bg-blue-700 focus:outline-none transition duration-200 ease-in-out dark:text-white"
                 >
-                  <FaUserCircle className="inline mr-2" />{" "}
-                  {currentUserData.name}
+                  <MdDashboard className="inline mr-2" /> Dashboard
                 </Link>
-                {currentUserData.role === "admin" ? (
-                  <Link
-                    to="/admin/dashboard"
-                    className="block hover:bg-gray-300 p-2 border-b-2 hover:rounded-md dark:border-gray-700 dark:hover:bg-blue-700  focus:outline-none  transition duration-200 ease-in-out dark:text-white"
-                  >
-                    <MdDashboard className="inline mr-2" /> Dashboard
-                  </Link>
-                ) : (
-                  <Link
-                    to="/user/my-bookings"
-                    className="block hover:bg-gray-300 p-2 border-b-2 dark:border-gray-700 hover:rounded-md dark:hover:bg-blue-700  focus:outline-none transition duration-200 ease-in-out dark:text-white"
-                  >
-                    <BsCalendar2Check className="inline mr-2" /> My Bookings
-                  </Link>
-                )}
+              ) : (
                 <Link
-                  to="/login"
-                  className="block hover:bg-gray-300 p-2 rounded-md dark:hover:bg-blue-700  focus:outline-none transition duration-200 ease-in-out dark:text-white"
-                  onClick={handleLogout}
+                  to="/user/my-bookings"
+                  className="block hover:bg-gray-300 p-2 border-b-2 dark:border-gray-700 hover:rounded-md dark:hover:bg-blue-700 focus:outline-none transition duration-200 ease-in-out dark:text-white"
                 >
-                  <MdLogout className="inline mr-2" /> Logout
+                  <BsCalendar2Check className="inline mr-2" /> My Bookings
                 </Link>
-              </div>
+              )}
+              <Link
+                to="/login"
+                className="block hover:bg-gray-300 p-2 rounded-md dark:hover:bg-blue-700 focus:outline-none transition duration-200 ease-in-out dark:text-white"
+                onClick={handleLogout}
+              >
+                <MdLogout className="inline mr-2" /> Logout
+              </Link>
             </div>
-          )}
+          </div>
         </div>
       ) : (
         <PrimaryButton path="/login" name="Login" />

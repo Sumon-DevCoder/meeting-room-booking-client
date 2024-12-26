@@ -27,7 +27,7 @@ const Banner = () => {
           Efficient, hassle-free room booking for all your meeting needs
         </p>
 
-        <div data-aos="zoom-in" data-aos-delay="400">
+        <div>
           <PrimaryButton path="/meeting-rooms" name="Book Now" />
         </div>
       </div>

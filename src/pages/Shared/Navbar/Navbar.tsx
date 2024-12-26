@@ -56,18 +56,18 @@ const Navbar = () => {
 
         {/* lg device navbar */}
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 space-x-5 font-medium text-base">
+          <ul className="menu menu-horizontal px-1 space-x-3 font-medium text-base">
             {navLinks}
           </ul>
         </div>
 
         {/* end navbar */}
-        <div className="navbar-end cursor-pointer gap-2">
+        <div className="navbar-end cursor-pointer gap-2 flex items-center">
           {/* dark mode  */}
           <div>
             <button
               onClick={toggleDarkMode}
-              className={`p-2 rounded-full transition-all duration-300 -mt-0.5 ${
+              className={`p-2 rounded-full transition-all duration-300 mt-0.5 ${
                 isDarkMode
                   ? " bg-slate-700 hover:bg-slate-600"
                   : " bg-gray-300 hover:bg-gray-200"

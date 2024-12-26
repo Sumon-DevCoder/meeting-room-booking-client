@@ -106,7 +106,7 @@ const Register = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="w-full xl:w-3/4 lg:w-11/12 flex justify-center">
+          <div className="w-full  flex justify-center">
             <div className="pr-5 pt-1 hidden lg:block">
               <NavLink
                 to="/"
@@ -123,18 +123,18 @@ const Register = () => {
               animate={{ scale: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <h3 className="py-4 text-2xl text-center text-gray-900 dark:text-white">
+              <h3 className="pb-1 text-2xl text-center text-gray-900 dark:text-white">
                 Create an Account!
               </h3>
 
-              <SocialLogin />
-
               <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="px-8 pt-6 pb-8 mb-4 bg-gray-100 dark:bg-gray-900 rounded"
+                className="px-8 pt-6   bg-gray-100 dark:bg-gray-900 rounded"
               >
-                <div className="mb-4 md:flex md:justify-between">
-                  <div className="mb-4 md:mr-2 md:mb-0">
+                {/* Start of Flexbox Container */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
+                  {/* Left Column */}
+                  <div className="mb-4">
                     <label
                       className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
                       htmlFor="firstName"
@@ -160,7 +160,87 @@ const Register = () => {
                       </p>
                     )}
                   </div>
-                  <div className="md:ml-2">
+
+                  {/* Right Column */}
+
+                  <div className="mb-4">
+                    <label
+                      className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
+                      htmlFor="phone"
+                    >
+                      Phone
+                    </label>
+                    <input
+                      className="w-full px-3 py-2 text-sm leading-tight text-gray-700 dark:text-white border border-gray-300 dark:border-gray-600 rounded shadow appearance-none focus:outline-none focus:shadow-outline bg-white dark:bg-gray-900"
+                      id="phone"
+                      type="number"
+                      placeholder="Enter Number"
+                      {...register("phone", {
+                        required: "Phone number is required",
+                        pattern: {
+                          value: /^\d{10,15}$/,
+                          message:
+                            "Phone number must be between 10 and 15 digits",
+                        },
+                      })}
+                    />
+                    {errors.phone && (
+                      <p className="text-red-500 text-sm ml-2 mt-1">
+                        {errors.phone.message as string}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Left Column address  */}
+                  <div className="mb-4">
+                    <label
+                      className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
+                      htmlFor="address"
+                    >
+                      Address
+                    </label>
+                    <input
+                      className="w-full px-3 py-2 text-sm leading-tight text-gray-700 dark:text-white border border-gray-300 dark:border-gray-600 rounded shadow appearance-none focus:outline-none focus:shadow-outline bg-white dark:bg-gray-900"
+                      id="address"
+                      type="text"
+                      placeholder="Enter Address"
+                      {...register("address", {
+                        required: "Address is required",
+                        minLength: {
+                          value: 10,
+                          message:
+                            "Address must be at least 10 characters long",
+                        },
+                      })}
+                    />
+                    {errors.address && (
+                      <p className="text-red-500 text-sm ml-2 mt-1">
+                        {errors.address.message as string}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* User Image Upload */}
+                  <div className="mb-4">
+                    <label
+                      className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
+                      htmlFor="userImg"
+                    >
+                      Image
+                    </label>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => {
+                        if (e.target.files && e.target.files.length > 0) {
+                          setUserImg(e.target.files[0]); // Set the file to state
+                        }
+                      }}
+                      className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border border-gray-300 dark:border-gray-600 rounded shadow appearance-none focus:outline-none focus:shadow-outline bg-white dark:bg-gray-900"
+                    />
+                  </div>
+
+                  <div className="mb-4">
                     <label
                       className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
                       htmlFor="lastName"
@@ -186,62 +266,11 @@ const Register = () => {
                       </p>
                     )}
                   </div>
-                </div>
-                <div className="mb-4">
-                  <label
-                    className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
-                    htmlFor="address"
-                  >
-                    Address
-                  </label>
-                  <input
-                    className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border border-gray-300 dark:border-gray-600 rounded shadow appearance-none focus:outline-none focus:shadow-outline bg-white dark:bg-gray-900"
-                    id="address"
-                    type="text"
-                    placeholder="Enter Address"
-                    {...register("address", {
-                      required: "Address is required",
-                      minLength: {
-                        value: 10,
-                        message: "Address must be at least 10 characters long",
-                      },
-                    })}
-                  />
-                  {errors.address && (
-                    <p className="text-red-500 text-sm ml-2 mt-1">
-                      {errors.address.message as string}
-                    </p>
-                  )}
-                </div>
-                <div className="mb-4 md:flex md:justify-between">
-                  <div className="mb-4 md:mr-2 md:mb-0">
-                    <label
-                      className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
-                      htmlFor="phone"
-                    >
-                      Phone
-                    </label>
-                    <input
-                      className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border border-gray-300 dark:border-gray-600 rounded shadow appearance-none focus:outline-none focus:shadow-outline bg-white dark:bg-gray-900"
-                      id="phone"
-                      type="number"
-                      placeholder="Enter Number"
-                      {...register("phone", {
-                        required: "Phone number is required",
-                        pattern: {
-                          value: /^\d{10,15}$/,
-                          message:
-                            "Phone number must be between 10 and 15 digits",
-                        },
-                      })}
-                    />
-                    {errors.phone && (
-                      <p className="text-red-500 text-sm ml-2 mt-1">
-                        {errors.phone.message as string}
-                      </p>
-                    )}
-                  </div>
-                  <div className="md:ml-2">
+
+                  {/* Right Column */}
+
+                  {/* Left Column */}
+                  <div className="mb-4">
                     <label
                       className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
                       htmlFor="c_password"
@@ -250,7 +279,7 @@ const Register = () => {
                     </label>
                     <div className="relative">
                       <input
-                        className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border border-gray-300 dark:border-gray-600 rounded shadow appearance-none focus:outline-none focus:shadow-outline bg-white dark:bg-gray-900"
+                        className="w-full px-3 py-2 text-sm leading-tight text-gray-700 dark:text-white border border-gray-300 dark:border-gray-600 rounded shadow appearance-none focus:outline-none focus:shadow-outline bg-white dark:bg-gray-900"
                         id="c_password"
                         type={showPassword ? "text" : "password"}
                         placeholder="Enter Password"
@@ -283,26 +312,7 @@ const Register = () => {
                     )}
                   </div>
                 </div>
-
-                {/* User Image Upload */}
-                <div className="mb-4">
-                  <label
-                    className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
-                    htmlFor="userImg"
-                  >
-                    Upload Image
-                  </label>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => {
-                      if (e.target.files && e.target.files.length > 0) {
-                        setUserImg(e.target.files[0]); // Set the file to state
-                      }
-                    }}
-                    className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border border-gray-300 dark:border-gray-600 rounded shadow appearance-none focus:outline-none focus:shadow-outline bg-white dark:bg-gray-900"
-                  />
-                </div>
+                {/* End of Flexbox Container */}
 
                 <div className="mb-6 text-center">
                   <button
@@ -317,9 +327,9 @@ const Register = () => {
                     {isLoading ? "Registering..." : "Register"}
                   </button>
                 </div>
-                <hr className="mb-6 border-t" />
+                <hr className="mb-3 border-t" />
                 <div className="text-center">
-                  <p className="inline-block text-md text-black dark:text-blue-500 align-baseline">
+                  <p className="inline-block text-md mb-2 text-black dark:text-blue-500 align-baseline">
                     Already have an account?{" "}
                     <Link
                       className="font-semibold text-indigo-500 underline"
@@ -328,6 +338,7 @@ const Register = () => {
                       Login
                     </Link>
                   </p>
+                  <SocialLogin />
                 </div>
               </form>
             </motion.div>

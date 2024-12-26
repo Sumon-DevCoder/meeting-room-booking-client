@@ -372,19 +372,19 @@ const Footer = () => {
             <div className="flex gap-4 md:flex-col lg:flex-row">
               <Link
                 to={"/about-us"}
-                className="text-blue-600 underline hover:text-blue-900  dark:text-indigo-200 dark:hover:text-indigo-400 md:border-none border-b-2 border-gray-400 mt-4 inline-block"
+                className="text-blue-600  hover:text-blue-900  dark:text-indigo-200 dark:hover:text-indigo-400 md:border-none border-b-2 border-gray-400 mt-4 inline-block"
               >
                 Privacy Policy
               </Link>
               <Link
                 to={"/about-us"}
-                className="text-blue-600 underline hover:text-blue-800 dark:text-indigo-200 dark:hover:text-indigo-400 md:border-none border-b-2 border-gray-400 md:mt-0 mt-4 lg:mt-4 inline-block"
+                className="text-blue-600  hover:text-blue-800 dark:text-indigo-200 dark:hover:text-indigo-400 md:border-none border-b-2 border-gray-400 md:mt-0 mt-4 lg:mt-4 inline-block"
               >
                 Terms of Service
               </Link>
               <Link
                 to={"/about-us"}
-                className="text-blue-600 underline hover:text-blue-800 dark:text-indigo-200 dark:hover:text-indigo-400 md:border-none border-b-2 border-gray-400 md:mt-0 mt-4 lg:mt-4 inline-block"
+                className="text-blue-600  hover:text-blue-800 dark:text-indigo-200 dark:hover:text-indigo-400 md:border-none border-b-2 border-gray-400 md:mt-0 mt-4 lg:mt-4 inline-block"
               >
                 FAQ
               </Link>
